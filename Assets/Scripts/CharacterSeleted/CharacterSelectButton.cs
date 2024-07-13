@@ -6,7 +6,7 @@ public class CharacterSelectButton : MonoBehaviour
     [SerializeField] private Image iconImage;
     [SerializeField] private GameObject disabledOverlay;
     [SerializeField] private Button button;
-
+    [SerializeField] private AudioSource click;
     private CharacterSelectDisplay characterSelect;
 
     public Character Character { get; private set; }
@@ -24,6 +24,7 @@ public class CharacterSelectButton : MonoBehaviour
     public void SelectCharacter()
     {
         characterSelect.Select(Character);
+        click.Play();
     }
 
     public void SetDisabled()

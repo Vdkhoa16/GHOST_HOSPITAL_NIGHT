@@ -1814,7 +1814,6 @@ GameObject:
   - component: {fileID: 2323344403287779167}
   - component: {fileID: 3228729609535078555}
   - component: {fileID: 4416067865618154243}
-  - component: {fileID: -5174283791436181483}
   - component: {fileID: 5984955444808308205}
   m_Layer: 0
   m_Name: CH02
@@ -1927,7 +1926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2278771469
+  GlobalObjectIdHash: 80769177
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2033,19 +2032,6 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &-5174283791436181483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2323344403287779161}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6351f5e3e353ee4389d3d2afcd32c5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  door: {fileID: 6956963401021968617, guid: c049249a20a67e141b590310070c94df, type: 3}
 --- !u!114 &5984955444808308205
 MonoBehaviour:
   m_ObjectHideFlags: 0

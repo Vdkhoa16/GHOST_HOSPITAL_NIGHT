@@ -28,7 +28,7 @@ public class Tager_Door : NetworkBehaviour
         {
             if (IsClient)
             {
-                Debug.Log("Nhận được nút E");
+/*                Debug.Log("Nhận được nút E");*/
                 ToggleDoorServerRpc();
             }
         }
@@ -65,14 +65,14 @@ public class Tager_Door : NetworkBehaviour
             animator.SetBool("closeD", true);
             OnCloseDAnimationEnd();
             animator.SetBool("OpenD", false);
-            Debug.Log("Closing door");
+/*            Debug.Log("Closing door");*/
         }
         else
         {
             // Nếu cửa đang đóng, mở cửa
             animator.SetBool("OpenD", true);
             animator.SetBool("closeD", false);
-            Debug.Log("Opening door");
+/*            Debug.Log("Opening door");*/
         }
     }
 
