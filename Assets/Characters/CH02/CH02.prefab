@@ -1815,6 +1815,7 @@ GameObject:
   - component: {fileID: 3228729609535078555}
   - component: {fileID: 4416067865618154243}
   - component: {fileID: 5984955444808308205}
+  - component: {fileID: 8743124465313784561}
   m_Layer: 0
   m_Name: CH02
   m_TagString: Player
@@ -2046,6 +2047,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 5535323977807531607, guid: 95f97a6a9e0f47f4bab8b5915955891b, type: 3}
   itemTransform: {fileID: 2323344403287779152}
+--- !u!81 &8743124465313784561
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2323344403287779161}
+  m_Enabled: 1
 --- !u!1 &2323344403296069206
 GameObject:
   m_ObjectHideFlags: 0

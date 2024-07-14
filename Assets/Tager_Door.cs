@@ -9,6 +9,7 @@ public class Tager_Door : NetworkBehaviour
     private Animator animator;
     private NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false); // trạng thái của cửa
     private bool isPlayerInRange = false; // vùng hiển thị button
+    [SerializeField] private AudioSource SoundOpen,SoundClose;
 
     void Start()
     {
@@ -54,6 +55,7 @@ public class Tager_Door : NetworkBehaviour
 
     private void OnDoorStateChanged(bool oldState, bool newState)
     {
+
         UpdateDoorState(newState);
     }
 
@@ -87,6 +89,15 @@ public class Tager_Door : NetworkBehaviour
         isOpen.Value = !isOpen.Value;
     }
 
+    public void SoundOpenDoor()
+    {
+        SoundOpen.Play();
+    }
+    public void SoundCloseDoor()
+    {
+        SoundClose.Play();
+    }
+
     [ServerRpc(RequireOwnership = false)]
     private void SetPickupButtonVisibilityServerRpc(ulong clientId, bool visible, ServerRpcParams rpcParams = default)
     {
@@ -99,9 +110,11 @@ public class Tager_Door : NetworkBehaviour
         });
     }
 
+
     [ClientRpc]
     private void SetPickupButtonVisibilityClientRpc(bool visible, ClientRpcParams rpcParams = default)
     {
+
         pickupButton.SetActive(visible);
         isPlayerInRange = visible;
     }

@@ -2590,6 +2590,7 @@ GameObject:
   - component: {fileID: 7026602022886096769}
   - component: {fileID: 8375835457688401762}
   - component: {fileID: -931516715855310105}
+  - component: {fileID: 8072667261142115317}
   m_Layer: 0
   m_Name: CH01
   m_TagString: Player
@@ -2654,7 +2655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 755429408
+  GlobalObjectIdHash: 777236365
   InScenePlacedSourceGlobalObjectIdHash: 777236365
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2823,6 +2824,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 5535323977807531607, guid: 95f97a6a9e0f47f4bab8b5915955891b, type: 3}
   itemTransform: {fileID: 7204105683431487651}
+--- !u!81 &8072667261142115317
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017319169791800093}
+  m_Enabled: 1
 --- !u!1 &8018049275055675853
 GameObject:
   m_ObjectHideFlags: 0

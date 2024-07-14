@@ -14,6 +14,8 @@ public class LobbyManager : MonoBehaviour
     private CharacterSelectDisplay characterSelectDisplay;
     public static LobbyManager Instance { get; private set; }
 
+    [SerializeField] private AudioSource SounLbby, SoundPlayGame;
+
     [SerializeField] private RelayManager relayManager;
 
     [Header("Lobby creation")]
@@ -71,9 +73,11 @@ public class LobbyManager : MonoBehaviour
 
     private async void Start()
     {
+        SounLbby.Play();
+
         characterSelectDisplay = FindObjectOfType<CharacterSelectDisplay>();
         Instance = this;
-
+        
         createLobbyPrivateToggle.onValueChanged.AddListener(OnCreateLobbyPrivateToggle);
 
         await UnityServices.InitializeAsync();
@@ -364,10 +368,13 @@ public class LobbyManager : MonoBehaviour
         }*/
     private IEnumerator DelayGame()
     {
+        SounLbby.Pause();
+
         yield return new WaitForSeconds(5); // Đợi 15 giây
         loadingBar.value = 1.0f;
         LoadingParent.SetActive(false);
         Debug.Log("Đã qua 15s");
+        SoundPlayGame.Play();
      
         characterSelectDisplay.Pick();
        
