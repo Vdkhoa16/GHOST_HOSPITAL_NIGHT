@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Door
+  - InventoryPanel
+  - InventoryObjectHolder
+  - WorldObjects
+  - PickE
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -12,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Pickup
   - 
   - 
   - 

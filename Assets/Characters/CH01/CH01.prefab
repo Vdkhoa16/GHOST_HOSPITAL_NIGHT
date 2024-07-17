@@ -2589,8 +2589,9 @@ GameObject:
   - component: {fileID: 2190394646512276382}
   - component: {fileID: 7026602022886096769}
   - component: {fileID: 8375835457688401762}
-  - component: {fileID: -931516715855310105}
   - component: {fileID: 8072667261142115317}
+  - component: {fileID: 1597813938234134753}
+  - component: {fileID: 4709325875045734143}
   m_Layer: 0
   m_Name: CH01
   m_TagString: Player
@@ -2810,7 +2811,15 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &-931516715855310105
+--- !u!81 &8072667261142115317
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017319169791800093}
+  m_Enabled: 0
+--- !u!114 &1597813938234134753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2819,19 +2828,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 8017319169791800093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e8d1a699c013a948a391762fcc93b38, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e0cb3b0cc255c34298426ee63c2f56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 5535323977807531607, guid: 95f97a6a9e0f47f4bab8b5915955891b, type: 3}
-  itemTransform: {fileID: 7204105683431487651}
---- !u!81 &8072667261142115317
-AudioListener:
+  inventoryObjects: []
+  invCanvasObject: {fileID: 1985974861613601577, guid: 3ac2722e2b95fd548b2de503f4d24de7, type: 3}
+  inventoryButtom: 9
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  pickupDistance: 10
+  pickupButtom: 101
+  boxCollider: {fileID: 4709325875045734143}
+  pickUpItem_gameobject: {fileID: 0}
+  playerTransform: {fileID: 7204105683431487651}
+--- !u!65 &4709325875045734143
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8017319169791800093}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.7001257, z: 1}
+  m_Center: {x: 0, y: 0.88736916, z: 0}
 --- !u!1 &8018049275055675853
 GameObject:
   m_ObjectHideFlags: 0

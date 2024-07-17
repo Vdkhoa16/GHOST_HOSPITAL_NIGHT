@@ -66,6 +66,10 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private TMP_Text textloading;
     [SerializeField] private GameObject CharactersHolder;
 
+    [Space(10)]
+    [Header("Inventory")]
+    [SerializeField] private GameObject inventory;
+
 
     private string playerName;
     private Player playerData;
@@ -369,7 +373,7 @@ public class LobbyManager : MonoBehaviour
     private IEnumerator DelayGame()
     {
         SounLbby.Pause();
-
+        inventory.SetActive(true);
         yield return new WaitForSeconds(5); // Đợi 15 giây
         loadingBar.value = 1.0f;
         LoadingParent.SetActive(false);
