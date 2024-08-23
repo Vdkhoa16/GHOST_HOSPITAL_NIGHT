@@ -3,7 +3,6 @@ using UnityEngine;
 using Unity.Netcode;
 using TMPro;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class PlayerInventory : NetworkBehaviour
 {
@@ -18,7 +17,10 @@ public class PlayerInventory : NetworkBehaviour
     [SerializeField] LayerMask pickupLayer;
     [SerializeField] float pickupDistance;
     [SerializeField] KeyCode pickupButtom = KeyCode.E;
-
+    private Transform playerCamera;
+    private Image crosshairImage;  // Tham chiếu đến UI crosshair
+    public float pickupRange = 5f;
+    private GameObject pickUpItem_gameobject;
 
     [Header("playerHandTransform")]
     [SerializeField] private Transform playerHandTransform;
@@ -45,11 +47,11 @@ public struct ItemData : INetworkSerializable
 
 
     [SerializeField] BoxCollider boxCollider;
-    private GameObject pickUpItem_gameobject;
-    private bool isPlayerInRange = false;
+
+    //private bool isPlayerInRange = false;
     private NetworkObject networkObject;
-    Transform worldObjectHolder;
-    public Transform playerTransform;
+    //Transform worldObjectHolder;
+    //public Transform playerTransform;
 
     void Start()
     {
@@ -67,10 +69,12 @@ public struct ItemData : INetworkSerializable
             return;
         }
 
-        worldObjectHolder = GameObject.FindGameObjectWithTag("WorldObjects").transform;
+       // worldObjectHolder = GameObject.FindGameObjectWithTag("WorldObjects").transform;
         invPanel = GameObject.FindGameObjectWithTag("InventoryPanel");
         invObjectHolder = GameObject.FindGameObjectWithTag("InventoryObjectHolder").transform;
+        playerCamera = GameObject.FindWithTag("MainCamera").transform;
         pickUpItem_gameobject = GameObject.FindGameObjectWithTag("PickE");
+        crosshairImage = GameObject.FindWithTag("pickupUI").GetComponent<Image>();
 
         if (invPanel.activeSelf)
         {
@@ -78,41 +82,16 @@ public struct ItemData : INetworkSerializable
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (((1 << other.gameObject.layer) & pickupLayer) != 0)
-        {
-            GroundItem groundItem = other.GetComponent<GroundItem>();
-            if (groundItem != null)
-            {
-                isPlayerInRange = true;
-                pickUpItem_gameobject.SetActive(true);
-            }
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (((1 << other.gameObject.layer) & pickupLayer) != 0)
-        {
-            GroundItem groundItem = other.GetComponent<GroundItem>();
-            if (groundItem != null)
-            {
-                isPlayerInRange = false;
-                pickUpItem_gameobject.SetActive(false);
-            }
-        }
-    }
 
     private void Update()
     {
-        if (isPlayerInRange && Input.GetKeyDown(pickupButtom))
+        if (Input.GetKeyDown(pickupButtom))
         {
-            //Debug.Log("Nhấn e");
-            PickUp();
+            Debug.Log("Nhấn e");
+            PickUpButton();
 
         }
-
+        PickUp();
         if (Input.GetKeyDown(inventoryButtom))
         {
             ToggleInventory();
@@ -124,16 +103,19 @@ public struct ItemData : INetworkSerializable
         }
     }
 
-    void PickUp()
+    public void PickUpButton()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(playerTransform.position, pickupDistance, pickupLayer);
-        foreach (Collider hitCollider in hitColliders)
+        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        RaycastHit hit;
+        Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.green);
+
+        if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
         {
-            GroundItem groundItem = hitCollider.GetComponent<GroundItem>();
-            if (groundItem != null)
+            if (hit.collider.CompareTag("Pickup"))
             {
+                GroundItem groundItem = hit.collider.GetComponent<GroundItem>();
                 AddToInventory(groundItem.itemScriptable);
-                NetworkObject networkObject = hitCollider.GetComponent<NetworkObject>();
+                NetworkObject networkObject = hit.collider.GetComponent<NetworkObject>();
                 if (networkObject != null)
                 {
                     Debug.Log(networkObject);
@@ -141,8 +123,34 @@ public struct ItemData : INetworkSerializable
                     pickUpItem_gameobject.SetActive(false);
                 }
                 return;
-            }
 
+            }
+        }
+    }
+    void PickUp()
+    {
+        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        RaycastHit hit;
+        Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.green);
+
+        if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
+        {
+            if (hit.collider.CompareTag("Pickup"))
+            {
+                //Debug.Log("Tìm thấy vật phẩm");
+                crosshairImage.color = Color.red;
+                pickUpItem_gameobject.SetActive(true);
+            }
+            else
+            {
+                crosshairImage.color = Color.white;
+                pickUpItem_gameobject.SetActive(false);
+            }
+        }
+        else
+        {
+            crosshairImage.color = Color.white;
+            pickUpItem_gameobject.SetActive(false);
         }
     }
 
@@ -206,8 +214,9 @@ public struct ItemData : INetworkSerializable
         foreach (InventoryObject invObj in inventoryObjects)
         {
             GameObject obj = Instantiate(invCanvasObject, invObjectHolder);
-            obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = invObj.item.itemName + " - " + invObj.amount;
-            obj.transform.GetChild(1).GetComponent<Image>().sprite = invObj.item.itemImage;
+            obj.transform.GetChild(0).GetComponent<Image>().sprite = invObj.item.itemImage;
+            obj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = invObj.item.itemName;
+            obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = invObj.amount+"";
             obj.GetComponent<Button>().onClick.AddListener(delegate { UseItem(invObj.item); });
         }
     }
@@ -253,6 +262,7 @@ public struct ItemData : INetworkSerializable
             }
         }
     }
+
 
     [ServerRpc(RequireOwnership = false)]
     void MoveItemToHandServerRpc(ItemData itemData)
