@@ -127,7 +127,7 @@ public struct ItemData : INetworkSerializable
     {
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
-        Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.green);
+        Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.red);
 
         if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
         {
