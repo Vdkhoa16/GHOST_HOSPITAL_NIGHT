@@ -2871,10 +2871,10 @@ MonoBehaviour:
     m_Bits: 64
   pickupDistance: 10
   pickupButtom: 101
+  pickupRange: 5
   playerHandTransform: {fileID: 5557397053870658331}
   currentItemInHand: {fileID: 6957845885201567542}
   boxCollider: {fileID: 4709325875045734143}
-  playerTransform: {fileID: 7204105683431487651}
 --- !u!65 &4709325875045734143
 BoxCollider:
   m_ObjectHideFlags: 0

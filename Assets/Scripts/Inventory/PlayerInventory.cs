@@ -96,11 +96,7 @@ public struct ItemData : INetworkSerializable
         {
             ToggleInventory();
         }
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            Debug.Log("Chuột Phải");
-            DropItem();
-        }
+
     }
 
     public void PickUpButton()
@@ -228,9 +224,9 @@ public struct ItemData : INetworkSerializable
         if (prefab != null)
         {
             GameObject itemObject = Instantiate(prefab, playerHandTransform.position, playerHandTransform.rotation, playerHandTransform);
-            itemObject.transform.SetParent(playerHandTransform);
-            itemObject.transform.localPosition = Vector3.zero; // Đặt vị trí local về 0,0,0 để gắn vào tay
-            itemObject.transform.localRotation = Quaternion.identity; // Đặt rotation local về 0 để gắn vào tay
+            //itemObject.transform.SetParent(playerHandTransform);
+            itemObject.transform.localPosition = prefab.transform.localPosition; // Đặt vị trí local về 0,0,0 để gắn vào tay
+            //itemObject.transform.localRotation = Quaternion.identity; // Đặt rotation local về 0 để gắn vào tay
             Debug.Log("Đang sử dụng item: " + itemData.itemName);
         }
         else
@@ -268,7 +264,6 @@ public struct ItemData : INetworkSerializable
     void MoveItemToHandServerRpc(ItemData itemData)
     {
         MoveItemToHandClientRpc(itemData);
-        MoveItemToHand(itemData);
     }
 
     [ClientRpc]
