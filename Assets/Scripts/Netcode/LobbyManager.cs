@@ -275,7 +275,7 @@ public class LobbyManager : MonoBehaviour
                 Transform newPlayerItem = Instantiate(playerItemPrefab, playerListParent);
                 newPlayerItem.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.Data["Name"].Value;
                // newPlayerItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = player.Data["Team"].Value;
-                newPlayerItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = (lobby.HostId == player.Id) ? "Owner" : "User";
+                newPlayerItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = (lobby.HostId == player.Id) ? "Chủ Phòng" : "Người Chơi";
             }
 
             await Task.Delay(1000);

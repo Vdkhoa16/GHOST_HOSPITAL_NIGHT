@@ -223,9 +223,12 @@ public struct ItemData : INetworkSerializable
         GameObject prefab = Resources.Load<GameObject>(itemData.prefabName);
         if (prefab != null)
         {
-            GameObject itemObject = Instantiate(prefab, playerHandTransform.position, playerHandTransform.rotation, playerHandTransform);
-            //itemObject.transform.SetParent(playerHandTransform);
-            itemObject.transform.localPosition = prefab.transform.localPosition; // Đặt vị trí local về 0,0,0 để gắn vào tay
+            // Instantiate prefab vào tay còn lại
+            GameObject itemObject = Instantiate(prefab, playerHandTransform);
+
+            // Giữ nguyên vị trí và rotation từ prefab
+            itemObject.transform.localPosition = prefab.transform.localPosition;
+            itemObject.transform.localRotation = prefab.transform.localRotation;
             //itemObject.transform.localRotation = Quaternion.identity; // Đặt rotation local về 0 để gắn vào tay
             Debug.Log("Đang sử dụng item: " + itemData.itemName);
         }
