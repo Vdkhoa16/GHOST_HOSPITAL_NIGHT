@@ -17,14 +17,15 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private AudioSource SounLbby, SoundPlayGame;
 
     [SerializeField] private RelayManager relayManager;
+    
 
     [Header("Lobby creation")]
     [SerializeField] private GameObject lobbyCreationParent;
     [SerializeField] private TMP_InputField createLobbyNameField;
-    //[SerializeField] private TMP_Dropdown createLobbyGameModeDropdown;
     [SerializeField] private TMP_InputField createLobbyMaxPlayersField;
     [SerializeField] private TMP_InputField createLobbyPasswordField;
     [SerializeField] private Toggle createLobbyPrivateToggle;
+    [SerializeField] private GameObject createLobbyButton;
 
     [Space(10)]
     [Header("Lobby list")]
@@ -44,7 +45,6 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private Transform playerItemPrefab;
     [SerializeField] private Transform playerListParent;
     [SerializeField] private TextMeshProUGUI joinedLobbyNameText;
-    //[SerializeField] private TextMeshProUGUI joinedLobbyGamemodeText;
     [SerializeField] private GameObject joinedLobbyStartButton;
 
     [Space(10)]
@@ -70,6 +70,11 @@ public class LobbyManager : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] private GameObject inventory;
 
+    [Space(10)]
+    [Header("Error")]
+    [SerializeField] private GameObject error;
+    [SerializeField] private TextMeshProUGUI errorText;
+
 
     private string playerName;
     private Player playerData;
@@ -92,6 +97,12 @@ public class LobbyManager : MonoBehaviour
         joinedLobbyParent.SetActive(false);
         lobbyCreationParent.SetActive(false);
         inputPasswordParent.SetActive(false);
+        error.SetActive(false);
+        createLobbyButton.SetActive(false);
+    }
+    private void Update()
+    {
+        CheckInputCreateLobby();
     }
 
     public void OnCreateLobbyPrivateToggle(bool value)
@@ -101,16 +112,25 @@ public class LobbyManager : MonoBehaviour
 
     public void CreateProfile()
     {
-        playerName = profileNameField.text;
-        profileSetupParent.SetActive(false);
-        lobbyListParent.SetActive(true);
-        ShowLobbies();
+        if (profileNameField.text == "")
+        {
+            error.SetActive(true);
+            errorText.text = "Vui lòng điền đầy đủ thông tin";
+        }
+        else
+        {
+            playerName = profileNameField.text;
+            profileSetupParent.SetActive(false);
+            lobbyListParent.SetActive(true);
 
-        PlayerDataObject playerDataObjectName = new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerName);
-/*        PlayerDataObject playerDataObjectTeam = new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, "A");*/
+            PlayerDataObject playerDataObjectName = new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerName);
 
-        playerData = new Player(id: AuthenticationService.Instance.PlayerId, data:
-        new Dictionary<string, PlayerDataObject> { { "Name", playerDataObjectName }/*, { "Team", playerDataObjectTeam }*/ });
+            playerData = new Player(id: AuthenticationService.Instance.PlayerId, data:
+                new Dictionary<string, PlayerDataObject> { { "Name", playerDataObjectName } });
+            ShowLobbies();
+            error.SetActive(false);
+        }
+
     }
 
 
@@ -170,6 +190,7 @@ public class LobbyManager : MonoBehaviour
     {
         while (Application.isPlaying && lobbyListParent.activeInHierarchy)
         {
+            // tìm kiếm room
             QueryLobbiesOptions queryLobbiesOptions = new QueryLobbiesOptions();
             queryLobbiesOptions.Filters = new List<QueryFilter>();
 
@@ -178,8 +199,9 @@ public class LobbyManager : MonoBehaviour
                 queryLobbiesOptions.Filters.Add(new QueryFilter(QueryFilter.FieldOptions.Name, searchLobbyNameInputField.text, QueryFilter.OpOptions.CONTAINS));
             }
 
+            // hiển thị lobby
             QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync(queryLobbiesOptions);
-
+            // xóa danh sách lobby
             foreach (Transform t in lobbyContentParent)
             {
                 Destroy(t.gameObject);
@@ -191,7 +213,6 @@ public class LobbyManager : MonoBehaviour
                 newLobbyItem.GetComponent<JoinLobbyButton>().lobbyId = lobby.Id;
                 newLobbyItem.GetComponent<JoinLobbyButton>().needPassword = lobby.HasPassword;
                 newLobbyItem.GetChild(0).GetComponent<TextMeshProUGUI>().text = lobby.Name;
-               // newLobbyItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = lobby.Data["GameMode"].Value;
                 newLobbyItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = lobby.Players.Count + "/" + lobby.MaxPlayers;
             }
 
@@ -263,7 +284,6 @@ public class LobbyManager : MonoBehaviour
             }
 
             joinedLobbyNameText.text = lobby.Name;
-           // joinedLobbyGamemodeText.text = lobby.Data["GameMode"].Value;
 
             foreach (Transform t in playerListParent)
             {
@@ -274,7 +294,6 @@ public class LobbyManager : MonoBehaviour
             {
                 Transform newPlayerItem = Instantiate(playerItemPrefab, playerListParent);
                 newPlayerItem.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.Data["Name"].Value;
-               // newPlayerItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = player.Data["Team"].Value;
                 newPlayerItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = (lobby.HostId == player.Id) ? "Chủ Phòng" : "Người Chơi";
             }
 
@@ -299,50 +318,60 @@ public class LobbyManager : MonoBehaviour
 
     public async void CreateLobby()
     {
-        if (!int.TryParse(createLobbyMaxPlayersField.text, out int maxPlayers))
+        int pass = createLobbyPasswordField.text.Length;
+        if (createLobbyPrivateToggle.isOn && pass < 8)
         {
-            Debug.LogWarning("Incorrect player count");
-            return;
+            error.SetActive(true);
+            errorText.text = "Mật khẩu ít nhất 8 kí tự";
         }
-
-        Lobby createdLobby = null;
-
-        CreateLobbyOptions options = new CreateLobbyOptions();
-        options.IsPrivate = false;
-        options.Player = playerData;
-
-        if (createLobbyPrivateToggle.isOn)
+        else
         {
-            options.Password = createLobbyPasswordField.text;
+            if (!int.TryParse(createLobbyMaxPlayersField.text, out int maxPlayers))
+            {
+                Debug.Log("số lượng người chơi không đúng");
+                error.SetActive(true);
+                errorText.text = "abc";
+                return;
+            }
+
+            Lobby createdLobby = null;
+
+            CreateLobbyOptions options = new CreateLobbyOptions();
+            options.IsPrivate = false;
+            options.Player = playerData;
+
+            if (createLobbyPrivateToggle.isOn)
+            {
+                options.Password = createLobbyPasswordField.text;
+            }
+
+            DataObject dataObjectJoinCode = new DataObject(DataObject.VisibilityOptions.Public, string.Empty);
+
+            options.Data = new Dictionary<string, DataObject> { { "JoinCode", dataObjectJoinCode } };
+
+            try
+            {
+                createdLobby = await LobbyService.Instance.CreateLobbyAsync(createLobbyNameField.text, maxPlayers, options);
+                lobbyCreationParent.SetActive(false);
+                joinedLobbyParent.SetActive(true);
+                joinedLobbyId = createdLobby.Id;
+                UpdateLobbyInfo();
+            }
+            catch (LobbyServiceException e)
+            {
+                Debug.Log(e);
+            }
+
+            LobbyHeartbeat(createdLobby);
+            error.SetActive(false);
         }
-
-       /* DataObject dataObjectGameMode = new DataObject(DataObject.VisibilityOptions.Public,
-            createLobbyGameModeDropdown.options[createLobbyGameModeDropdown.value].text);*/
-
-        DataObject dataObjectJoinCode = new DataObject(DataObject.VisibilityOptions.Public, string.Empty);
-
-        options.Data = new Dictionary<string, DataObject> { /*{ "GameMode", dataObjectGameMode },*/ { "JoinCode", dataObjectJoinCode } };
-
-        try
-        {
-            createdLobby = await LobbyService.Instance.CreateLobbyAsync(createLobbyNameField.text, maxPlayers, options);
-            lobbyCreationParent.SetActive(false);
-            joinedLobbyParent.SetActive(true);
-            joinedLobbyId = createdLobby.Id;
-            UpdateLobbyInfo();
-        }
-        catch (LobbyServiceException e)
-        {
-            Debug.Log(e);
-        }
-
-        LobbyHeartbeat(createdLobby);
     }
 
     private async void LobbyHeartbeat(Lobby lobby)
     {
         while (true)
         {
+            //kiểm tra có người trong lobby k
             if (lobby == null)
             {
                 return;
@@ -351,25 +380,9 @@ public class LobbyManager : MonoBehaviour
             await LobbyService.Instance.SendHeartbeatPingAsync(lobby.Id);
 
             await Task.Delay(15 * 1000);
+            // sau 15s tạo lại
         }
     }
-
-    /*    public async void SwitchPlayerTeamButton()
-        {
-            string newTeam;
-            if (playerData.Data["Team"].Value == "A")
-            {
-                newTeam = "B";
-            }
-            else
-            {
-                newTeam = "A";
-            }
-
-            await Lobbies.Instance.UpdatePlayerAsync(joinedLobbyId, AuthenticationService.Instance.PlayerId, new UpdatePlayerOptions
-            { Data = new Dictionary<string, PlayerDataObject> { { "Team", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, newTeam) } } });
-            playerData.Data["Team"].Value = newTeam;
-        }*/
     private IEnumerator DelayGame()
     {
         SounLbby.Pause();
@@ -382,5 +395,35 @@ public class LobbyManager : MonoBehaviour
      
         characterSelectDisplay.Pick();
        
+    }
+
+    private void CheckInputCreateLobby()
+    {
+
+
+        if(createLobbyNameField.text == "" || createLobbyMaxPlayersField.text == "" 
+            || (createLobbyPrivateToggle.isOn && createLobbyPasswordField.text == ""))
+        {
+            createLobbyButton.SetActive(false);
+
+        }
+        else if (int.TryParse(createLobbyMaxPlayersField.text, out int maxplayer))
+        {
+            if (maxplayer >= 5)
+            {
+                error.SetActive(true);
+                errorText.text = "Tối đa 4 người chơi";
+                createLobbyButton.SetActive(false);
+            }
+            else
+            {
+                createLobbyButton.SetActive(true);
+            }
+        }
+        else
+        {
+            createLobbyButton.SetActive(true);
+        }
+
     }
 }
