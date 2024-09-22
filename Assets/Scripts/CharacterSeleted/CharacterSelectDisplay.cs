@@ -19,6 +19,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
     private void Start()
     {
+
         Character[] allCharacters = characterDatabase.GetAllCharacters();
 
         foreach (var character in allCharacters)
@@ -44,6 +45,11 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
     public void Pick()
     {
+        if (selectedCharacter == null)
+        {
+            SubmitCharacterSelectionServerRpc(1);
+        }
+
         if (selectedCharacter != null)
         {
             SubmitCharacterSelectionServerRpc(selectedCharacter.Id);

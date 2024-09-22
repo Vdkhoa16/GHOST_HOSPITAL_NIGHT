@@ -26,27 +26,27 @@ public class PlayerInventory : NetworkBehaviour
     [SerializeField] private Transform playerHandTransform;
     public GameObject currentItemInHand;
 
+
+
     [System.Serializable]
-public struct ItemData : INetworkSerializable
-{
-    public string itemName;
-    public string prefabName;
-
-    public ItemData(Item item)
+    public struct ItemData : INetworkSerializable
     {
-        itemName = item.itemName;
-        prefabName = item.prefab.name;
+        public string itemName;
+        public string prefabName;
+
+        public ItemData(Item item)
+        {
+            itemName = item.itemName;
+            prefabName = item.prefab.name;
+        }
+
+        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+        {
+            serializer.SerializeValue(ref itemName);
+            serializer.SerializeValue(ref prefabName);
+        }
     }
 
-    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
-    {
-        serializer.SerializeValue(ref itemName);
-        serializer.SerializeValue(ref prefabName);
-    }
-}
-
-
-    [SerializeField] BoxCollider boxCollider;
 
     //private bool isPlayerInRange = false;
     private NetworkObject networkObject;
@@ -69,7 +69,7 @@ public struct ItemData : INetworkSerializable
             return;
         }
 
-       // worldObjectHolder = GameObject.FindGameObjectWithTag("WorldObjects").transform;
+        // worldObjectHolder = GameObject.FindGameObjectWithTag("WorldObjects").transform;
         invPanel = GameObject.FindGameObjectWithTag("InventoryPanel");
         invObjectHolder = GameObject.FindGameObjectWithTag("InventoryObjectHolder").transform;
         playerCamera = GameObject.FindWithTag("MainCamera").transform;
@@ -96,6 +96,7 @@ public struct ItemData : INetworkSerializable
         {
             ToggleInventory();
         }
+
 
     }
 
@@ -212,7 +213,7 @@ public struct ItemData : INetworkSerializable
             GameObject obj = Instantiate(invCanvasObject, invObjectHolder);
             obj.transform.GetChild(0).GetComponent<Image>().sprite = invObj.item.itemImage;
             obj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = invObj.item.itemName;
-            obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = invObj.amount+"";
+            obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = invObj.amount + "";
             obj.GetComponent<Button>().onClick.AddListener(delegate { UseItem(invObj.item); });
         }
     }
@@ -229,8 +230,9 @@ public struct ItemData : INetworkSerializable
             // Giữ nguyên vị trí và rotation từ prefab
             itemObject.transform.localPosition = prefab.transform.localPosition;
             itemObject.transform.localRotation = prefab.transform.localRotation;
-            //itemObject.transform.localRotation = Quaternion.identity; // Đặt rotation local về 0 để gắn vào tay
             Debug.Log("Đang sử dụng item: " + itemData.itemName);
+
+            // kiểm tra còn tồn tại item nào trên tay không
         }
         else
         {
@@ -240,6 +242,7 @@ public struct ItemData : INetworkSerializable
 
     void UseItem(Item item)
     {
+        RemoveItemHand();
         foreach (InventoryObject invObj in inventoryObjects)
         {
             if (invObj.item == item)
@@ -250,7 +253,7 @@ public struct ItemData : INetworkSerializable
                     ItemData itemData = new ItemData(item);
                     MoveItemToHandServerRpc(itemData);
 
-                   // invObj.amount--;
+                    // invObj.amount--;
                     if (invObj.amount == 0)
                     {
                         inventoryObjects.Remove(invObj);
@@ -260,6 +263,7 @@ public struct ItemData : INetworkSerializable
                 }
             }
         }
+
     }
 
 
@@ -297,6 +301,28 @@ public struct ItemData : INetworkSerializable
             inventoryObjects.Remove(heldItem);
         }
         UpdateInventoryUI();
+    }
+
+    // Đổi Item
+    public void SwapItem()
+    {
+
+    }
+
+    // Xóa item Trên tay 
+    public void RemoveItemHand()
+    {
+
+        // Kiểm tra xem playerHandTransform có con không
+        if (playerHandTransform.childCount > 0)
+        {
+            // Dùng vòng lặp để xóa tất cả các con của playerHandTransform
+            for (int i = playerHandTransform.childCount - 1; i >= 0; i--)
+            {
+                // Lấy con và phá hủy nó
+                Destroy(playerHandTransform.GetChild(i).gameObject);
+            }
+        }
     }
     /*void DropItem(Item item)
       {

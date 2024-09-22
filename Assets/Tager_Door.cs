@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -9,8 +10,12 @@ public class Tager_Door : NetworkBehaviour
     private Animator animator;
     private NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false); // trạng thái của cửa
     private bool isPlayerInRange = false; // vùng hiển thị button
-    [SerializeField] private AudioSource SoundOpen,SoundClose;
+    [SerializeField] private AudioSource SoundOpen, SoundClose;
 
+    public bool requiresKey = false; // Cửa có yêu cầu chìa khóa không
+    public int keyID; // ID của chìa khóa cần để mở cửa
+    public TextMeshPro notificationText;
+    private KeyManager keyManager;  // Tham chiếu đến KeyManager
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -21,20 +26,54 @@ public class Tager_Door : NetworkBehaviour
         }
 
         isOpen.OnValueChanged += OnDoorStateChanged;
+        // Tìm KeyManager trong scene (hoặc gán từ một đối tượng khác)
+        keyManager = GameObject.FindObjectOfType<KeyManager>();
+
     }
 
     void Update()
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (IsClient)
+            if (requiresKey)
             {
-/*                Debug.Log("Nhận được nút E");*/
-                ToggleDoorServerRpc();
+                if (keyManager != null && keyManager.HasKey(keyID))
+                {
+                    // Người chơi có chìa khóa, mở cửa và xóa chìa khóa
+                    ToggleDoorServerRpc();
+                }
+                else
+                {
+                    // Người chơi không có chìa khóa
+                    ShowNotification("Cần có chìa khóa để mở cửa");
+                }
             }
+            else
+            {
+                if (isPlayerInRange)
+                {
+                    if (IsClient)
+                    {
+                        ToggleDoorServerRpc();
+                    }
+                }
+            }
+
+
         }
     }
-
+    void ShowNotification(string message)
+    {
+        notificationText.text = message;
+        notificationText.gameObject.SetActive(true);  // Hiển thị thông báo
+        StartCoroutine(HideNotificationAfterSeconds(3));  // Ẩn sau 3 giây
+    }
+    IEnumerator HideNotificationAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);  // Đợi trong 3 giây
+        notificationText.gameObject.SetActive(false);  // Ẩn thông báo
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -67,14 +106,14 @@ public class Tager_Door : NetworkBehaviour
             animator.SetBool("closeD", true);
             OnCloseDAnimationEnd();
             animator.SetBool("OpenD", false);
-/*            Debug.Log("Closing door");*/
+            /*            Debug.Log("Closing door");*/
         }
         else
         {
             // Nếu cửa đang đóng, mở cửa
             animator.SetBool("OpenD", true);
             animator.SetBool("closeD", false);
-/*            Debug.Log("Opening door");*/
+            /*            Debug.Log("Opening door");*/
         }
     }
 
@@ -118,4 +157,6 @@ public class Tager_Door : NetworkBehaviour
         pickupButton.SetActive(visible);
         isPlayerInRange = visible;
     }
+
+
 }

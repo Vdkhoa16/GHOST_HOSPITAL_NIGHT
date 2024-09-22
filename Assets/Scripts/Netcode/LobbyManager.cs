@@ -8,6 +8,7 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using System.Threading.Tasks;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private AudioSource SounLbby, SoundPlayGame;
 
     [SerializeField] private RelayManager relayManager;
-    
+
 
     [Header("Lobby creation")]
     [SerializeField] private GameObject lobbyCreationParent;
@@ -75,6 +76,9 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private GameObject error;
     [SerializeField] private TextMeshProUGUI errorText;
 
+    [Space(10)]
+    [Header("Timeline")]
+    [SerializeField] private PlayableDirector timeLineStartLobby;
 
     private string playerName;
     private Player playerData;
@@ -86,7 +90,7 @@ public class LobbyManager : MonoBehaviour
 
         characterSelectDisplay = FindObjectOfType<CharacterSelectDisplay>();
         Instance = this;
-        
+
         createLobbyPrivateToggle.onValueChanged.AddListener(OnCreateLobbyPrivateToggle);
 
         await UnityServices.InitializeAsync();
@@ -228,21 +232,22 @@ public class LobbyManager : MonoBehaviour
         string JoinCode = await relayManager.StartHostWithRelay(lobby.MaxPlayers);
         // Show loading 
         LoadingParent.SetActive(true);
-        loadingBar.value = 0.1f; 
+        loadingBar.value = 0.1f;
         //
         isJoined = true;
         await Lobbies.Instance.UpdateLobbyAsync(joinedLobbyId, new UpdateLobbyOptions
         {
             Data = new Dictionary<string, DataObject> { { "JoinCode", new DataObject(DataObject.VisibilityOptions.Public, JoinCode) } }
         });
-        loadingBar.value = 0.3f; 
+        loadingBar.value = 0.3f;
         lobbyListParent.SetActive(false);
         joinedLobbyParent.SetActive(false);
         loadingBar.value = 0.7f;
         BKround.SetActive(false);
         playerCLon.SetActive(false);
-        loadingBar.value = 0.9f; 
+        loadingBar.value = 0.9f;
         StartCoroutine(DelayGame());
+
     }
 
 
@@ -392,16 +397,17 @@ public class LobbyManager : MonoBehaviour
         LoadingParent.SetActive(false);
         Debug.Log("Đã qua 15s");
         SoundPlayGame.Play();
-     
+
         characterSelectDisplay.Pick();
-       
+        timeLineStartLobby.Play();
+
     }
 
     private void CheckInputCreateLobby()
     {
 
 
-        if(createLobbyNameField.text == "" || createLobbyMaxPlayersField.text == "" 
+        if (createLobbyNameField.text == "" || createLobbyMaxPlayersField.text == ""
             || (createLobbyPrivateToggle.isOn && createLobbyPasswordField.text == ""))
         {
             createLobbyButton.SetActive(false);
