@@ -14,8 +14,7 @@ public class Tager_Door : NetworkBehaviour
 
     public bool requiresKey = false; // Cửa có yêu cầu chìa khóa không
     public int keyID; // ID của chìa khóa cần để mở cửa
-    public TextMeshPro notificationText;
-    private KeyManager keyManager;  // Tham chiếu đến KeyManager
+    public TextMeshProUGUI notificationText;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -26,41 +25,34 @@ public class Tager_Door : NetworkBehaviour
         }
 
         isOpen.OnValueChanged += OnDoorStateChanged;
-        // Tìm KeyManager trong scene (hoặc gán từ một đối tượng khác)
-        keyManager = GameObject.FindObjectOfType<KeyManager>();
+       
 
     }
 
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
         {
+            PlayerInventory playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+
             if (requiresKey)
             {
-                if (keyManager != null && keyManager.HasKey(keyID))
+                // Check if the player has the correct key
+                if (playerInventory != null && playerInventory.HasKey(keyID))
                 {
-                    // Người chơi có chìa khóa, mở cửa và xóa chìa khóa
                     ToggleDoorServerRpc();
+                    //remove
                 }
                 else
                 {
-                    // Người chơi không có chìa khóa
-                    ShowNotification("Cần có chìa khóa để mở cửa");
+                    ShowNotification("Không có chìa khóa");
                 }
             }
             else
             {
-                if (isPlayerInRange)
-                {
-                    if (IsClient)
-                    {
-                        ToggleDoorServerRpc();
-                    }
-                }
+                ToggleDoorServerRpc();
             }
-
-
         }
     }
     void ShowNotification(string message)

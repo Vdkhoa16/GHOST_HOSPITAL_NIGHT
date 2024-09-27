@@ -162,6 +162,11 @@ public class PlayerInventory : NetworkBehaviour
             }
         }
         inventoryObjects.Add(new InventoryObject() { item = newItem, amount = 1 });
+
+        if (newItem.isKey)
+        {
+            Debug.Log("Picked up key with ID: " + newItem.keyID);
+        }
     }
     [ServerRpc(RequireOwnership = false)]
     public void PickItemServerRpc(NetworkObjectReference networkObjectReference)
@@ -264,6 +269,18 @@ public class PlayerInventory : NetworkBehaviour
             }
         }
 
+    }
+    // kiểm tra matkhau door
+    public bool HasKey(int keyID)
+    {
+        foreach (InventoryObject inventoryObject in inventoryObjects)
+        {
+            if (inventoryObject.item.isKey && inventoryObject.item.keyID == keyID)
+            {
+                return true; 
+            }
+        }
+        return false;
     }
 
 
