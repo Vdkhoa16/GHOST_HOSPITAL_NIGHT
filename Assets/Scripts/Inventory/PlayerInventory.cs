@@ -247,7 +247,7 @@ public class PlayerInventory : NetworkBehaviour
 
     void UseItem(Item item)
     {
-        RemoveItemHand();
+        RemoveItemHandServerRpc();
         foreach (InventoryObject invObj in inventoryObjects)
         {
             if (invObj.item == item)
@@ -340,6 +340,18 @@ public class PlayerInventory : NetworkBehaviour
                 Destroy(playerHandTransform.GetChild(i).gameObject);
             }
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void RemoveItemHandServerRpc()
+    {
+        RemoveItemHandClientRpc();
+    }
+
+    [ClientRpc]
+    private void RemoveItemHandClientRpc()
+    {
+        RemoveItemHand();
     }
     /*void DropItem(Item item)
       {

@@ -8,13 +8,15 @@ public class Tager_Door : NetworkBehaviour
 {
     public GameObject pickupButton; // Tham chiếu đến nút nhặt
     private Animator animator;
-    private NetworkVariable<bool> isOpen = new NetworkVariable<bool>(false); // trạng thái của cửa
+    private NetworkVariable<bool> isOpen = new NetworkVariable<bool>(true); // trạng thái của cửa
     private bool isPlayerInRange = false; // vùng hiển thị button
     [SerializeField] private AudioSource SoundOpen, SoundClose;
 
     public bool requiresKey = false; // Cửa có yêu cầu chìa khóa không
     public int keyID; // ID của chìa khóa cần để mở cửa
     public TextMeshProUGUI notificationText;
+
+    private PlayerInventory playerInventory;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -23,7 +25,7 @@ public class Tager_Door : NetworkBehaviour
         {
             pickupButton.SetActive(false);
         }
-
+         // Khi trạng thái của cửa thay đổi, cập nhật ngay lập tức
         isOpen.OnValueChanged += OnDoorStateChanged;
        
 
@@ -34,7 +36,7 @@ public class Tager_Door : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
         {
-            PlayerInventory playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+            
 
             if (requiresKey)
             {
@@ -70,6 +72,7 @@ public class Tager_Door : NetworkBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
             ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
             SetPickupButtonVisibilityServerRpc(clientId, true);
         }
@@ -118,6 +121,7 @@ public class Tager_Door : NetworkBehaviour
     public void ToggleDoorServerRpc(ServerRpcParams rpcParams = default)
     {
         isOpen.Value = !isOpen.Value;
+        Debug.Log("Toggled Door. New state: " + isOpen.Value);  // In ra trạng thái mới để kiểm tra
     }
 
     public void SoundOpenDoor()
@@ -149,6 +153,5 @@ public class Tager_Door : NetworkBehaviour
         pickupButton.SetActive(visible);
         isPlayerInRange = visible;
     }
-
 
 }
