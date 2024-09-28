@@ -12,6 +12,7 @@ TagManager:
   - Item
   - Pickup
   - pickupUI
+  - car
   layers:
   - Default
   - TransparentFX
