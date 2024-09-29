@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   displayName: CH02
-  icon: {fileID: 21300000, guid: 36c494531b3c4a04ea92c5c2752d18d5, type: 3}
+  icon: {fileID: 21300000, guid: dbfda2141177ae34b887ee8f98c1d054, type: 3}
   introPrefab: {fileID: 8398108747100984787, guid: 313b0c57290f8624dbca223ff62cceba, type: 3}
   gameplayPrefab: {fileID: 2323344403287779166, guid: a709356a3effa9544b4a09cb263847ec, type: 3}

@@ -106,7 +106,6 @@ MonoBehaviour:
   pickupRange: 5
   playerHandTransform: {fileID: 0}
   currentItemInHand: {fileID: 0}
-  boxCollider: {fileID: 0}
 --- !u!114 &-5372765211559309158
 MonoBehaviour:
   m_ObjectHideFlags: 0
