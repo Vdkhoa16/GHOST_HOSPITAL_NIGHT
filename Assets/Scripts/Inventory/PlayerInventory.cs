@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
-using Unity.Netcode;
 using TMPro;
+using Unity.Netcode;
+
+using UnityEngine;
 using UnityEngine.UI;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class PlayerInventory : NetworkBehaviour
 {
