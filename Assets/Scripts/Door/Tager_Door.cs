@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Tager_Door : NetworkBehaviour
 {
-    public GameObject pickupButton; // Tham chiếu đến nút nhặt
+    public GameObject pickupButton;
     private Animator animator;
     private NetworkVariable<bool> isOpen = new NetworkVariable<bool>(true); // trạng thái của cửa
     private bool isPlayerInRange = false; // vùng hiển thị button
@@ -25,7 +25,6 @@ public class Tager_Door : NetworkBehaviour
         {
             pickupButton.SetActive(false);
         }
-         // Khi trạng thái của cửa thay đổi, cập nhật ngay lập tức
         isOpen.OnValueChanged += OnDoorStateChanged;
        
 

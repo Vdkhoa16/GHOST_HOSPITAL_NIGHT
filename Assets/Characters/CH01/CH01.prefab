@@ -2688,7 +2688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3666871806
+  GlobalObjectIdHash: 777236365
   InScenePlacedSourceGlobalObjectIdHash: 777236365
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2863,7 +2863,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0cb3b0cc255c34298426ee63c2f56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryObjects: []
+  inventoryObjects:
+  - item: {fileID: 11400000, guid: 581929150a323f141a1d368b85a37e60, type: 2}
+    amount: 1
   invCanvasObject: {fileID: 1985974861613601577, guid: 3ac2722e2b95fd548b2de503f4d24de7, type: 3}
   inventoryButtom: 9
   pickupLayer:
@@ -2874,7 +2876,6 @@ MonoBehaviour:
   pickupRange: 5
   playerHandTransform: {fileID: 5557397053870658331}
   currentItemInHand: {fileID: 6957845885201567542}
-  boxCollider: {fileID: 4709325875045734143}
 --- !u!65 &4709325875045734143
 BoxCollider:
   m_ObjectHideFlags: 0

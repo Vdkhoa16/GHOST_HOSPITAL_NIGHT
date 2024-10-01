@@ -3,6 +3,7 @@ using UnityEngine;
 using Unity.Netcode;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class PlayerInventory : NetworkBehaviour
 {
@@ -33,17 +34,23 @@ public class PlayerInventory : NetworkBehaviour
     {
         public string itemName;
         public string prefabName;
+        public bool isKey;
+        public int keyID;
 
         public ItemData(Item item)
         {
             itemName = item.itemName;
             prefabName = item.prefab.name;
+            isKey = item.isKey;
+            keyID = item.keyID;
         }
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
             serializer.SerializeValue(ref itemName);
             serializer.SerializeValue(ref prefabName);
+            serializer.SerializeValue(ref keyID);
+            serializer.SerializeValue(ref isKey);
         }
     }
 
@@ -162,11 +169,6 @@ public class PlayerInventory : NetworkBehaviour
             }
         }
         inventoryObjects.Add(new InventoryObject() { item = newItem, amount = 1 });
-
-        if (newItem.isKey)
-        {
-            Debug.Log("Picked up key with ID: " + newItem.keyID);
-        }
     }
     [ServerRpc(RequireOwnership = false)]
     public void PickItemServerRpc(NetworkObjectReference networkObjectReference)
@@ -236,6 +238,10 @@ public class PlayerInventory : NetworkBehaviour
             itemObject.transform.localPosition = prefab.transform.localPosition;
             itemObject.transform.localRotation = prefab.transform.localRotation;
             Debug.Log("Đang sử dụng item: " + itemData.itemName);
+            if (itemData.isKey)
+            {
+                Debug.Log("Picked up key with ID: " + itemData.keyID);
+            }
 
             // kiểm tra còn tồn tại item nào trên tay không
         }

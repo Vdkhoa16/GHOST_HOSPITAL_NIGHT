@@ -2676,7 +2676,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0cb3b0cc255c34298426ee63c2f56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryObjects: []
+  inventoryObjects:
+  - item: {fileID: 11400000, guid: 581929150a323f141a1d368b85a37e60, type: 2}
+    amount: 1
   invCanvasObject: {fileID: 1985974861613601577, guid: 3ac2722e2b95fd548b2de503f4d24de7, type: 3}
   inventoryButtom: 9
   pickupLayer:
