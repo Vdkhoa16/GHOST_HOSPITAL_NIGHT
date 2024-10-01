@@ -3,7 +3,6 @@ using UnityEngine;
 using Unity.Netcode;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class PlayerInventory : NetworkBehaviour
 {
