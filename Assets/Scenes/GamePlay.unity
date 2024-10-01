@@ -134417,7 +134417,7 @@ MonoBehaviour:
   SoundClose: {fileID: 1991862512}
   requiresKey: 0
   keyID: 0
-  notificationText: {fileID: 0}
+  notificationText: {fileID: 1065379275}
 --- !u!114 &1991862508
 MonoBehaviour:
   m_ObjectHideFlags: 0
