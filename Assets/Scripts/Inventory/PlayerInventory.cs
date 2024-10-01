@@ -4,6 +4,7 @@ using Unity.Netcode;
 
 using UnityEngine;
 using UnityEngine.UI;
+using static PlayerInventory;
 
 public class PlayerInventory : NetworkBehaviour
 {
@@ -34,15 +35,15 @@ public class PlayerInventory : NetworkBehaviour
     {
         public string itemName;
         public string prefabName;
-        public bool isKey;
+        public ItemType itemType;
         public int keyID;
 
         public ItemData(Item item)
         {
             itemName = item.itemName;
             prefabName = item.prefab.name;
-            isKey = item.isKey;
             keyID = item.keyID;
+            itemType = item.itemType;
         }
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -50,7 +51,7 @@ public class PlayerInventory : NetworkBehaviour
             serializer.SerializeValue(ref itemName);
             serializer.SerializeValue(ref prefabName);
             serializer.SerializeValue(ref keyID);
-            serializer.SerializeValue(ref isKey);
+            serializer.SerializeValue(ref itemType);
         }
     }
 
@@ -169,6 +170,11 @@ public class PlayerInventory : NetworkBehaviour
             }
         }
         inventoryObjects.Add(new InventoryObject() { item = newItem, amount = 1 });
+
+        if (newItem.itemType == ItemType.isKey)
+        {
+            Debug.Log("Picked up key with ID: " + newItem.keyID);
+        }
     }
     [ServerRpc(RequireOwnership = false)]
     public void PickItemServerRpc(NetworkObjectReference networkObjectReference)
@@ -221,7 +227,11 @@ public class PlayerInventory : NetworkBehaviour
             obj.transform.GetChild(0).GetComponent<Image>().sprite = invObj.item.itemImage;
             obj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = invObj.item.itemName;
             obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = invObj.amount + "";
-            obj.GetComponent<Button>().onClick.AddListener(delegate { UseItem(invObj.item); });
+            obj.GetComponent<Button>().onClick.AddListener(delegate {
+                    UseItem(invObj.item);
+                UseLetter(invObj.item);
+            });
+            
         }
     }
 
@@ -238,16 +248,37 @@ public class PlayerInventory : NetworkBehaviour
             itemObject.transform.localPosition = prefab.transform.localPosition;
             itemObject.transform.localRotation = prefab.transform.localRotation;
             Debug.Log("Đang sử dụng item: " + itemData.itemName);
-            if (itemData.isKey)
-            {
-                Debug.Log("Picked up key with ID: " + itemData.keyID);
-            }
+
 
             // kiểm tra còn tồn tại item nào trên tay không
         }
         else
         {
             Debug.LogError("Không tìm thấy prefab: " + itemData.prefabName);
+        }
+    }
+
+    void UseLetter(Item item)
+    {
+        ItemData itemData = new ItemData(item);
+        if (item.itemType == ItemType.isLetter)
+        {
+            GameObject prefab = Resources.Load<GameObject>(itemData.prefabName);
+
+            if (prefab != null)
+            {
+                // Instantiate prefab vào tay còn lại
+                GameObject itemObject = Instantiate(prefab, invPanel.transform);
+
+                // Giữ nguyên vị trí và rotation từ prefab
+                itemObject.transform.localPosition = prefab.transform.localPosition;
+                itemObject.transform.localRotation = prefab.transform.localRotation;
+                Debug.Log("Đang sử dụng item: " + itemData.itemName);
+
+
+                // kiểm tra còn tồn tại item nào trên tay không
+            }
+
         }
     }
 
@@ -281,7 +312,7 @@ public class PlayerInventory : NetworkBehaviour
     {
         foreach (InventoryObject inventoryObject in inventoryObjects)
         {
-            if (inventoryObject.item.isKey && inventoryObject.item.keyID == keyID)
+            if (inventoryObject.item.itemType == ItemType.isKey && inventoryObject.item.keyID == keyID)
             {
                 return true; 
             }
@@ -414,4 +445,5 @@ public class PlayerInventory : NetworkBehaviour
         public Item item;
         public int amount;
     }
+
 }
