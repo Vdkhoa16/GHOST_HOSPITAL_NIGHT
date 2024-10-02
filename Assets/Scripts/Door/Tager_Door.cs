@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Tager_Door : NetworkBehaviour
 {
@@ -27,11 +28,11 @@ public class Tager_Door : NetworkBehaviour
         }
         isOpen.OnValueChanged += OnDoorStateChanged;
        
-
     }
 
     void Update()
     {
+
 
         if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
         {
@@ -43,6 +44,7 @@ public class Tager_Door : NetworkBehaviour
                 if (playerInventory != null && playerInventory.HasKey(keyID))
                 {
                     ToggleDoorServerRpc();
+                    
                     //remove
                 }
                 else
@@ -55,6 +57,7 @@ public class Tager_Door : NetworkBehaviour
                 ToggleDoorServerRpc();
             }
         }
+
     }
     void ShowNotification(string message)
     {

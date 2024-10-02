@@ -32,6 +32,7 @@ namespace Invector.vCharacterController
         [HideInInspector] public vThirdPersonCamera tpCamera;
         [HideInInspector] public Camera cameraMain;
 
+        [SerializeField] private Transform transformCamera;
         #endregion
 
         protected virtual void Start()
@@ -77,7 +78,7 @@ namespace Invector.vCharacterController
                     return;
                 if (tpCamera)
                 {
-                    tpCamera.SetMainTarget(this.transform);
+                    tpCamera.SetMainTarget(transformCamera);
                     tpCamera.Init();
                 }
             }
@@ -122,6 +123,14 @@ namespace Invector.vCharacterController
             var X = Input.GetAxis(rotateCameraXInput);
 
             tpCamera.RotateCamera(X, Y);
+
+            // góc nhìn t1
+            
+            // Xoay nhân vật theo góc của camera
+            Vector3 cameraForward = cameraMain.transform.forward;
+            cameraForward.y = 0; // Đặt giá trị y = 0 để chỉ giữ lại hướng ngang
+            Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
+            cc.transform.rotation = Quaternion.Slerp(cc.transform.rotation, targetRotation, Time.deltaTime * cc.rotationSpeed); // Cập nhật tốc độ xoay nếu cần
         }
 
         protected virtual void StrafeInput()

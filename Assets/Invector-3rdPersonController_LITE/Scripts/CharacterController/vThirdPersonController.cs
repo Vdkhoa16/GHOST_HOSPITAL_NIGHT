@@ -4,8 +4,8 @@ namespace Invector.vCharacterController
 {
     public class vThirdPersonController : vThirdPersonAnimator
     {
-/*        private Animator animator;*/
-
+        /*        private Animator animator;*/
+        public float rotationSpeed = 10f; // Tốc độ xoay của nhân vật
         void Awake()
         {
             animator = GetComponent<Animator>();
