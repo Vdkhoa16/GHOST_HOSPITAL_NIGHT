@@ -23,7 +23,7 @@ namespace Invector.vCharacterController
         public KeyCode jumpInput = KeyCode.Space;
         public KeyCode strafeInput = KeyCode.Tab;
         public KeyCode sprintInput = KeyCode.LeftShift;
-
+        public KeyCode switchViewInput = KeyCode.V;
         [Header("Camera Input")]
         public string rotateCameraXInput = "Mouse X";
         public string rotateCameraYInput = "Mouse Y";
@@ -33,6 +33,7 @@ namespace Invector.vCharacterController
         [HideInInspector] public Camera cameraMain;
 
         [SerializeField] private Transform transformCamera;
+        public static bool isFirstPerson = false;
         #endregion
 
         protected virtual void Start()
@@ -52,6 +53,10 @@ namespace Invector.vCharacterController
         {
             InputHandle();                  // update the input methods
             cc.UpdateAnimator();            // updates the Animator Parameters
+            if (Input.GetKeyDown(switchViewInput))
+            {
+                ToggleCameraView();
+            }
         }
         
         public virtual void OnAnimatorMove()
@@ -78,11 +83,32 @@ namespace Invector.vCharacterController
                     return;
                 if (tpCamera)
                 {
-                    tpCamera.SetMainTarget(transformCamera);
-                    tpCamera.Init();
+                    tpCamera.SetMainTargetThird(this.transform);
+                    if (isFirstPerson)
+                    {
+                        tpCamera.InitFirst();
+                    }
+                    else
+                    {
+                        tpCamera.InitThird();
+                    }
                 }
             }
         }
+        protected void ToggleCameraView()
+        {
+            if (isFirstPerson)
+            {
+                tpCamera.SetMainTargetThird(this.transform); // Switch to third-person
+                isFirstPerson = false;
+            }
+            else
+            {
+                tpCamera.SetMainTargetFirst(transformCamera); // Switch to first-person
+                isFirstPerson = true;
+            }
+        }
+
 
         protected virtual void InputHandle()
         {
@@ -122,15 +148,22 @@ namespace Invector.vCharacterController
             var Y = Input.GetAxis(rotateCameraYInput);
             var X = Input.GetAxis(rotateCameraXInput);
 
-            tpCamera.RotateCamera(X, Y);
+            if (isFirstPerson)
+            {
+                tpCamera.RotateCameraFirst(X, Y);
 
-            // góc nhìn t1
-            
-            // Xoay nhân vật theo góc của camera
-            Vector3 cameraForward = cameraMain.transform.forward;
-            cameraForward.y = 0; // Đặt giá trị y = 0 để chỉ giữ lại hướng ngang
-            Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
-            cc.transform.rotation = Quaternion.Slerp(cc.transform.rotation, targetRotation, Time.deltaTime * cc.rotationSpeed); // Cập nhật tốc độ xoay nếu cần
+                // góc nhìn t1
+
+                // Xoay nhân vật theo góc của camera
+                Vector3 cameraForward = cameraMain.transform.forward;
+                cameraForward.y = 0; // Đặt giá trị y = 0 để chỉ giữ lại hướng ngang
+                Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
+                cc.transform.rotation = Quaternion.Slerp(cc.transform.rotation, targetRotation, Time.deltaTime * cc.rotationSpeed); // Cập nhật tốc độ xoay nếu cần
+            }
+            else
+            {
+                tpCamera.RotateCameraThird(X,Y);
+            }
         }
 
         protected virtual void StrafeInput()
