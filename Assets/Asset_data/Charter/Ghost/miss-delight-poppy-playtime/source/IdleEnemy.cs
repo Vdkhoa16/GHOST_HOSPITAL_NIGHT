@@ -34,6 +34,7 @@ public class IdleEnemy : StateMachineBehaviour
         foreach (Transform player in players)
         {
             float distance = Vector3.Distance(player.position, animator.transform.position);
+            Debug.Log("No People");
             if (distance < shortestDistance)
             {
                 shortestDistance = distance;
