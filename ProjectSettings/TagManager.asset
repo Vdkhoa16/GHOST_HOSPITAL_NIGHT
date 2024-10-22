@@ -14,16 +14,60 @@ TagManager:
   - pickupUI
   - car
   - WP
+  - Metal
+  - Wall
+  - Wood
+  - WayPointHospital
+  - KeyRoom2_Respawn
+  - RegularObjRespawnSurgery
+  - RegularObjRespawnHospital
+  - DartLocation
+  - Flash Light Respawn
+  - KeyRoom7_Respawn
+  - TabletLocations
+  - PlayerRespawnHospital
+  - Blood
+  - RegularObjRespawnLabs
+  - RegularObjRespawnGenerators
+  - KeyRoom6_Respawn
+  - RespawnPointHospital
+  - MetalDoor
+  - KeyRoom4_Respawn
+  - WayPointLabs
+  - WayPointSurgery
+  - Stairs key Respawn
+  - HidePoint
+  - RespawnPointSurgery
+  - BatteryRespawnLabs
+  - KeyRoom3_Respawn
+  - KeyRoom1_Respawn
+  - FuseBoxCover
+  - WayPointGenerators
+  - HospitalExitKeyCardRespawn
+  - Ammo Respawn
+  - BatteryRepawnHospital
+  - BatteryRespawnSurgery
+  - Plank
+  - BatteryRespawnGenerators
+  - LabsKeyCardRespawn
+  - RespawnPointLabs
+  - Gun Respawn
+  - KeyRoom8_Respawn
+  - KeyRoom5_Respawn
+  - FuseBox
+  - SurgeryKeyCardRespawn
+  - ElevatorKeyCardRespawn
+  - BrokenCables
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Pickup
   - Mirror
-  - 
+  - Objects
   - 
   - 
   - 

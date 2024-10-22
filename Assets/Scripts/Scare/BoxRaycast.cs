@@ -6,6 +6,7 @@ public class BoxRaycast : MonoBehaviour
 {
     [SerializeField] private GameObject scare;
     [SerializeField] private AudioSource clip;
+    [SerializeField] private BoxCollider boxCollider;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class BoxRaycast : MonoBehaviour
     {       
         scare.SetActive(true);
         clip.Play();
+        boxCollider.enabled = false;
     }
 
 }

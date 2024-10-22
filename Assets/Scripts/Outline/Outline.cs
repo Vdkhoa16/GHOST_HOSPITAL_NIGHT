@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 
@@ -60,7 +61,7 @@ public class Outline : MonoBehaviour {
   private Color outlineColor = Color.white;
 
   [SerializeField, Range(0f, 10f)]
-  private float outlineWidth = 2f;
+  public float outlineWidth = 2f;
 
   [Header("Optional")]
 
@@ -134,8 +135,11 @@ public class Outline : MonoBehaviour {
       needsUpdate = false;
 
       UpdateMaterialProperties();
+
+        }
+
+        OutlineWidth = 0;
     }
-  }
 
   void OnDisable() {
     foreach (var renderer in renderers) {
@@ -269,7 +273,7 @@ public class Outline : MonoBehaviour {
     mesh.SetTriangles(mesh.triangles, mesh.subMeshCount - 1);
   }
 
-  void UpdateMaterialProperties() {
+  public void UpdateMaterialProperties() {
 
     // Apply properties according to mode
     outlineFillMaterial.SetColor("_OutlineColor", outlineColor);

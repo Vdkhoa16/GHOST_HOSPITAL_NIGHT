@@ -112,7 +112,7 @@ public class PlayerInventory : NetworkBehaviour
     {
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
-        Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.green);
+       // Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.green);
 
         if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
         {
@@ -136,26 +136,32 @@ public class PlayerInventory : NetworkBehaviour
     {
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
-        Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.red);
+       // Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.red);
 
         if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
         {
+            Outline outline = hit.collider.GetComponent<Outline>();
             if (hit.collider.CompareTag("Pickup"))
             {
                 //Debug.Log("Tìm thấy vật phẩm");
                 crosshairImage.color = Color.red;
                 pickUpItem_gameobject.SetActive(true);
+               
+                // outline.UpdateMaterialProperties();
+                outline.OutlineWidth = 10;
             }
             else
             {
                 crosshairImage.color = Color.white;
                 pickUpItem_gameobject.SetActive(false);
+                outline.OutlineWidth = 0;
             }
         }
         else
         {
             crosshairImage.color = Color.white;
             pickUpItem_gameobject.SetActive(false);
+
         }
     }
 

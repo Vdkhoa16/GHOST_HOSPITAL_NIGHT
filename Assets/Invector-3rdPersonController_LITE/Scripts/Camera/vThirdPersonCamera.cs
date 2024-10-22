@@ -175,7 +175,7 @@ public class vThirdPersonCamera : MonoBehaviour
         mouseY = Mathf.Clamp(mouseY, yMinLimit, yMaxLimit);
 
         // Giới hạn góc xoay ngang (xoay 360 độ)
-        mouseX = Mathf.Clamp(mouseX, -360f, 360f);
+       // mouseX = Mathf.Clamp(mouseX, -360f, 360f);
     }
     public void RotateCameraThird(float x, float y)
     {

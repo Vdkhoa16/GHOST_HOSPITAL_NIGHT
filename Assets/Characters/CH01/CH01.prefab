@@ -2720,7 +2720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3666871806
+  GlobalObjectIdHash: 777236365
   InScenePlacedSourceGlobalObjectIdHash: 777236365
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2796,6 +2796,7 @@ MonoBehaviour:
   jumpInput: 32
   strafeInput: 9
   sprintInput: 304
+  switchViewInput: 118
   rotateCameraXInput: Mouse X
   rotateCameraYInput: Mouse Y
   cc: {fileID: 2862758606287892732}
