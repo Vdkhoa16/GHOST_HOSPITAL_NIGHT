@@ -4,16 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/GamePlay.unity
-    guid: 2b5801da84cb88c49b329ecfa650beef
-  - enabled: 1
-<<<<<<< Updated upstream
-    path: Assets/Scenes/MauRSS.unity
-    guid: 5dbdcdcc8a82cf54785912381640db0f
-=======
-    path: Assets/Scenes/Khoa.unity
-    guid: a463bde170bebe24897b994f691ac37c
->>>>>>> Stashed changes
+  m_Scenes: []
   m_configObjects: {}
