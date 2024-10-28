@@ -56,7 +56,7 @@ public class IdleEnemy : StateMachineBehaviour
         if (timer > 5)
         {
             animator.SetBool("isPatrolling", true);
-            Debug.Log("walk");
+           //ebug.Log("walk");
         }
 
         Transform closestPlayer = GetClosestPlayer(animator);
@@ -66,7 +66,7 @@ public class IdleEnemy : StateMachineBehaviour
             if (distance < ChaseRange)
             {
                 animator.SetBool("isChasing", true);
-                Debug.Log("run");
+               //ebug.Log("run");
             }
         }
     }

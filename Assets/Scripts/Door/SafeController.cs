@@ -19,6 +19,8 @@ public class SafeController : NetworkBehaviour
     public TextMeshProUGUI notificationText;
     [SerializeField] private GameObject PassPanel;
 
+    [SerializeField] private GameObject letter;
+    [SerializeField] private Transform transformletterl;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -51,6 +53,7 @@ public class SafeController : NetworkBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+       // letter = Instantiate(letter);
     }
 
 
@@ -124,6 +127,7 @@ public class SafeController : NetworkBehaviour
     public void ToggleDoorServerRpc(ServerRpcParams rpcParams = default)
     {
         isOpen.Value = !isOpen.Value;
+        letter = Instantiate(letter,transformletterl);
         Debug.Log("Toggled Door. New state: " + isOpen.Value);  // In ra trạng thái mới để kiểm tra
     }
 
