@@ -10,7 +10,7 @@ public class HideShow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // cheatBox = GetComponent<CheatBoxHaS>();
+        cheatBox = GetComponent<CheatBoxHaS>();
     }
 
     // Update is called once per frame
