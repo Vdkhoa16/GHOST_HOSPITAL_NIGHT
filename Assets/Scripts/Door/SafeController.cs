@@ -21,6 +21,7 @@ public class SafeController : NetworkBehaviour
 
     [SerializeField] private GameObject letter;
     [SerializeField] private Transform transformletterl;
+    [SerializeField] private BoxCollider boxCollider;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -30,7 +31,7 @@ public class SafeController : NetworkBehaviour
             pickupButton.SetActive(false);
         }
         isOpen.OnValueChanged += OnDoorStateChanged;
-        
+        letter.SetActive(false);
     }
 
     void Update()
@@ -127,8 +128,9 @@ public class SafeController : NetworkBehaviour
     public void ToggleDoorServerRpc(ServerRpcParams rpcParams = default)
     {
         isOpen.Value = !isOpen.Value;
-        letter = Instantiate(letter,transformletterl);
-        Debug.Log("Toggled Door. New state: " + isOpen.Value);  // In ra trạng thái mới để kiểm tra
+        letter.SetActive(true);
+        boxCollider.enabled = false;
+        
     }
 
     //public void SoundOpenDoor()

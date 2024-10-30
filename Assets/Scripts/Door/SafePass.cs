@@ -44,6 +44,11 @@ public class SafePass : MonoBehaviour
         {
             safeController.ToggleDoorServerRpc();
         }
+        else
+        {
+            inputPassSafe.text = "";
+        }
+
     }
 
     public void Button0()
