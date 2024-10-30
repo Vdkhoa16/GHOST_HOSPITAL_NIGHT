@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
@@ -28,6 +28,7 @@ public class NumberBox : MonoBehaviour
         UpdatePos(i, j);
         this.swapFunc = swapFunc;
     }
+
     void Awake()
     {
         // Get the Image component from the GameObject
@@ -58,9 +59,10 @@ public class NumberBox : MonoBehaviour
     {
         return index == 16;
     }
-    void OnMouseDown()
+    public void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0) && swapFunc != null)
+        if (Input.GetKey(KeyCode.Mouse0) && swapFunc != null)
             swapFunc(x, y);
+        Debug.Log("Chạm");
     }
 }

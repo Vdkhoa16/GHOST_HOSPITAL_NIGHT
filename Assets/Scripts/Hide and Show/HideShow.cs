@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HideShow : MonoBehaviour
@@ -7,10 +8,12 @@ public class HideShow : MonoBehaviour
     public BoxTriger[] boxTriger;
     public bool check;
     public CheatBoxHaS cheatBox;
+    public TextMeshPro passR;
+    public SafeController safeController;
     // Start is called before the first frame update
     void Start()
     {
-       
+        RandomPass();
     }
 
     // Update is called once per frame
@@ -23,7 +26,7 @@ public class HideShow : MonoBehaviour
                 LoseGame();
             }
         }
-
+       
   
     }
 
@@ -42,6 +45,7 @@ public class HideShow : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
+                RandomPass();
                 for (int i = 0; i < boxTriger.Length; i++)
                 {
                     boxTriger[i].setActive();
@@ -50,5 +54,13 @@ public class HideShow : MonoBehaviour
             }
         }
         
+    }
+
+    public void RandomPass()
+    {
+        int pass;
+        pass = Random.Range(1000, 9999);
+        passR.text = pass.ToString();
+        safeController.keyID = pass ;
     }
 }
