@@ -28,6 +28,8 @@ public class PlayerInventory : NetworkBehaviour
     [SerializeField] private Transform playerHandTransform;
     public GameObject currentItemInHand;
 
+    [Header("Animation")]
+    [SerializeField] private PlayerAnimation playerAnimation;
 
 
     [System.Serializable]
@@ -97,7 +99,8 @@ public class PlayerInventory : NetworkBehaviour
         {
             Debug.Log("Nhấn e");
             PickUpButton();
-
+            // gọi aniamtion
+            playerAnimation.PickUp();
         }
         PickUp();
         if (Input.GetKeyDown(inventoryButtom))

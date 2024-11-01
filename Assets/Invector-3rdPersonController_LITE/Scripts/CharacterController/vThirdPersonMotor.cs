@@ -155,12 +155,12 @@ namespace Invector.vCharacterController
 
         #region Locomotion
 
-        public virtual void SetControllerMoveSpeed(vMovementSpeed speed)
+        public virtual void SetControllerMoveSpeed(vMovementSpeed speed,float walkSpeed, float runningSpeed,float sprintSpeed)
         {
             if (speed.walkByDefault)
-                moveSpeed = Mathf.Lerp(moveSpeed, isSprinting ? speed.runningSpeed : speed.walkSpeed, speed.movementSmooth * Time.deltaTime);
+                moveSpeed = Mathf.Lerp(moveSpeed, isSprinting ? runningSpeed : walkSpeed, speed.movementSmooth * Time.deltaTime);
             else
-                moveSpeed = Mathf.Lerp(moveSpeed, isSprinting ? speed.sprintSpeed : speed.runningSpeed, speed.movementSmooth * Time.deltaTime);
+                moveSpeed = Mathf.Lerp(moveSpeed, isSprinting ? sprintSpeed : runningSpeed, speed.movementSmooth * Time.deltaTime);
         }
 
         public virtual void MoveCharacter(Vector3 _direction)

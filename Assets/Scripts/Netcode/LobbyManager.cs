@@ -84,6 +84,9 @@ public class LobbyManager : MonoBehaviour
     private Player playerData;
     private string joinedLobbyId;
 
+    // check lobby chạy xong
+    private bool isDelayComplete = false;
+
     private async void Start()
     {
         SounLbby.Play();
@@ -400,7 +403,12 @@ public class LobbyManager : MonoBehaviour
 
         characterSelectDisplay.Pick();
         timeLineStartLobby.Play();
-
+        // Đánh dấu là đã hoàn tất
+        isDelayComplete = true;
+    }
+    public bool IsDelayComplete()
+    {
+        return isDelayComplete;
     }
 
     private void CheckInputCreateLobby()

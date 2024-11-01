@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 780a351c75af17c4bbbc939cf9fafd85
+  - enabled: 1
+    path: Assets/Invector-3rdPersonController_LITE/TestModel.unity
+    guid: 5030ab1a6919779449f003dfa1909caa
   m_configObjects: {}
