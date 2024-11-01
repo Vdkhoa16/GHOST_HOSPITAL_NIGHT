@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -37,6 +37,7 @@ namespace NavKeypad
         [SerializeField] private Renderer panelMesh;
         [SerializeField] private TMP_Text keypadDisplayText;
         [SerializeField] private AudioSource audioSource;
+        [SerializeField] private HienKaypad hienKaypad;
 
 
         private string currentInput;
@@ -125,7 +126,14 @@ namespace NavKeypad
             onAccessGranted?.Invoke();
             panelMesh.material.SetVector("_EmissionColor", screenGrantedColor * screenIntensity);
             audioSource.PlayOneShot(accessGrantedSfx);
+            // Gọi hàm đóng Keypad và xóa HienKaypad sau 2 giây
+            StartCoroutine(CloseAndDestroyHienKaypad());
         }
-
+        private IEnumerator CloseAndDestroyHienKaypad()
+        {
+            yield return new WaitForSeconds(2f); // Chờ 2 giây
+            hienKaypad.HidePaper(); // Gọi hàm đóng
+            Destroy(hienKaypad); // Xóa script HienKaypad
+        }
     }
 }
