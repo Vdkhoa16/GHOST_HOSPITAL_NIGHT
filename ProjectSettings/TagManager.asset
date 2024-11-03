@@ -3,12 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Pickup
+  - InventoryObjectHolder
+  - PickE
+  - Door
+  - car
+  - InventoryPanel
+  - WorldObjects
+  - pickupUI
+  - WP
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 

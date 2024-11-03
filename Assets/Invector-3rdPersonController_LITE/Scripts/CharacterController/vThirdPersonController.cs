@@ -4,6 +4,18 @@ namespace Invector.vCharacterController
 {
     public class vThirdPersonController : vThirdPersonAnimator
     {
+        public float walk_Speed;
+        public float running_Speed;
+        public float sprint_Speed;
+
+
+        public void UpdateSpeed(float walk, float running, float sprint)
+        {
+            walk_Speed = walk;
+            running_Speed = running;
+            sprint_Speed = sprint;
+        }
+
         /*        private Animator animator;*/
         public float rotationSpeed = 10f; // Tốc độ xoay của nhân vật
         void Awake()
@@ -34,13 +46,13 @@ namespace Invector.vCharacterController
 
             if (locomotionType.Equals(LocomotionType.FreeWithStrafe) && !isStrafing || locomotionType.Equals(LocomotionType.OnlyFree))
             {
-                SetControllerMoveSpeed(freeSpeed);
+                SetControllerMoveSpeed(freeSpeed, walk_Speed, running_Speed, sprint_Speed);
                 SetAnimatorMoveSpeed(freeSpeed);
             }
             else if (locomotionType.Equals(LocomotionType.OnlyStrafe) || locomotionType.Equals(LocomotionType.FreeWithStrafe) && isStrafing)
             {
                 isStrafing = true;
-                SetControllerMoveSpeed(strafeSpeed);
+                SetControllerMoveSpeed(strafeSpeed, walk_Speed, running_Speed, sprint_Speed);
                 SetAnimatorMoveSpeed(strafeSpeed);
             }
 

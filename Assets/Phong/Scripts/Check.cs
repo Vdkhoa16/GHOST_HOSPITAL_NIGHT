@@ -15,6 +15,11 @@ public class Check : MonoBehaviour
     {
         // Gán hàm CheckInput cho nút khi được nhấn
         submitButton.onClick.AddListener(CheckInput);
+        // Gán hàm để giới hạn ký tự cho các Input Field
+        inputFieldH.onValueChanged.AddListener((value) => LimitInputLength(inputFieldH, value));
+        inputFieldC.onValueChanged.AddListener((value) => LimitInputLength(inputFieldC, value));
+        inputFieldF.onValueChanged.AddListener((value) => LimitInputLength(inputFieldF, value));
+        inputFieldY.onValueChanged.AddListener((value) => LimitInputLength(inputFieldY, value));
     }
 
     void Update()
@@ -49,5 +54,14 @@ public class Check : MonoBehaviour
                inputC.Equals("C", System.StringComparison.OrdinalIgnoreCase) &&
                inputF.Equals("F", System.StringComparison.OrdinalIgnoreCase) &&
                inputY.Equals("Y", System.StringComparison.OrdinalIgnoreCase);
+
+    }
+    private void LimitInputLength(TMP_InputField inputField, string value)
+    {
+        // Giới hạn số lượng ký tự nhập vào
+        if (value.Length > 1)
+        {
+            inputField.text = value.Substring(0, 1); // Giữ lại ký tự đầu tiên
+        }
     }
 }
