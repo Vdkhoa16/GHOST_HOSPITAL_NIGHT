@@ -7,6 +7,7 @@ public class HideShow : MonoBehaviour
 {
     public BoxTriger[] boxTriger;
     public bool check;
+    public bool isActive = false;
     public CheatBoxHaS cheatBox;
     public TextMeshPro passR;
     public SafeController safeController;
@@ -17,18 +18,6 @@ public class HideShow : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        for (int i = 0; i < boxTriger.Length; i++)
-        {
-            if (boxTriger[i].CheckOnTriger() == true)
-            {
-                LoseGame();
-            }
-        }
-       
-  
-    }
 
     public void LoseGame()
     {
@@ -37,6 +26,7 @@ public class HideShow : MonoBehaviour
             boxTriger[i].gameObject.SetActive(false);
             boxTriger[i].isTriger = false;
         }
+        isActive = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,6 +41,7 @@ public class HideShow : MonoBehaviour
                     boxTriger[i].setActive();
                     check = true;
                 }
+                isActive = true;
             }
         }
         
@@ -63,4 +54,21 @@ public class HideShow : MonoBehaviour
         passR.text = pass.ToString();
         safeController.keyID = pass ;
     }
+    void Update()
+    {
+        if (isActive)
+        {
+            for (int i = 0; i < boxTriger.Length; i++)
+            {
+                if (boxTriger[i].CheckOnTriger() == true)
+                {
+                    LoseGame();
+                }
+                boxTriger[i].MoveCube();
+            }
+        }
+
+
+    }
+
 }

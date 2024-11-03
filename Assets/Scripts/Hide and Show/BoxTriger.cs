@@ -25,7 +25,8 @@ public class BoxTriger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveCube();
+        
+
     }
 
     public void setActive()
@@ -57,7 +58,7 @@ public class BoxTriger : MonoBehaviour
         safeController.keyID = pass;
 
     }
-    private void MoveCube()
+    public void MoveCube()
     {
         // vị trí hiện tại đi đến targetpositon
         float step = moveSpeed * Time.deltaTime;

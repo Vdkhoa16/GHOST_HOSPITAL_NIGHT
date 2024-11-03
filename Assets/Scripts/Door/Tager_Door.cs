@@ -44,7 +44,7 @@ public class Tager_Door : NetworkBehaviour
                 if (playerInventory != null && playerInventory.HasKey(keyID))
                 {
                     ToggleDoorServerRpc();
-                    
+                    requiresKey = false;
                     //remove
                 }
                 else
