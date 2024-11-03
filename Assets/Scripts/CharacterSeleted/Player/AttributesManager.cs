@@ -20,14 +20,14 @@ public class AttributesManager : NetworkBehaviour
     public float running_Speed = 4f;
     public float sprint_Speed = 6f;
 
-    public vThirdPersonController vThirdPersonController;
-    // Start is called before the first frame update
+    private vThirdPersonController vThirdPersonController;
+
 
 
     
     void Start()
     {
-        
+        vThirdPersonController = GetComponent<vThirdPersonController>();
     }
 
     // Update is called once per frame

@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GamePlay.unity
     guid: 728bc1174b1eaba4b96b50a3bf0b3ce8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game.unity
     guid: 780a351c75af17c4bbbc939cf9fafd85
-  - enabled: 1
+  - enabled: 0
     path: Assets/Invector-3rdPersonController_LITE/TestModel.unity
     guid: 5030ab1a6919779449f003dfa1909caa
+  - enabled: 1
+    path: Assets/Scenes/SceenTestPlayer.unity
+    guid: aa8815c4ae43d4f49ab3eaf417f96a1d
   m_configObjects: {}

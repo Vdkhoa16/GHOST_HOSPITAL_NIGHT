@@ -2990,7 +2990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69273cb27d53c394a8dcaec4411aa3a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 1321
   walk_Speed: 2
   running_Speed: 4
   sprint_Speed: 6
@@ -3325,10 +3325,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIPLayer
       objectReference: {fileID: 0}
-    - target: {fileID: 828015227905960124, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
-      propertyPath: attributesManager
-      value: 
-      objectReference: {fileID: -1541818751747830159}
     - target: {fileID: 5171104533819939228, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 960
@@ -3369,12 +3365,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8937940945765386175, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3666871806
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8937940945765386175, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
