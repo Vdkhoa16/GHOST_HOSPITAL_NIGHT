@@ -37,7 +37,7 @@ public class BoxTriger : MonoBehaviour
 
     public bool CheckOnTriger()
     {
-       
+       // kiểm tra người dùng có chạm vào saw hay k
         return isTriger;
     }
     private void OnTriggerEnter(Collider other)
@@ -47,7 +47,8 @@ public class BoxTriger : MonoBehaviour
             isTriger = true;
             //Destroy(gameObject);
             RandomPass();
-
+            // nếu chạm vào thì mật khẩu safe sẽ bị thay đổi 
+            // để set sự kiện khi người chơi thua thì mật khẩu safe sẽ bị thay đổi
         }
     }
 

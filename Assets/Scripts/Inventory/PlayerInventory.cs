@@ -33,7 +33,7 @@ public class PlayerInventory : NetworkBehaviour
 
 
     [System.Serializable]
-    public struct ItemData : INetworkSerializable
+    public struct ItemData : INetworkSerializable //giúp ItemData có thể được tuần tự hóa (serialize) và truyền qua mạng.
     {
         public string itemName;
         public string prefabName;
@@ -78,7 +78,7 @@ public class PlayerInventory : NetworkBehaviour
             enabled = false;
             return;
         }
-
+        // tìm đến các panel 
         // worldObjectHolder = GameObject.FindGameObjectWithTag("WorldObjects").transform;
         invPanel = GameObject.FindGameObjectWithTag("InventoryPanel");
         invObjectHolder = GameObject.FindGameObjectWithTag("InventoryObjectHolder").transform;
@@ -99,12 +99,13 @@ public class PlayerInventory : NetworkBehaviour
         {
             Debug.Log("Nhấn e");
             PickUpButton();
-            // gọi aniamtion
+
             
         }
         PickUp();
         if (Input.GetKeyDown(inventoryButtom))
         {
+            // bật tắt kho đồ
             ToggleInventory();
         }
 
@@ -113,6 +114,7 @@ public class PlayerInventory : NetworkBehaviour
 
     public void PickUpButton()
     {
+        // bắn tia ray vào vật phẩm 
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
        // Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.green);
@@ -121,14 +123,17 @@ public class PlayerInventory : NetworkBehaviour
         {
             if (hit.collider.CompareTag("Pickup"))
             {
+                // thực hiện hành động nhặt và kiểm tra đó là vật phẩm nào 
                 GroundItem groundItem = hit.collider.GetComponent<GroundItem>();
                 AddToInventory(groundItem.itemScriptable);
                 NetworkObject networkObject = hit.collider.GetComponent<NetworkObject>();
                 if (networkObject != null)
                 {
+                    // thông báo đến các player khác vật phẩm đã được nhặt và xóa vật phẩm
                     Debug.Log(networkObject);
                     PickItemServerRpc(networkObject);
                     pickUpItem_gameobject.SetActive(false);
+                    // gọi aniamtion
                     playerAnimation.PickUp();
                 }
                 return;
@@ -138,13 +143,14 @@ public class PlayerInventory : NetworkBehaviour
     }
     void PickUp()
     {
+        // UI giao diện khi người dùng chỉa cam vào thì sẽ đổi màu vùng tâm và hiển thị button E
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
        // Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.red);
 
         if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
         {
-            Outline outline = hit.collider.GetComponent<Outline>();
+            Outline outline = hit.collider.GetComponent<Outline>(); // lấy dữ liệu Outline
             if (hit.collider.CompareTag("Pickup"))
             {
                 //Debug.Log("Tìm thấy vật phẩm");
@@ -152,7 +158,7 @@ public class PlayerInventory : NetworkBehaviour
                 pickUpItem_gameobject.SetActive(true);
                
                 // outline.UpdateMaterialProperties();
-                outline.OutlineWidth = 10;
+                outline.OutlineWidth = 10; // bật outline vật phẩm
             }
             else
             {
@@ -226,6 +232,7 @@ public class PlayerInventory : NetworkBehaviour
 
     void UpdateInventoryUI()
     {
+        // cập nhật vật phẩm trong kho đồ
         foreach (Transform child in invObjectHolder)
         {
             Destroy(child.gameObject);
@@ -237,7 +244,7 @@ public class PlayerInventory : NetworkBehaviour
             obj.transform.GetChild(0).GetComponent<Image>().sprite = invObj.item.itemImage;
             obj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = invObj.item.itemName;
             obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = invObj.amount + "";
-            obj.GetComponent<Button>().onClick.AddListener(delegate {
+            obj.GetComponent<Button>().onClick.AddListener(delegate { // sự kiển nhấn vào vật phẩm trong kho đồ
                     UseItem(invObj.item);
                 UseLetter(invObj.item);
             });
@@ -270,6 +277,7 @@ public class PlayerInventory : NetworkBehaviour
 
     void UseLetter(Item item)
     {
+        // sử dụng lá thư
         ItemData itemData = new ItemData(item);
         if (item.itemType == ItemType.isLetter)
         {

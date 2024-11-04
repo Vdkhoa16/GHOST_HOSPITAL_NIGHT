@@ -35,6 +35,7 @@ public class HideShow : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
+                // nếu player bước vào vùng tiger thì random mật khẩu rương bật các saw
                 RandomPass();
                 for (int i = 0; i < boxTriger.Length; i++)
                 {
@@ -49,6 +50,7 @@ public class HideShow : MonoBehaviour
 
     public void RandomPass()
     {
+        // mật khẩu random
         int pass;
         pass = Random.Range(1000, 9999);
         passR.text = pass.ToString();
@@ -64,6 +66,7 @@ public class HideShow : MonoBehaviour
                 {
                     LoseGame();
                 }
+                // gọi hàm chuyển động của saw
                 boxTriger[i].MoveCube();
             }
         }
