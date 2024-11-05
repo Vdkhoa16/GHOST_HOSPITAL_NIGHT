@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -20,19 +20,18 @@ public class CharacterSelectDisplay : NetworkBehaviour
     private void Start()
     {
 
-        Character[] allCharacters = characterDatabase.GetAllCharacters(); // lấy danh sách nhân vật
+        Character[] allCharacters = characterDatabase.GetAllCharacters();
 
         foreach (var character in allCharacters)
         {
             var selectButtonInstance = Instantiate(selectButtonPrefab, charactersHolder);
             selectButtonInstance.SetCharacter(this, character);
-            characterButtons.Add(selectButtonInstance); // thêm bustton cho các nhân vật
+            characterButtons.Add(selectButtonInstance);
         }
     }
 
     public void Select(Character character)
     {
-        // chọn nhân vật hiển thị thông tin
         characterNameText.text = character.DisplayName;
 
         if (introInstance != null)
@@ -40,13 +39,12 @@ public class CharacterSelectDisplay : NetworkBehaviour
             Destroy(introInstance);
         }
 
-        introInstance = Instantiate(character.IntroPrefab, introSpawnPoint); // tạo ra nhân vật intro
+        introInstance = Instantiate(character.IntroPrefab, introSpawnPoint);
         selectedCharacter = character;
     }
 
     public void Pick()
     {
-        // chọn nhân vật 
         if (selectedCharacter == null)
         {
             SubmitCharacterSelectionServerRpc(1);

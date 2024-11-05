@@ -25,8 +25,7 @@ public class BoxTriger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
+        MoveCube();
     }
 
     public void setActive()
@@ -37,7 +36,7 @@ public class BoxTriger : MonoBehaviour
 
     public bool CheckOnTriger()
     {
-       // kiểm tra người dùng có chạm vào saw hay k
+       
         return isTriger;
     }
     private void OnTriggerEnter(Collider other)
@@ -47,8 +46,7 @@ public class BoxTriger : MonoBehaviour
             isTriger = true;
             //Destroy(gameObject);
             RandomPass();
-            // nếu chạm vào thì mật khẩu safe sẽ bị thay đổi 
-            // để set sự kiện khi người chơi thua thì mật khẩu safe sẽ bị thay đổi
+
         }
     }
 
@@ -59,7 +57,7 @@ public class BoxTriger : MonoBehaviour
         safeController.keyID = pass;
 
     }
-    public void MoveCube()
+    private void MoveCube()
     {
         // vị trí hiện tại đi đến targetpositon
         float step = moveSpeed * Time.deltaTime;
