@@ -29,7 +29,7 @@ public class ShowObjectOnceOnCollision : MonoBehaviour
     private IEnumerator ShowObjectFor10Seconds()
     {
         objectToShow.SetActive(true); // Hiển thị đối tượng
-        yield return new WaitForSeconds(10); // Đợi 10 giây
+        yield return new WaitForSeconds(5); // Đợi 10 giây
         objectToShow.SetActive(false); // Ẩn đối tượng sau 10 giây
     }
 }
