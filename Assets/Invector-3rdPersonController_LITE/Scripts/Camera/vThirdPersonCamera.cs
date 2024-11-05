@@ -1,11 +1,14 @@
 ﻿using Invector;
 using Invector.vCharacterController;
+using Unity.Netcode;
 using UnityEngine;
 
 public class vThirdPersonCamera : MonoBehaviour
 {
     #region inspector properties    
     public vThirdPersonInput vThirdPersonInput;
+    public NetworkObject networkObject;
+
     public Transform target;
     [Tooltip("Lerp speed between Camera States")]
 
@@ -14,7 +17,6 @@ public class vThirdPersonCamera : MonoBehaviour
     public LayerMask cullingLayer = 1 << 0;
     [Tooltip("Debug purposes, lock the camera behind the character for better align the states")]
     public bool lockCamera;
-
     public float rightOffset = 0f;
     public float defaultDistance = 2.5f;
     public float height = 1.4f;
@@ -44,10 +46,10 @@ public class vThirdPersonCamera : MonoBehaviour
     private Vector3 lookPoint;
     private Vector3 current_cPos;
     private Vector3 desired_cPos;
-     private Camera _camera;
+    private Camera _camera;
     private float distance = 5f;
-     private float mouseY = 0f;
-     private float mouseX = 0f;
+    private float mouseY = 0f;
+    private float mouseX = 0f;
     private float currentHeight;
     private float cullingDistance;
     private float checkHeightRadius = 0.4f;
@@ -72,7 +74,26 @@ public class vThirdPersonCamera : MonoBehaviour
             return;
 
         _camera = GetComponent<Camera>();
-
+        NetworkObject networkObject = target.GetComponentInParent<NetworkObject>();
+        if (networkObject != null)
+        {
+            // Nếu target là chủ sở hữu, ẩn lớp của nó
+            if (networkObject.IsOwner)
+            {
+                foreach (Transform child in target)
+                {
+                    child.gameObject.SetActive(false); // Ẩn đối tượng con
+                }
+            }
+            else
+            {
+                // Hiển thị lại các đối tượng con nếu không phải chủ sở hữu
+                foreach (Transform child in target)
+                {
+                    child.gameObject.SetActive(true); // Hiển thị đối tượng con
+                }
+            }
+        }
         // Lấy góc xoay hiện tại của nhân vật để đồng bộ với camera
         mouseY = target.eulerAngles.x;
         mouseX = target.eulerAngles.y;
@@ -83,6 +104,23 @@ public class vThirdPersonCamera : MonoBehaviour
             return;
 
         _camera = GetComponent<Camera>();
+
+        NetworkObject networkObject = target.GetComponentInParent<NetworkObject>();
+        if (networkObject != null)
+        {
+            // Nếu target là chủ sở hữu, ẩn lớp của nó
+            if (networkObject.IsOwner)
+            {
+                foreach (Transform child in target)
+                {
+                    foreach (Transform grandChild in child)
+                    {
+                        grandChild.gameObject.SetActive(true); // Ẩn đối tượng con (grandchild)
+                    }
+                }
+            }
+        }
+
         currentTarget = target;
         currentTargetPos = new Vector3(currentTarget.position.x, currentTarget.position.y + offSetPlayerPivot, currentTarget.position.z);
 
@@ -175,7 +213,7 @@ public class vThirdPersonCamera : MonoBehaviour
         mouseY = Mathf.Clamp(mouseY, yMinLimit, yMaxLimit);
 
         // Giới hạn góc xoay ngang (xoay 360 độ)
-       // mouseX = Mathf.Clamp(mouseX, -360f, 360f);
+        // mouseX = Mathf.Clamp(mouseX, -360f, 360f);
     }
     public void RotateCameraThird(float x, float y)
     {
