@@ -13,6 +13,7 @@ TagManager:
   - WorldObjects
   - pickupUI
   - WP
+  - test
   layers:
   - Default
   - TransparentFX

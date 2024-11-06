@@ -223,7 +223,7 @@ public class LobbyManager : MonoBehaviour
                 newLobbyItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = lobby.Players.Count + "/" + lobby.MaxPlayers;
             }
 
-            await Task.Delay(1000);
+            await Task.Delay(5000);
         }
     }
 

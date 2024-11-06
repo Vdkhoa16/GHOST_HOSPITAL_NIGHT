@@ -99,8 +99,7 @@ public class PlayerInventory : NetworkBehaviour
         {
             Debug.Log("Nhấn e");
             PickUpButton();
-            // gọi aniamtion
-            playerAnimation.PickUp();
+
         }
         PickUp();
         if (Input.GetKeyDown(inventoryButtom))
@@ -126,7 +125,9 @@ public class PlayerInventory : NetworkBehaviour
                 NetworkObject networkObject = hit.collider.GetComponent<NetworkObject>();
                 if (networkObject != null)
                 {
-                    Debug.Log(networkObject);
+                    // gọi aniamtion
+                    playerAnimation.PickUp();
+                   // Debug.Log(networkObject);
                     PickItemServerRpc(networkObject);
                     pickUpItem_gameobject.SetActive(false);
                 }
