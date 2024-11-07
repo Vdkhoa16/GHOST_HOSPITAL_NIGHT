@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 using UnityEngine.UI;  // Để sử dụng UI như Slider
 
 public class NextLevel : MonoBehaviour
@@ -11,6 +13,7 @@ public class NextLevel : MonoBehaviour
 
     private AsyncOperation asyncLoad;  // Lưu AsyncOperation để kiểm soát việc chuyển scene
     private bool isSceneReady = false;  // Kiểm tra xem scene đã tải xong chưa
+
 
     void Start()
     {
@@ -36,6 +39,7 @@ public class NextLevel : MonoBehaviour
                 loadingBar.value = 1f;  // Đảm bảo thanh trượt đầy khi hoàn thành
                 isSceneReady = true;  // Đánh dấu rằng scene đã tải xong và sẵn sàng
                 load.SetActive(false);
+  
             }
 
             yield return null;
