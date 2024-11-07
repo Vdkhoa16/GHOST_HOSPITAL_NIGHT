@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a74426d9a8ee34d9511cfcf4ed2bdc, type: 3}
   m_Name: Key1
   m_EditorClassIdentifier: 
-  itemImage: {fileID: 21300000, guid: 36c494531b3c4a04ea92c5c2752d18d5, type: 3}
+  itemImage: {fileID: 21300000, guid: 7bef241ae4922e64a88e79e49ce15597, type: 3}
   itemName: Key
   prefab: {fileID: 82187509533369827, guid: 8eb90509774edfe4896e87af5dff2a19, type: 3}
   itemType: 1

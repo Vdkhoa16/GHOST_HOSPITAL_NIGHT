@@ -305,7 +305,7 @@ public class LobbyManager : MonoBehaviour
                 newPlayerItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = (lobby.HostId == player.Id) ? "Chủ Phòng" : "Người Chơi";
             }
 
-            await Task.Delay(1000);
+            await Task.Delay(5000);
         }
     }
 

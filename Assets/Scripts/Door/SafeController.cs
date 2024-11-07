@@ -14,14 +14,12 @@ public class SafeController : NetworkBehaviour
     private bool isPlayerInRange = false; // vùng hiển thị button
    // [SerializeField] private AudioSource SoundOpen, SoundClose;
 
-    public bool requiresKey = false; // Cửa có yêu cầu chìa khóa không
     public int keyID; // ID của chìa khóa cần để mở cửa
     public TextMeshProUGUI notificationText;
     [SerializeField] private GameObject PassPanel;
 
     [SerializeField] private GameObject letter;
-    [SerializeField] private Transform transformletterl;
-    [SerializeField] private BoxCollider boxCollider;
+    private bool isOn = false;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -80,8 +78,11 @@ public class SafeController : NetworkBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
-            SetPickupButtonVisibilityServerRpc(clientId, true);
+            if (!isOn)
+            {
+                ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
+                SetPickupButtonVisibilityServerRpc(clientId, true);
+            }
         }
     }
 
@@ -89,8 +90,11 @@ public class SafeController : NetworkBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
-            SetPickupButtonVisibilityServerRpc(clientId, false);
+            if (!isOn)
+            {
+                ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
+                SetPickupButtonVisibilityServerRpc(clientId, false);
+            }
         }
     }
 
@@ -129,8 +133,8 @@ public class SafeController : NetworkBehaviour
     {
         isOpen.Value = !isOpen.Value;
         letter.SetActive(true);
-        boxCollider.enabled = false;
-        
+        isOn = true;
+        pickupButton.SetActive(false);
     }
 
     //public void SoundOpenDoor()

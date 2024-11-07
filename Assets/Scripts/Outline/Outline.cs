@@ -94,7 +94,7 @@ public class Outline : MonoBehaviour {
     outlineFillMaterial.name = "OutlineFill (Instance)";
 
     // Retrieve or generate smooth normals
-    LoadSmoothNormals();
+   // LoadSmoothNormals();
 
     // Apply material properties immediately
     needsUpdate = true;

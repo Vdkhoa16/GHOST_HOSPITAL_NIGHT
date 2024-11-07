@@ -9,7 +9,7 @@ public class NextLevel : MonoBehaviour
 {
     public Slider loadingBar;  // Thanh trượt UI để hiển thị tiến trình tải
     public GameObject load;
-    public string sceneName = "Scene1";  // Tên scene bạn muốn tải
+    public string sceneName = "Game";  // Tên scene bạn muốn tải
 
     private AsyncOperation asyncLoad;  // Lưu AsyncOperation để kiểm soát việc chuyển scene
     private bool isSceneReady = false;  // Kiểm tra xem scene đã tải xong chưa
