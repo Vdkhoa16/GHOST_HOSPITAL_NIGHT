@@ -29,7 +29,7 @@ public class PlayerInventory : NetworkBehaviour
     public GameObject currentItemInHand;
 
     [Header("Animation")]
-    [SerializeField] private PlayerAnimation playerAnimation;
+    private PlayerAnimation playerAnimation;
 
 
     [System.Serializable]
@@ -65,6 +65,7 @@ public class PlayerInventory : NetworkBehaviour
 
     void Start()
     {
+        playerAnimation = GetComponent<PlayerAnimation>();
         pickUpItem_gameobject.SetActive(false);
         networkObject = GetComponent<NetworkObject>();
     }
