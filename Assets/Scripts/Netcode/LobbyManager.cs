@@ -12,12 +12,12 @@ using UnityEngine.Playables;
 
 public class LobbyManager : MonoBehaviour
 {
-    private CharacterSelectDisplay characterSelectDisplay;
-    public static LobbyManager Instance { get; private set; }
+    private CharacterSelectDisplay characterSelectDisplay; // khai báo character 
+    public static LobbyManager Instance { get; private set; } // khai báo get set cho phép truy cập
 
-    [SerializeField] private AudioSource SounLbby, SoundPlayGame;
+    [SerializeField] private AudioSource SounLbby, SoundPlayGame; // âm thanh game
 
-    [SerializeField] private RelayManager relayManager;
+    [SerializeField] private RelayManager relayManager; // gọi hàm reley nhầm mục đích cho phép người khác vào phòng và bắt đầu trò chơi
 
 
     [Header("Lobby creation")]
@@ -91,13 +91,13 @@ public class LobbyManager : MonoBehaviour
     {
         SounLbby.Play();
 
-        characterSelectDisplay = FindObjectOfType<CharacterSelectDisplay>();
+        characterSelectDisplay = FindObjectOfType<CharacterSelectDisplay>(); // tìm đến object chứa CharacterSelectDisplay
         Instance = this;
 
-        createLobbyPrivateToggle.onValueChanged.AddListener(OnCreateLobbyPrivateToggle);
+        createLobbyPrivateToggle.onValueChanged.AddListener(OnCreateLobbyPrivateToggle); // đăng kí sự kiện phòng có riêng tư hay k
 
-        await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        await UnityServices.InitializeAsync(); // khởi tạo bất đồng bộ đăng kí dịch vụ
+        await AuthenticationService.Instance.SignInAnonymouslyAsync(); // cho phép người dùng ẩn danh mà k cần dùng đến tk
 
         profileSetupParent.SetActive(true);
         lobbyListParent.SetActive(false);
@@ -119,6 +119,7 @@ public class LobbyManager : MonoBehaviour
 
     public void CreateProfile()
     {
+        // kiểm tra form
         if (profileNameField.text == "")
         {
             error.SetActive(true);
@@ -130,6 +131,7 @@ public class LobbyManager : MonoBehaviour
             profileSetupParent.SetActive(false);
             lobbyListParent.SetActive(true);
 
+            // tạo player public và tên
             PlayerDataObject playerDataObjectName = new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerName);
 
             playerData = new Player(id: AuthenticationService.Instance.PlayerId, data:
@@ -147,8 +149,9 @@ public class LobbyManager : MonoBehaviour
         {
             try
             {
+                // nếu có pass kiểm tra pass đúng thì mới đc vào 
                 await LobbyService.Instance.JoinLobbyByIdAsync(lobbyID, new JoinLobbyByIdOptions
-                { Password = await InputPassword(), Player = playerData });
+                { Password = await InputPassword(), Player = playerData }); // truyền player 
 
                 joinedLobbyId = lobbyID;
                 lobbyListParent.SetActive(false);
@@ -193,7 +196,7 @@ public class LobbyManager : MonoBehaviour
         return inputPasswordField.text;
     }
 
-    private async void ShowLobbies()
+    public async void ShowLobbies()
     {
         while (Application.isPlaying && lobbyListParent.activeInHierarchy)
         {
@@ -203,7 +206,7 @@ public class LobbyManager : MonoBehaviour
 
             if (searchLobbyNameInputField.text != string.Empty)
             {
-                queryLobbiesOptions.Filters.Add(new QueryFilter(QueryFilter.FieldOptions.Name, searchLobbyNameInputField.text, QueryFilter.OpOptions.CONTAINS));
+                queryLobbiesOptions.Filters.Add(new QueryFilter(QueryFilter.FieldOptions.Name, searchLobbyNameInputField.text, QueryFilter.OpOptions.CONTAINS));// kiểm tra xem có phòng với tên đó k
             }
 
             // hiển thị lobby
@@ -213,7 +216,7 @@ public class LobbyManager : MonoBehaviour
             {
                 Destroy(t.gameObject);
             }
-
+            // load lại danh sách 
             foreach (Lobby lobby in queryResponse.Results)
             {
                 Transform newLobbyItem = Instantiate(lobbyItemPrefab, lobbyContentParent);
@@ -223,22 +226,22 @@ public class LobbyManager : MonoBehaviour
                 newLobbyItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = lobby.Players.Count + "/" + lobby.MaxPlayers;
             }
 
-            await Task.Delay(5000);
+            await Task.Delay(5000); // hàm gọi lại sao 5s
         }
     }
 
     public async void LobbyStart()
     {
-        textloading.text = "Loading...";
+        textloading.text = "Loading..."; // UI load
         CharactersHolder.SetActive(false);
-        Lobby lobby = await Lobbies.Instance.GetLobbyAsync(joinedLobbyId);
-        string JoinCode = await relayManager.StartHostWithRelay(lobby.MaxPlayers);
+        Lobby lobby = await Lobbies.Instance.GetLobbyAsync(joinedLobbyId); 
+        string JoinCode = await relayManager.StartHostWithRelay(lobby.MaxPlayers); // gọi hàm relay nhầm bắt đầu trò cho
         // Show loading 
         LoadingParent.SetActive(true);
         loadingBar.value = 0.1f;
         //
         isJoined = true;
-        await Lobbies.Instance.UpdateLobbyAsync(joinedLobbyId, new UpdateLobbyOptions
+        await Lobbies.Instance.UpdateLobbyAsync(joinedLobbyId, new UpdateLobbyOptions // tạo phòng với id và cập nhật các player
         {
             Data = new Dictionary<string, DataObject> { { "JoinCode", new DataObject(DataObject.VisibilityOptions.Public, JoinCode) } }
         });
@@ -268,7 +271,7 @@ public class LobbyManager : MonoBehaviour
             if (!isJoined && lobby.Data["JoinCode"].Value != string.Empty)
             {
                 textloading.text = "Loading...";
-                await relayManager.StartClientWithRelay(lobby.Data["JoinCode"].Value);
+                await relayManager.StartClientWithRelay(lobby.Data["JoinCode"].Value);// join vào phòng với code của id phòng trên lobby
                 isJoined = true;
                 LoadingParent.SetActive(true);
                 loadingBar.value = 0.3f;
@@ -393,7 +396,7 @@ public class LobbyManager : MonoBehaviour
     }
     private IEnumerator DelayGame()
     {
-        SounLbby.Pause();
+        SounLbby.Stop();
         inventory.SetActive(true);
         yield return new WaitForSeconds(5); // Đợi 15 giây
         loadingBar.value = 1.0f;
@@ -413,10 +416,10 @@ public class LobbyManager : MonoBehaviour
 
     private void CheckInputCreateLobby()
     {
-
+        // kiểm tra form xem có nhập đúng k
 
         if (createLobbyNameField.text == "" || createLobbyMaxPlayersField.text == ""
-            || (createLobbyPrivateToggle.isOn && createLobbyPasswordField.text == ""))
+            || (createLobbyPrivateToggle.isOn && createLobbyPasswordField.text == "")) // kiểm tra có clik pass và nhap vào pas k
         {
             createLobbyButton.SetActive(false);
 

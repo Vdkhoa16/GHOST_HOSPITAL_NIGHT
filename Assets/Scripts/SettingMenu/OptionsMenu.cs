@@ -19,10 +19,10 @@ public class OptionsMenu : MonoBehaviour
         int savedQualityLevel = PlayerPrefs.GetInt("QualityLevel", 2);
         QualitySettings.SetQualityLevel(savedQualityLevel);
 
-        // Thiết lập nút được chọn ban đầu
+        // hiển thị mức đồ họa đã lưuu
         SetSelectedButton(savedQualityLevel);
        
-        // Ẩn panel sau khi thiết lập ban đầu
+        // ẩn panel
         this.gameObject.SetActive(false);
     }
 
@@ -66,18 +66,18 @@ public class OptionsMenu : MonoBehaviour
 
     private void SetQualityLevel(int level)
     {
-        // Đặt mức chất lượng và lưu nó vào bộ nhớ
-        QualitySettings.SetQualityLevel(level);
-        PlayerPrefs.SetInt("QualityLevel", level);
+        QualitySettings.SetQualityLevel(level); // setting đồ họa cho game
+        PlayerPrefs.SetInt("QualityLevel", level); // lưu đồ họa 
         PlayerPrefs.Save();
     }
 
-    private void SetSelectedButton(int qualityLevel)
+    private void SetSelectedButton(int level)
     {
-        // Đặt nút được chọn dựa trên mức chất lượng
-        switch (qualityLevel)
+        
+        switch (level)
         {
             case 0:
+                // set hiển thị selected của button
                 EventSystem.current.SetSelectedGameObject(veryLowButton.gameObject);
                 break;
             case 1:

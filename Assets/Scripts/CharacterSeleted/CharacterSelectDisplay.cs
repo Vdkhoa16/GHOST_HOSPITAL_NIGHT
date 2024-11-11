@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -19,34 +19,38 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
     private void Start()
     {
-
+        // lấy tất cả các charac ter có trong dataa
         Character[] allCharacters = characterDatabase.GetAllCharacters();
 
         foreach (var character in allCharacters)
         {
             var selectButtonInstance = Instantiate(selectButtonPrefab, charactersHolder);
             selectButtonInstance.SetCharacter(this, character);
-            characterButtons.Add(selectButtonInstance);
+            characterButtons.Add(selectButtonInstance); // tạo list button để chọn nhân vật
         }
     }
 
     public void Select(Character character)
     {
+        // hiển thị tên nv
         characterNameText.text = character.DisplayName;
 
         if (introInstance != null)
         {
             Destroy(introInstance);
+            
         }
-
+        // tạo ra nhân vật nhảy
         introInstance = Instantiate(character.IntroPrefab, introSpawnPoint);
         selectedCharacter = character;
     }
 
     public void Pick()
     {
+        // sự kiển khi chọn vào nhân vật
         if (selectedCharacter == null)
         {
+            // nếu k chọn mặc định là nhân vaatj 1
             SubmitCharacterSelectionServerRpc(1);
         }
 
@@ -59,6 +63,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void SubmitCharacterSelectionServerRpc(int characterId, ServerRpcParams serverRpcParams = default)
     {
+        // đồng bộ nhầm thông báo cho các player khác
         var clientId = serverRpcParams.Receive.SenderClientId;
         var playerObject = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
 
@@ -67,7 +72,7 @@ public class CharacterSelectDisplay : NetworkBehaviour
             var character = characterDatabase.GetCharacterById(characterId);
             if (character != null)
             {
-                var spawnPos = spawnPoint.position;
+                var spawnPos = spawnPoint.position; // tạo ra nhân vật ở vi trí
                 var characterInstance = Instantiate(character.GameplayPrefab, spawnPos, Quaternion.identity);
                 NetworkObject networkObject = characterInstance.GetComponent<NetworkObject>();
                 networkObject.SpawnWithOwnership(clientId);
