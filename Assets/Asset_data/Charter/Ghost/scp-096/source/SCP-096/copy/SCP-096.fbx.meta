@@ -17,14 +17,113 @@ ModelImporter:
     removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Avatar Rig Configuration mis-match. Inbetween bone rotation
+      in configuration does not match rotation in animation file:\n\t'Bone_016' :
+      rotation error = 54.321583 deg\n"
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'scp096_skeleton|scp096attack1' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'lowerjaw' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'Bone_015'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Bone_016'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096attackJump' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'lowerjaw' is inbetween humanoid transforms and has
+      rotation animation that will be discarded.\n\t'Bone_015' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'Bone_016'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096attackrun' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'lowerjaw' is inbetween humanoid transforms and has
+      rotation animation that will be discarded.\n\nClip 'scp096_skeleton|scp096attackrunstart'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'lowerjaw'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Bone_016'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096death' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'lowerjaw' is inbetween humanoid transforms and has rotation animation
+      that will be discarded.\n\t'Bone_016' is inbetween humanoid transforms and
+      has rotation animation that will be discarded.\n\nClip 'scp096_skeleton|scp096getup'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'lowerjaw'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Bone_015'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Bone_016'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096getuppanic' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'lowerjaw' is inbetween humanoid transforms and has
+      rotation animation that will be discarded.\n\t'Bone_015' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'Bone_016'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096idle1' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'lowerjaw' is inbetween humanoid transforms and has rotation animation
+      that will be discarded.\n\nClip 'scp096_skeleton|scp096idle2end1' has import
+      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'lowerjaw' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'Bone_015'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096idle2end2' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'lowerjaw' is inbetween humanoid transforms and has
+      rotation animation that will be discarded.\n\t'Bone_015' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\nClip 'scp096_skeleton|scp096idle2lookaround'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'lowerjaw'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Bone_015'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Bone_016'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096panic' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'lowerjaw' is inbetween humanoid transforms and has rotation animation
+      that will be discarded.\n\t'Bone_015' is inbetween humanoid transforms and
+      has rotation animation that will be discarded.\n\t'Bone_016' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\nClip 'scp096_skeleton|scp096panicend'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'lowerjaw'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Bone_015'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Bone_016'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096panicstart' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'lowerjaw' is inbetween humanoid transforms and has
+      rotation animation that will be discarded.\n\t'Bone_015' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'Bone_016'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096running' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'lowerjaw' is inbetween humanoid transforms and has rotation animation
+      that will be discarded.\n\t'Bone_016' is inbetween humanoid transforms and
+      has rotation animation that will be discarded.\n\nClip 'scp096_skeleton|scp096sit'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'lowerjaw'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096sit2end' has import animation warnings that might lower
+      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
+      quality.\n\t'lowerjaw' is inbetween humanoid transforms and has rotation animation
+      that will be discarded.\n\nClip 'scp096_skeleton|scp096sit2start' has import
+      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'lowerjaw' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\nClip 'scp096_skeleton|scp096sitback'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'lowerjaw'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Bone_015'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Bone_016'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'scp096_skeleton|scp096teslagatehit' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'lowerjaw' is inbetween humanoid transforms and has
+      rotation animation that will be discarded.\n\nClip 'scp096_skeleton|scp096walk'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'lowerjaw'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -82,7 +181,307 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: SCP-096(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Light
+      parentName: SCP-096(Clone)
+      position: {x: -4.0762453, y: 5.903862, z: -1.005454}
+      rotation: {x: 0.52327543, y: -0.34203392, z: 0.72694236, w: 0.28416622}
+      scale: {x: 100.00001, y: 100, z: 100}
+    - name: Camera
+      parentName: SCP-096(Clone)
+      position: {x: -7.3588915, y: 4.958309, z: 6.925791}
+      rotation: {x: 0.09062847, y: 0.89379627, z: -0.20997298, w: 0.3857799}
+      scale: {x: 100, y: 100.00001, z: 99.99999}
+    - name: scp096
+      parentName: SCP-096(Clone)
+      position: {x: -0, y: 1.17, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: scp096_skeleton
+      parentName: SCP-096(Clone)
+      position: {x: -0, y: 1.17, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Scene_Root
+      parentName: scp096_skeleton
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.70710665, y: -0, z: -0, w: 0.7071069}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Scene_Root1
+      parentName: Scene_Root
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Scene_Root2
+      parentName: Scene_Root1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Scene_Root3
+      parentName: Scene_Root2
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Scene_Root4
+      parentName: Scene_Root3
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Scene_Root5
+      parentName: Scene_Root4
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: MiddlePivot
+      parentName: Scene_Root5
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone
+      parentName: MiddlePivot
+      position: {x: -0, y: 5.684342e-16, z: -0.021103758}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton
+      parentName: Bone
+      position: {x: -0, y: 0, z: -1.9895197e-15}
+      rotation: {x: 0.00000014901161, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Scene_Root6
+      parentName: Skeleton
+      position: {x: -0, y: 0, z: -1.9895197e-15}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SCP096
+      parentName: Scene_Root6
+      position: {x: -0.000015, y: 0.0019249998, z: 0.0118470015}
+      rotation: {x: -0.7071067, y: -0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: SCP096_end
+      parentName: SCP096
+      position: {x: -0, y: 0.00023130297, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eyes
+      parentName: Scene_Root6
+      position: {x: -0.01200289, y: 4.7521096e-13, z: -0.0000000023841877}
+      rotation: {x: 0.0056127245, y: 0.7616896, z: 0.0056120814, w: 0.6478935}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Eyes_end
+      parentName: Eyes
+      position: {x: -0, y: 0.00023130307, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature1
+      parentName: Scene_Root6
+      position: {x: -0.000015, y: 0.0019249998, z: 0.0118470015}
+      rotation: {x: -0.7071067, y: -0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: pelvis
+      parentName: Armature1
+      position: {x: 0.000000009999894, y: -0.006094328, z: 0.021579223}
+      rotation: {x: 0.53032607, y: -0, z: -0, w: 0.84779376}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Bone_002
+      parentName: pelvis
+      position: {x: -0, y: 0.0022822605, z: -0.00000055015084}
+      rotation: {x: 0.27760524, y: -2.4979288e-10, z: -6.89399e-10, w: 0.96069527}
+      scale: {x: 1, y: 1.0000001, z: 0.99999994}
+    - name: ripcage
+      parentName: Bone_002
+      position: {x: 6.984919e-12, y: 0.0089599695, z: 0.00000041985288}
+      rotation: {x: -0.09949948, y: -0.0000000041770245, z: 6.7891265e-10, w: 0.9950377}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: neck
+      parentName: ripcage
+      position: {x: -1.4901161e-10, y: 0.011168788, z: -0.00000011079013}
+      rotation: {x: 0.00000013241713, y: 0.973886, z: 0.22703737, w: -0.000000079679964}
+      scale: {x: 1.0000007, y: 1.0000007, z: 1.0000005}
+    - name: head
+      parentName: neck
+      position: {x: -1.4901161e-10, y: 0.0041362983, z: 0.0000010906067}
+      rotation: {x: 0.18321718, y: -0.0000000646876, z: 0.000000029391089, w: 0.9830725}
+      scale: {x: 1.0000004, y: 0.9999995, z: 1.0000008}
+    - name: Lbrow
+      parentName: head
+      position: {x: 0.00011090008, y: 0.0032401618, z: -0.0042657815}
+      rotation: {x: -0.6347504, y: -0.76797163, z: -0.06331601, w: -0.05746731}
+      scale: {x: 1.0000012, y: 0.99999976, z: 1.0000001}
+    - name: Lbrow_end
+      parentName: Lbrow
+      position: {x: -0, y: 0.00023130298, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Rbrow
+      parentName: head
+      position: {x: 0.00012258986, y: 0.0032502513, z: -0.004269501}
+      rotation: {x: 0.4022406, y: -0.5862735, z: -0.48971027, w: -0.50464815}
+      scale: {x: 1, y: 1.0000001, z: 1.0000011}
+    - name: Rbrow_end
+      parentName: Rbrow
+      position: {x: -0, y: 0.00023130304, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leyelid
+      parentName: head
+      position: {x: 0.00017009962, y: 0.002561592, z: -0.0036929604}
+      rotation: {x: -0.6458138, y: -0.7634949, z: 0.000000029802319, w: -0.000000022613978}
+      scale: {x: 1.0000006, y: 0.9999996, z: 0.99999994}
+    - name: Leyelid_end
+      parentName: Leyelid
+      position: {x: -0, y: 0.00023130297, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Reyelid
+      parentName: head
+      position: {x: 0.00010362975, y: 0.0025253405, z: -0.0036766496}
+      rotation: {x: 0.4614026, y: -0.5358263, z: -0.46140063, w: -0.53582394}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1.0000011}
+    - name: Reyelid_end
+      parentName: Reyelid
+      position: {x: -0, y: 0.00023130316, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: lowerjaw
+      parentName: neck
+      position: {x: -1.4901161e-10, y: 0.0041362983, z: 0.0000010906067}
+      rotation: {x: -0.6667653, y: -0.000000057523625, z: -0.00000010297354, w: 0.7452678}
+      scale: {x: 0.99999964, y: 0.99999994, z: 0.99999964}
+    - name: lowerjaw_001
+      parentName: lowerjaw
+      position: {x: 5.5879353e-11, y: 0.003036061, z: -0.000000020297302}
+      rotation: {x: 0.11509861, y: -0.00000011436928, z: -0.0000000071728286, w: 0.99335414}
+      scale: {x: 1.0000002, y: 1.0000006, z: 1.0000001}
+    - name: lowerjaw_001_end
+      parentName: lowerjaw_001
+      position: {x: -0, y: 0.00023130335, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: upperjaw
+      parentName: neck
+      position: {x: -1.4901161e-10, y: 0.0041362983, z: 0.0000010906067}
+      rotation: {x: -0.53582746, y: -0.00000006472899, z: -0.0000000801805, w: 0.8443275}
+      scale: {x: 0.9999999, y: 1.0000004, z: 0.99999946}
+    - name: upperjaw_end
+      parentName: upperjaw
+      position: {x: -0, y: 0.00023130307, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone_007
+      parentName: ripcage
+      position: {x: 7.4505804e-11, y: 0.011169779, z: -0.000000023161991}
+      rotation: {x: -0.48417908, y: 0.4659961, z: 0.5716468, w: 0.47078472}
+      scale: {x: 1, y: 1.0000004, z: 1}
+    - name: Bone_009
+      parentName: Bone_007
+      position: {x: -0.00000017091631, y: 0.00587063, z: 0.0000004196167}
+      rotation: {x: -0.034065023, y: 0.0011533052, z: 0.044592783, w: -0.99842364}
+      scale: {x: 1.0000005, y: 0.9999996, z: 0.99999994}
+    - name: Bone_012
+      parentName: Bone_009
+      position: {x: -0.000000049844385, y: 0.018665854, z: 0.00000009961426}
+      rotation: {x: -0.01640886, y: 0.000102834776, z: -0.004574507, w: 0.999855}
+      scale: {x: 1, y: 1.0000005, z: 1.0000001}
+    - name: Bone_011
+      parentName: Bone_012
+      position: {x: -0.00000036869199, y: 0.014751673, z: -0.00000023141503}
+      rotation: {x: -0.07963049, y: 0.24221334, z: -0.44514823, w: -0.8583908}
+      scale: {x: 1.0000006, y: 1.0000005, z: 1.0000005}
+    - name: Bone_023
+      parentName: Bone_011
+      position: {x: 0.000000011175871, y: 0.0036755714, z: -0.00000015836208}
+      rotation: {x: -0.11270712, y: -0.0000035762782, z: -0.14568959, w: 0.9828894}
+      scale: {x: 1, y: 1.0000004, z: 1.0000002}
+    - name: Bone_023_end
+      parentName: Bone_023
+      position: {x: -0, y: 0.00023130342, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone_008
+      parentName: ripcage
+      position: {x: -3.0733643e-10, y: 0.011169779, z: -0.000000021848827}
+      rotation: {x: 0.48417962, y: 0.46599662, z: 0.57164633, w: -0.4707843}
+      scale: {x: 1.0000001, y: 1, z: 0.99999994}
+    - name: Bone_010
+      parentName: Bone_008
+      position: {x: 0.00000018730759, y: 0.0058706296, z: 0.000000410676}
+      rotation: {x: 0.03406595, y: 0.0011526044, z: 0.044592783, w: 0.9984236}
+      scale: {x: 0.9999999, y: 0.99999994, z: 1.0000001}
+    - name: Bone_014
+      parentName: Bone_010
+      position: {x: 0.0000000885129, y: 0.01866583, z: 0.000000076293944}
+      rotation: {x: -0.016405374, y: -0.00010195188, z: 0.004574299, w: 0.99985504}
+      scale: {x: 0.99999994, y: 1.0000004, z: 0.9999999}
+    - name: Bone_013
+      parentName: Bone_014
+      position: {x: 0.00000040177255, y: 0.014751678, z: -0.00000027090312}
+      rotation: {x: 0.079624474, y: 0.24220413, z: -0.44514817, w: 0.8583939}
+      scale: {x: 1, y: 1.0000001, z: 1.0000004}
+    - name: Bone_024
+      parentName: Bone_013
+      position: {x: -2.9802322e-10, y: 0.0036755593, z: -0.00000015661121}
+      rotation: {x: -0.11270875, y: 0.0000051856036, z: 0.14568637, w: 0.9828897}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000002}
+    - name: Bone_024_end
+      parentName: Bone_024
+      position: {x: -0, y: 0.00023130342, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone_015
+      parentName: pelvis
+      position: {x: -3.958121e-11, y: 0.0022822595, z: -0.0000005511939}
+      rotation: {x: -0.6281543, y: 0.7117483, z: 0.2729157, w: 0.15605676}
+      scale: {x: 1.0000002, y: 0.99999994, z: 1}
+    - name: Bone_017
+      parentName: Bone_015
+      position: {x: 0.00000023066997, y: 0.0037994504, z: -0.0000004291907}
+      rotation: {x: -0.76440865, y: -0.63630587, z: 0.010273233, w: 0.103386775}
+      scale: {x: 1, y: 0.9999997, z: 0.9999997}
+    - name: Bone_019
+      parentName: Bone_017
+      position: {x: 0.00000024050473, y: 0.016521173, z: -0.00000008143484}
+      rotation: {x: -0.014660493, y: 0.00011431798, z: -0.020399898, w: 0.99968445}
+      scale: {x: 1.0000005, y: 1.0000006, z: 0.9999997}
+    - name: Bone_021
+      parentName: Bone_019
+      position: {x: 0.00000003999099, y: 0.016938418, z: 0.00000037968158}
+      rotation: {x: 0.65793127, y: 0.05598346, z: -0.054537363, w: 0.7490114}
+      scale: {x: 0.99999976, y: 0.99999994, z: 0.99999976}
+    - name: Bone_021_end
+      parentName: Bone_021
+      position: {x: -0, y: 0.0002313029, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone_016
+      parentName: pelvis
+      position: {x: -2.9802322e-10, y: 0.002282259, z: -0.0000005494058}
+      rotation: {x: 0.6281541, y: 0.7117482, z: 0.2729159, w: -0.15605718}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000008}
+    - name: Bone_018
+      parentName: Bone_016
+      position: {x: -0.0000002298504, y: 0.0037994497, z: -0.00000043097882}
+      rotation: {x: -0.764409, y: 0.63630533, z: -0.010273353, w: 0.1033875}
+      scale: {x: 1, y: 1, z: 0.9999992}
+    - name: Bone_020
+      parentName: Bone_018
+      position: {x: -0.000000269562, y: 0.01652117, z: -0.00000006973743}
+      rotation: {x: -0.014660498, y: -0.00011442228, z: 0.020399032, w: 0.99968445}
+      scale: {x: 1.0000006, y: 1.0000007, z: 1.0000005}
+    - name: Bone_022
+      parentName: Bone_020
+      position: {x: -0.000000070929524, y: 0.016938452, z: 0.00000040069222}
+      rotation: {x: 0.6579314, y: -0.055984, z: 0.05453622, w: 0.74901134}
+      scale: {x: 0.99999964, y: 0.99999976, z: 0.99999964}
+    - name: Bone_022_end
+      parentName: Bone_022
+      position: {x: -0, y: 0.0002313029, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -93,13 +492,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

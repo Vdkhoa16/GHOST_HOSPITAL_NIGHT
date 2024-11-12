@@ -6,6 +6,9 @@ public class AtackingEnemy : StateMachineBehaviour
 {
     List<Transform> players = new List<Transform>();
     private AttributesManager playerAttributes;
+
+    //sound
+    //private Sound playsound;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -18,8 +21,14 @@ public class AtackingEnemy : StateMachineBehaviour
 
         if (playerAttributes != null)
         {
-            playerAttributes.Atacking();
-        } 
+            Debug.Log("atackig");
+            // playerAttributes.Atacking();
+        }
+
+        //sound
+        //playsound = animator.GetComponent<Sound>();
+        //    playsound.StopSound();
+
     }
     void TryFindPlayers()
     {
@@ -60,7 +69,7 @@ public class AtackingEnemy : StateMachineBehaviour
         Transform closestPlayer = GetClosestPlayer(animator);
         animator.transform.LookAt(closestPlayer);
         float distance = Vector3.Distance(closestPlayer.position, animator.transform.position);
-        if (distance > 5f)
+        if (distance >= 5f)
         {
             //Debug.Log("Player is within chase range. Setting isChasing to true.");
             animator.SetBool("isAttacking", false);

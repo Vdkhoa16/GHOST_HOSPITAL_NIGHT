@@ -14,6 +14,7 @@ TagManager:
   - pickupUI
   - WP
   - test
+  - dameE
   layers:
   - Default
   - TransparentFX

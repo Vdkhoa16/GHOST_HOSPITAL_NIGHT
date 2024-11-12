@@ -1026,7 +1026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1272447068185134532
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2943,7 +2943,6 @@ MonoBehaviour:
   pickupRange: 5
   playerHandTransform: {fileID: 5557397053870658331}
   currentItemInHand: {fileID: 6957845885201567542}
-  playerAnimation: {fileID: -8257754693276327812}
 --- !u!65 &4709325875045734143
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2991,9 +2990,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTesting: 0
   health: 5
+  live: 0
   walk_Speed: 2
   running_Speed: 4
   sprint_Speed: 6
+  respawnX: 5
+  respawnY: 5
+  respawnZ: 5
+  imageOnLiveDecrease: {fileID: 4286774463370098765}
+  imageOnAttack: {fileID: 122848644099253282}
 --- !u!1 &8018049275055675853
 GameObject:
   m_ObjectHideFlags: 0
@@ -3324,6 +3329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIPLayer
       objectReference: {fileID: 0}
+    - target: {fileID: 2523855918140071893, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+      propertyPath: liveUI
+      value: 
+      objectReference: {fileID: 3818623432326864185}
     - target: {fileID: 2523855918140071893, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: livesUI
       value: 

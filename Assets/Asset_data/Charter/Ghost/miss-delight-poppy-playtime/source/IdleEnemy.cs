@@ -7,13 +7,21 @@ public class IdleEnemy : StateMachineBehaviour
 {
     float timer;
     List<Transform> players = new List<Transform>();
-    float ChaseRange = 10;
+
+
+    //sound
+    private Sound playsound;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("isChasing", false);
         timer = 0;
         TryFindPlayers();
+
+        //sound
+        playsound = animator.GetComponent<Sound>();
+        playsound.StopSound();
+
     }
 
     void TryFindPlayers()
@@ -56,17 +64,16 @@ public class IdleEnemy : StateMachineBehaviour
         if (timer > 5)
         {
             animator.SetBool("isPatrolling", true);
-           //ebug.Log("walk");
+            //ebug.Log("walk");
         }
 
         Transform closestPlayer = GetClosestPlayer(animator);
         if (closestPlayer != null)
         {
             float distance = Vector3.Distance(closestPlayer.position, animator.transform.position);
-            if (distance < ChaseRange)
+            if (distance <= 10)
             {
                 animator.SetBool("isChasing", true);
-               //ebug.Log("run");
             }
         }
     }

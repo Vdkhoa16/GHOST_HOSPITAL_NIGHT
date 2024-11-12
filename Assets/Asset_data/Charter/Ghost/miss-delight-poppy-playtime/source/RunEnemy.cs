@@ -9,17 +9,20 @@ public class RunEnemy : StateMachineBehaviour
 {
     NavMeshAgent agent;
     List<Transform> players = new List<Transform>();
-    float ChaseRange = 15;
-    float AttackRange = 2f;
+    float ChaseRange = 10;
+    float JumpRange = 4f;
+    //sound
+    private Sound playsound;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // animator.SetBool("isChasing", false);
         agent = animator.GetComponent<NavMeshAgent>();
-        // player = GameObject.FindGameObjectWithTag("Player").transform;
         TryFindPlayers();
-        agent.speed = 6f;
-        //Debug.Log("Entered Chase State");
+        agent.speed = 5f;
+        //sound
+        playsound = animator.GetComponent<Sound>();
+        playsound.Runsound();
 
     }
     void TryFindPlayers()
@@ -65,15 +68,17 @@ public class RunEnemy : StateMachineBehaviour
         if (closestPlayer != null)
         {
             float distance = Vector3.Distance(closestPlayer.position, animator.transform.position);
-            if (distance > ChaseRange)
+            if (distance >= ChaseRange)
             {
                 //Debug.Log("Player is within chase range. Setting isChasing to false.");
                 animator.SetBool("isChasing", false);
             }
-            if (distance < AttackRange)
+            if (distance <= JumpRange)
             {
                 //Debug.Log("Player is within chase range. Setting isAttacking to true.");
-                animator.SetBool("isAttacking", true);
+                animator.SetBool("isJump", true);
+
+                //animator.SetBool("isChasing", false);
             }
         }
 
@@ -83,7 +88,12 @@ public class RunEnemy : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(animator.transform.position);
-        //Debug.Log("Exiting Chase State");
+        // Stop sound and reset sound state
+        //if (isSoundPlaying && playsound != null)
+        //{
+        //    playsound.StopSound();
+        //    isSoundPlaying = false;
+        //}
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
