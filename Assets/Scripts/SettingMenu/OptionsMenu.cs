@@ -12,7 +12,23 @@ public class OptionsMenu : MonoBehaviour
     public Button highButton;
     public Button veryHighButton;
     public Button ultraButton;
+    public GameObject CanvaSetting;
+    public GameObject settingObject;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(CanvaSetting.gameObject);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            settingObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None; // Giải phóng con trỏ khỏi chế độ khóa
+            Cursor.visible = true; // Hiện con trỏ chuột
+        }
+    }
     private void Start()
     {
         // Lấy và áp dụng mức chất lượng đã lưu khi khởi động
@@ -22,8 +38,7 @@ public class OptionsMenu : MonoBehaviour
         // hiển thị mức đồ họa đã lưuu
         SetSelectedButton(savedQualityLevel);
        
-        // ẩn panel
-        this.gameObject.SetActive(false);
+       
     }
 
     // Hàm này sẽ được gọi mỗi khi mở lại panel
