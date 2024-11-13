@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Playables;
 
 public class Tager_Door : NetworkBehaviour
@@ -18,6 +19,9 @@ public class Tager_Door : NetworkBehaviour
     public TextMeshProUGUI notificationText;
 
     public PlayerInventory playerInventory;
+
+
+    public NavMeshObstacle navMeshObstacle;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -109,6 +113,11 @@ public class Tager_Door : NetworkBehaviour
             OnCloseDAnimationEnd();
             animator.SetBool("OpenD", false);
             /*            Debug.Log("Closing door");*/
+            // Cập nhật NavMeshObstacle khi cửa đóng
+            if (navMeshObstacle != null)
+            {
+                navMeshObstacle.carving = true; // Tạo chướng ngại vật cho AI
+            }
         }
         else
         {
@@ -116,6 +125,10 @@ public class Tager_Door : NetworkBehaviour
             animator.SetBool("OpenD", true);
             animator.SetBool("closeD", false);
             /*            Debug.Log("Opening door");*/
+            if (navMeshObstacle != null)
+            {
+                navMeshObstacle.carving = false; // Cho phép AI đi qua
+            }
         }
     }
 
