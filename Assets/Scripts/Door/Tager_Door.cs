@@ -17,7 +17,7 @@ public class Tager_Door : NetworkBehaviour
     public int keyID; // ID của chìa khóa cần để mở cửa
     public TextMeshProUGUI notificationText;
 
-    private PlayerInventory playerInventory;
+    public PlayerInventory playerInventory;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -75,7 +75,11 @@ public class Tager_Door : NetworkBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+            //playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+            if (other.GetComponent<NetworkObject>().IsOwner)
+            {
+                playerInventory = other.GetComponent<PlayerInventory>();
+            }
             ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
             SetPickupButtonVisibilityServerRpc(clientId, true);
         }

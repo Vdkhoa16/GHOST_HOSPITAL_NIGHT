@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sound : MonoBehaviour
 {
     public AudioSource runsound;
-    bool isSoundPlaying = false;
+   // bool isSoundPlaying = false;
    // public Animator animator;
 
     // Start is called before the first frame update
@@ -27,9 +27,9 @@ public class Sound : MonoBehaviour
     }
     public void StopSound()
     {
-        if (runsound.isPlaying)
-        {
+       // if (runsound.isPlaying)
+        //{
             runsound.Stop();
-        }
+       // }
     }
 }
