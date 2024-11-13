@@ -11,29 +11,14 @@ public class NumberBox : MonoBehaviour
     int x = 0;
     int y = 0;
     private Action<int, int> swapFunc = null;
-    private Image imageComponent;
-    public void Init(int i, int j, int index,Sprite sprite, Action<int, int> swapFunc)
+    public void Init(int i, int j, int index, Sprite sprite, Action<int, int> swapFunc)
     {
         this.index = index;
         this.GetComponent<SpriteRenderer>().sprite = sprite;
-        if (!IsEmpty())
-        {
-            imageComponent.sprite = sprite;
-            imageComponent.enabled = true; // Ensure the image is visible
-        }
-        else
-        {
-            imageComponent.enabled = false; // Hide the image for the empty box
-        }
         UpdatePos(i, j);
         this.swapFunc = swapFunc;
     }
 
-    void Awake()
-    {
-        // Get the Image component from the GameObject
-        imageComponent = GetComponent<Image>();
-    }
     public void UpdatePos(int i, int j)
     {
         x = i;
