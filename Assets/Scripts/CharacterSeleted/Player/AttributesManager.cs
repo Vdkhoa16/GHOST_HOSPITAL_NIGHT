@@ -20,14 +20,17 @@ public class AttributesManager : NetworkBehaviour
     public float walk_Speed = 2f;
     public float running_Speed = 4f;
     public float sprint_Speed = 6f;
+    public int textlive;
 
     // Replace Transform with float variables for x, y, and z coordinates
     public float respawnX;
     public float respawnY;
     public float respawnZ;
 
+
     public GameObject imageOnLiveDecrease; // First image to show on live decrease
     public GameObject imageOnAttack; // Second image to show on attack
+    public GameObject Textlive;
 
     private int maxHealth = 5;
     private float initialWalkSpeed;
@@ -39,7 +42,8 @@ public class AttributesManager : NetworkBehaviour
     void Start()
     {
         health = maxHealth;
-        live = 5;
+        live = 1;
+        textlive = 1;
         initialWalkSpeed = walk_Speed;
         initialRunningSpeed = running_Speed;
         initialSprintSpeed = sprint_Speed;
@@ -59,10 +63,10 @@ public class AttributesManager : NetworkBehaviour
 
         if (health <= 1)
         {
-            live -= 1;
+            live += 1;
+            textlive += 1;
             ResetAttributes();
-
-            if (live > 0)
+            if (live <= 5)
             {
                 ResetPositionAndShowImage();
             }
@@ -82,7 +86,9 @@ public class AttributesManager : NetworkBehaviour
         // Set player position to the specified x, y, z coordinates
         transform.position = new Vector3(respawnX, respawnY, respawnZ);
         imageOnLiveDecrease.SetActive(true);
-        StartCoroutine(HideImageAfterDelay(imageOnLiveDecrease, 1f)); // Hide after 1 second
+        Textlive.SetActive(true);
+        StartCoroutine(HideImageAfterDelay(imageOnLiveDecrease, 1f)) ; // Hide after 1 second
+        StartCoroutine(HideImageAfterDelay(Textlive, 1f));
     }
 
     private void ShowAttackImage()

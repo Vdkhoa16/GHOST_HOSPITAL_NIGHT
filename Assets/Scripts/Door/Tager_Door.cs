@@ -31,7 +31,10 @@ public class Tager_Door : NetworkBehaviour
             pickupButton.SetActive(false);
         }
         isOpen.OnValueChanged += OnDoorStateChanged;
-       
+
+        //navMeshObstacle.carving = true;
+
+
     }
 
     void Update()
@@ -103,7 +106,6 @@ public class Tager_Door : NetworkBehaviour
 
         UpdateDoorState(newState);
     }
-
     private void UpdateDoorState(bool open)
     {
         if (open)
