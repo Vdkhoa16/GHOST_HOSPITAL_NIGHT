@@ -51,15 +51,15 @@ public class PuzzleController : MonoBehaviour
             PuzzleCamera.SetActive(true);
             ONMose();
         }
-        if (Input.GetKeyUp(KeyCode.K))
-            {
-                Cameramain.SetActive(true);
-                PuzzleCamera.SetActive(false);
-               
-            }
         }
 
-    
+    public void ClosePuzzle()
+    {
+        Cameramain.SetActive(true);
+        PuzzleCamera.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     // Method to load a new scene
     public void ONMose()
@@ -67,6 +67,5 @@ public class PuzzleController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        // letter = Instantiate(letter);
     }
 }

@@ -10,13 +10,18 @@ public class Puzzle : MonoBehaviour
     public NumberBox[,] boxes = new NumberBox[4, 4];
     public Sprite[] sprites;
     public GameObject puzzlePanel;
+    private bool checkPoint = false;
     // Start is called before the first frame update
     void Start()
     {
         Init();
-/*        for (int i = 0; i < 999; i++)*/
+        for (int i = 0; i < 10; i++)
+        {
             Shuffle();
+        }
+        checkPoint= true;
     }
+
 
     // Update is called once per frame
     void Init()
@@ -26,10 +31,7 @@ public class Puzzle : MonoBehaviour
         for (int y = 3; y >= 0; y--)
             for (int x = 0; x < 4; x++)
             {
-                /*                NumberBox box = Instantiate(boxPrefab, new Vector2(x,y), Quaternion.identity,transform);*/
-                // Tạo GameObject NumberBox dưới PuzzlePanel (UI)
                 NumberBox box = Instantiate(boxPrefab, puzzlePanel.transform);
-
                 box.Init(x, y, n + 1,sprites[n], ClickToSwap);
                 boxes[x, y] = box;
                 n++;
@@ -93,9 +95,11 @@ public class Puzzle : MonoBehaviour
                 {
                     Vector2 pos = getValidMove(i, j);
                     Swap(i, j, (int)pos.x, (int)pos.y);
+                    checkPoint = false;
                 }
             }
         }
+
     }
     private Vector2 lastMove;
     void CheckWinCondition()
@@ -120,7 +124,7 @@ public class Puzzle : MonoBehaviour
                 correctIndex++;
 
                 // If we reach 15, we have successfully arranged the puzzle
-                if (correctIndex == 16)
+                if (correctIndex == 16 && checkPoint == true)
                 {
                     Debug.Log("Puzzle solved!");
                     TriggerCombat();
