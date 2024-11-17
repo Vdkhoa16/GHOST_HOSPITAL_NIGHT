@@ -190,6 +190,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67d2da6befd177343899e47f682b26f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5136920017499617590}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67d2da6befd177343899e47f682b26f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7321009137282662152}
   m_SourcePrefab: {fileID: 100100000, guid: 67d2da6befd177343899e47f682b26f5, type: 3}
 --- !u!1 &8268902396530448080 stripped
 GameObject:
@@ -251,6 +254,21 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &7321009137282662152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8268902396530448080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281c08223f5a1d8409d234a24971d369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashlight: {fileID: 5501002556819864350}
+  maxTimeLight: 60
+  batteryConsumptionRate: 1
 --- !u!4 &8758052427361586282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 67d2da6befd177343899e47f682b26f5, type: 3}

@@ -37,10 +37,16 @@ public class AttributesManager : NetworkBehaviour
     private float initialRunningSpeed;
     private float initialSprintSpeed;
 
+    [Header("FlastLight")]
+    public float maxPin = 60f;
+    public float currentPin;
+
     private vThirdPersonController vThirdPersonController;
 
     void Start()
     {
+        currentPin = maxPin;
+
         health = maxHealth;
         live = 1;
         textlive = 1;

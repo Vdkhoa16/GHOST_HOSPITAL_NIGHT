@@ -31,6 +31,8 @@ public class PlayerInventory : NetworkBehaviour
     [Header("Animation")]
     private PlayerAnimation playerAnimation;
 
+    [Header("AttributesManager")]
+    private AttributesManager playerAttributes;
 
     [System.Serializable]
     public struct ItemData : INetworkSerializable
@@ -68,6 +70,7 @@ public class PlayerInventory : NetworkBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();
         pickUpItem_gameobject.SetActive(false);
         networkObject = GetComponent<NetworkObject>();
+        playerAttributes = GetComponent<AttributesManager>();
     }
 
     public override void OnNetworkSpawn()
@@ -108,7 +111,15 @@ public class PlayerInventory : NetworkBehaviour
             ToggleInventory();
         }
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            RemoveItemHandServerRpc();
+        }
 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            playerAttributes.currentPin = playerAttributes.maxPin;
+        }
     }
 
     public void PickUpButton()
@@ -259,7 +270,12 @@ public class PlayerInventory : NetworkBehaviour
             itemObject.transform.localPosition = prefab.transform.localPosition;
             itemObject.transform.localRotation = prefab.transform.localRotation;
             Debug.Log("Đang sử dụng item: " + itemData.itemName);
+            if(itemData.itemType == ItemType.isFlashLight)
+            {
+                FlashLight flashLight = currentItemInHand.GetComponentInChildren<FlashLight>();
+                flashLight.IsFlashLightOn();
 
+            }
 
             // kiểm tra còn tồn tại item nào trên tay không
         }
@@ -386,6 +402,8 @@ public class PlayerInventory : NetworkBehaviour
             {
                 // Lấy con và phá hủy nó
                 Destroy(playerHandTransform.GetChild(i).gameObject);
+               // playerHandTransform.GetChild(i).gameObject.SetActive(false);
+               
             }
         }
     }

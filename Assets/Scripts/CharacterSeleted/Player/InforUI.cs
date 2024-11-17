@@ -13,14 +13,19 @@ public class InforUI : MonoBehaviour
     public TextMeshProUGUI liveUI;
     public TextMeshProUGUI TextliveUI;
     private AttributesManager attributesManager;
+    public GameObject pinGameObject;
+    public GameObject[] pinUI;
+    public float maxPin = 60f;
+    public GameObject hand;
 
     public TextMeshProUGUI timerUI; // Add a UI element to display the timer
     private float timeRemaining = 1800f; // 30 minutes in seconds
     private bool timerIsRunning = true;
+    private FlashLight flashLight;
     void Start()
     {
         attributesManager = GetComponentInParent<AttributesManager>();
-
+        pinGameObject.SetActive(false);
         // Kiểm tra xem có phải là đối tượng của player cục bộ hay không
         if (GetComponentInParent<NetworkObject>().IsOwner)
         {
@@ -59,7 +64,23 @@ public class InforUI : MonoBehaviour
                 timerIsRunning = false;
             }
         }
-
+        if (hand.GetComponentInChildren<FlashLight>()) 
+        {
+            pinGameObject.SetActive(true);
+            float pin;
+            pin = (attributesManager.currentPin / attributesManager.maxPin) * 100;
+            Debug.Log(pin);
+            if (pin > 50)
+            {
+                pinUI[0].SetActive(true);
+                pinUI[1].SetActive(false);
+            }
+            if (pin < 50)
+            {
+                pinUI[0].SetActive(false);
+                pinUI[1].SetActive(true);
+            }
+        }
     }
 
     void DisplayTime(float timeToDisplay)
@@ -73,4 +94,5 @@ public class InforUI : MonoBehaviour
         // Update the timer UI text in MM:SS format
         timerUI.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
 }

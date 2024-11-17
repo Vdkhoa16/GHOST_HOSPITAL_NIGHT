@@ -1,9 +1,49 @@
 fileFormatVersion: 2
 guid: ce37b9381ca45bf48a0d4f9a33a1e51b
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GENERIC_BADGES
+    second: {fileID: 2100000, guid: 1a783a88b171309478c6a83553d114b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Numberplates
+    second: {fileID: 2100000, guid: 9977d2ebae793664bbd1334e207ae477, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RIMOFFROAD_01_3
+    second: {fileID: 2100000, guid: 0792f255c9d814b47b48459379ad7383, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UCB_BOTTOM
+    second: {fileID: 2100000, guid: 734f34847d346714ba849c9a6cba9dfb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UCB_GLASS_CLEAN
+    second: {fileID: 2100000, guid: 3654993010ce37146afcaf132e340f9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: krmlghtbdy85_body
+    second: {fileID: 2100000, guid: 3e2dbabfa2b384042b9703376d3fa999, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: krmlgtbdy85_headlights
+    second: {fileID: 2100000, guid: 3ad92e24d0a116c46bf0c3fc925bd784, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: krmlgtbdy85_interior
+    second: {fileID: 2100000, guid: c3b9a7ebee62dc04782beb2b809fbaaf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,6 +80,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -100,6 +141,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

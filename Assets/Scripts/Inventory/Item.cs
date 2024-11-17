@@ -6,7 +6,8 @@ public enum ItemType
 {
     isNone,
     isKey,
-    isLetter
+    isLetter,
+    isFlashLight
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Inventory/Item", order = 1)]

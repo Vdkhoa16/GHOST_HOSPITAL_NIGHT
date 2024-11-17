@@ -15,3 +15,5 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: 63500f9180e20f84c826b50bb256f268, type: 3}
   itemName: flashLight
   prefab: {fileID: 8268902396530448080, guid: a77933d8859a9354fb939207e946f31c, type: 3}
+  itemType: 3
+  keyID: 0
