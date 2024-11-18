@@ -16,10 +16,10 @@ public class Tager_Door : NetworkBehaviour
 
     public bool requiresKey = false; // Cửa có yêu cầu chìa khóa không
     public int keyID; // ID của chìa khóa cần để mở cửa
+
     public TextMeshProUGUI notificationText;
 
     public PlayerInventory playerInventory;
-
 
     public NavMeshObstacle navMeshObstacle;
     void Start()

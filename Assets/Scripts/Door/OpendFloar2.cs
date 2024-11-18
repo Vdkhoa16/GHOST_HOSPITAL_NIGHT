@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OpendFloar2 : MonoBehaviour
@@ -8,7 +9,8 @@ public class OpendFloar2 : MonoBehaviour
     public GameObject pickupButton;
     private bool isPlayerInRange = false;
     public GameObject Fence;
-    // Start is called before the first frame update
+    public ElectoPanel electoPanel;
+    public ParticleSystem fenceEffect;
     void Start()
     {
         if (pickupButton != null)
@@ -22,8 +24,16 @@ public class OpendFloar2 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
         {
-            pickupButton.SetActive(false);
-            Fence.SetActive(false);
+            if (electoPanel != null && electoPanel.IsOn()) 
+            {
+                pickupButton.SetActive(false); // Ẩn nút nhấn
+                TriggerFenceEffect();
+                Fence.SetActive(false); // Tắt Fence
+            }
+            else
+            {
+                Debug.Log("Không thể tắt Fence vì ElectoPanel chưa mở!"); // Thông báo lỗi
+            }
         }
         
     }
@@ -54,7 +64,15 @@ public class OpendFloar2 : MonoBehaviour
         }
     }
 
-   
+
+    private void TriggerFenceEffect()
+    {
+        if (fenceEffect != null)
+        {
+            fenceEffect.Play(); 
+        }
+
+    }
 
 
 }

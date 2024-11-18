@@ -18,8 +18,8 @@ public class InforUI : MonoBehaviour
     public float maxPin = 60f;
     public GameObject hand;
 
-    public TextMeshProUGUI timerUI; // Add a UI element to display the timer
-    private float timeRemaining = 1800f; // 30 minutes in seconds
+    public TextMeshProUGUI timerUI;
+    private float timeRemaining = 1800f; 
     private bool timerIsRunning = true;
     private FlashLight flashLight;
     void Start()
@@ -49,7 +49,6 @@ public class InforUI : MonoBehaviour
             TextliveUI.text = "Day: " + attributesManager.textlive.ToString();
 
         }
-        // Update the countdown timer
         if (timerIsRunning)
         {
             if (timeRemaining > 0)
@@ -85,13 +84,11 @@ public class InforUI : MonoBehaviour
 
     void DisplayTime(float timeToDisplay)
     {
-        timeToDisplay += 1; // Adding 1 second to show 00:00 instead of -00:01 when time runs out
+        timeToDisplay += 1; 
 
-        // Convert time to minutes and seconds format
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-        // Update the timer UI text in MM:SS format
         timerUI.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
