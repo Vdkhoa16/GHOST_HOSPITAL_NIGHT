@@ -115,11 +115,11 @@ public class PlayerInventory : NetworkBehaviour
         {
             RemoveItemHandServerRpc();
         }
-
         if (Input.GetKeyDown(KeyCode.L))
         {
             playerAttributes.currentPin = playerAttributes.maxPin;
         }
+
     }
 
     public void PickUpButton()
@@ -273,7 +273,7 @@ public class PlayerInventory : NetworkBehaviour
             if(itemData.itemType == ItemType.isFlashLight)
             {
                 FlashLight flashLight = currentItemInHand.GetComponentInChildren<FlashLight>();
-                flashLight.IsFlashLightOn();
+                flashLight.isFlashLightOn = true;
 
             }
 
@@ -311,6 +311,29 @@ public class PlayerInventory : NetworkBehaviour
 
     void UseItem(Item item)
     {
+        if(item.itemType == ItemType.isBattery)
+        {
+            foreach (InventoryObject invObj in inventoryObjects)
+            {
+                if (invObj.item == item)
+                {
+                    if (invObj.amount > 0)
+                    {
+                        //FlashLight flashLight = currentItemInHand.GetComponentInChildren<FlashLight>();
+                        //flashLight.IsFlashLightOn();
+                        invObj.amount--;
+                        playerAttributes.currentPin = playerAttributes.maxPin;
+                        if (invObj.amount == 0)
+                        {
+                            inventoryObjects.Remove(invObj);
+                        }
+                        UpdateInventoryUI();
+                        return;
+                    }
+                }
+            }
+        }
+
         RemoveItemHandServerRpc();
         foreach (InventoryObject invObj in inventoryObjects)
         {

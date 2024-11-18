@@ -267,8 +267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashlight: {fileID: 5501002556819864350}
-  maxTimeLight: 60
   batteryConsumptionRate: 1
+  isFlashLightOn: 0
 --- !u!4 &8758052427361586282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 67d2da6befd177343899e47f682b26f5, type: 3}

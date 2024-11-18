@@ -69,16 +69,76 @@ public class InforUI : MonoBehaviour
             pinGameObject.SetActive(true);
             float pin;
             pin = (attributesManager.currentPin / attributesManager.maxPin) * 100;
-            Debug.Log(pin);
-            if (pin > 50)
+            //Debug.Log(pin);
+            if (pin >= 75)
             {
-                pinUI[0].SetActive(true);
-                pinUI[1].SetActive(false);
+                for (int i = 0; i < pinUI.Length ; i++)
+                {
+                    if(pinUI[i] == pinUI[0])
+                    {
+                        pinUI[i].SetActive(true);
+                    }
+                    else
+                    {
+                        pinUI[i].SetActive(false);
+                    }
+                }
             }
-            if (pin < 50)
+            else if (pin >= 50)
             {
-                pinUI[0].SetActive(false);
-                pinUI[1].SetActive(true);
+                for (int i = 0; i < pinUI.Length; i++)
+                {
+                    if (pinUI[i] == pinUI[1])
+                    {
+                        pinUI[i].SetActive(true);
+                    }
+                    else
+                    {
+                        pinUI[i].SetActive(false);
+                    }
+                }
+            }
+            else if(pin >= 25)
+            {
+                for (int i = 0; i < pinUI.Length; i++)
+                {
+                    if (pinUI[i] == pinUI[2])
+                    {
+                        pinUI[i].SetActive(true);
+                    }
+                    else
+                    {
+                        pinUI[i].SetActive(false);
+                    }
+                }
+            }
+            else if( pin > 0)
+            {
+                for (int i = 0; i < pinUI.Length; i++)
+                {
+                    if (pinUI[i] == pinUI[3])
+                    {
+                        pinUI[i].SetActive(true);
+                    }
+                    else
+                    {
+                        pinUI[i].SetActive(false);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < pinUI.Length; i++)
+                {
+                    if (pinUI[i] == pinUI[4])
+                    {
+                        pinUI[i].SetActive(true);
+                    }
+                    else
+                    {
+                        pinUI[i].SetActive(false);
+                    }
+                }
             }
         }
     }
