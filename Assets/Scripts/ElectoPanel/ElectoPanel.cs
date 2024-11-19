@@ -6,14 +6,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Playables;
 
-public class ElectoPanel : MonoBehaviour
+public class ElectoPanel : NetworkBehaviour
 {
     public GameObject pickupButton;
     private NetworkVariable<bool> isOn = new NetworkVariable<bool>(false);
-    private bool isPlayerInRange = false; 
+    private bool isPlayerInRange = false;
 
     public bool requiresKey = false;
-    public int keyID; 
+    public int keyID;
     public TextMeshProUGUI notificationText;
 
     public GameObject gameObject1; // The GameObject to activate/deactivate
@@ -30,7 +30,7 @@ public class ElectoPanel : MonoBehaviour
         isOn.OnValueChanged += OnElectoStateChanged;
 
         // Ensure the GameObject and sound reflect the initial state
-       // UpdateElectoState(isOn.Value);
+        // UpdateElectoState(isOn.Value);
     }
 
     void Update()
@@ -56,7 +56,6 @@ public class ElectoPanel : MonoBehaviour
         }
     }
 
-
     void ShowNotification(string message)
     {
         notificationText.text = message;
@@ -77,9 +76,16 @@ public class ElectoPanel : MonoBehaviour
             if (other.GetComponent<NetworkObject>().IsOwner)
             {
                 playerInventory = other.GetComponent<PlayerInventory>();
+                pickupButton.SetActive(true);
+                isPlayerInRange = true;
             }
-            ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
-            SetPickupButtonVisibilityServerRpc(clientId, true);
+            else
+            {
+                pickupButton.SetActive(false);
+            }
+            //ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
+            //SetPickupButtonVisibilityServerRpc(clientId, true);
+
         }
     }
 
@@ -87,8 +93,10 @@ public class ElectoPanel : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
-            SetPickupButtonVisibilityServerRpc(clientId, false);
+            //ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
+            //SetPickupButtonVisibilityServerRpc(clientId, false);
+            pickupButton.SetActive(false);
+            isPlayerInRange = true;
         }
     }
 
@@ -98,7 +106,7 @@ public class ElectoPanel : MonoBehaviour
     }
     public bool IsOn()
     {
-        return isOn.Value; 
+        return isOn.Value;
     }
 
     private void UpdateElectoState(bool on)
@@ -115,7 +123,7 @@ public class ElectoPanel : MonoBehaviour
         else
         {
             // State: "Chưa mở"
-            gameObject1.SetActive(true); 
+            gameObject1.SetActive(true);
             //if (!Sound1.isPlaying) Sound1.Play(); // Play Sound1 
             //if (Sound2.isPlaying) Sound2.Stop(); // Stop Sound2
             Audio2.gameObject.SetActive(false);

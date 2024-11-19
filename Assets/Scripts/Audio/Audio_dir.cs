@@ -6,9 +6,9 @@ using UnityEngine;
 public class Audio_dir : MonoBehaviour
 {
     [SerializeField] private AudioSource zoneAudioSource; // Âm thanh phát trong vùng
-    private HashSet<ulong> playersInZone = new HashSet<ulong>(); // Danh sách người chơi trong vùng
-    [SerializeField] private bool isRepeatable = true; // Âm thanh lặp lại hay chỉ phát một lần
-    private HashSet<ulong> playersWhoTriggered = new HashSet<ulong>(); // Danh sách người chơi đã kích hoạt âm thanh một lần
+    //private HashSet<ulong> playersInZone = new HashSet<ulong>(); // Danh sách người chơi trong vùng
+    //[SerializeField] private bool isRepeatable = true; // Âm thanh lặp lại hay chỉ phát một lần
+    //private HashSet<ulong> playersWhoTriggered = new HashSet<ulong>(); // Danh sách người chơi đã kích hoạt âm thanh một lần
 
     private void Start()
     {
@@ -20,35 +20,50 @@ public class Audio_dir : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && other.TryGetComponent<NetworkObject>(out var networkObject))
+        //if (other.CompareTag("Player") && other.TryGetComponent<NetworkObject>(out var networkObject))
+        //{
+        //    ulong clientId = networkObject.OwnerClientId;
+
+        //    // Kiểm tra nếu là âm thanh không lặp lại và đã phát với người chơi này
+        //    if (!isRepeatable && playersWhoTriggered.Contains(clientId))
+        //    {
+        //        return; // Không làm gì nếu âm thanh đã phát
+        //    }
+
+        //    if (!playersInZone.Contains(clientId))
+        //    {
+        //        playersInZone.Add(clientId);
+        //        playersWhoTriggered.Add(clientId); // Đánh dấu người chơi đã kích hoạt âm thanh
+        //        UpdateSoundStateServerRpc(clientId, true); // Bật âm thanh cho người chơi
+        //    }
+        //}
+        if (other.CompareTag("Player"))
         {
-            ulong clientId = networkObject.OwnerClientId;
-
-            // Kiểm tra nếu là âm thanh không lặp lại và đã phát với người chơi này
-            if (!isRepeatable && playersWhoTriggered.Contains(clientId))
+            if (other.GetComponent<NetworkObject>().IsOwner)
             {
-                return; // Không làm gì nếu âm thanh đã phát
+                zoneAudioSource.Play();
             }
-
-            if (!playersInZone.Contains(clientId))
+            else
             {
-                playersInZone.Add(clientId);
-                playersWhoTriggered.Add(clientId); // Đánh dấu người chơi đã kích hoạt âm thanh
-                UpdateSoundStateServerRpc(clientId, true); // Bật âm thanh cho người chơi
+                zoneAudioSource.Stop();
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && other.TryGetComponent<NetworkObject>(out var networkObject))
+        //if (other.CompareTag("Player") && other.TryGetComponent<NetworkObject>(out var networkObject))
+        //{
+        //    ulong clientId = networkObject.OwnerClientId;
+        //    if (playersInZone.Contains(clientId))
+        //    {
+        //        playersInZone.Remove(clientId);
+        //        UpdateSoundStateServerRpc(clientId, false); // Tắt âm thanh cho người chơi
+        //    }
+        //}
+        if (other.CompareTag("Player"))
         {
-            ulong clientId = networkObject.OwnerClientId;
-            if (playersInZone.Contains(clientId))
-            {
-                playersInZone.Remove(clientId);
-                UpdateSoundStateServerRpc(clientId, false); // Tắt âm thanh cho người chơi
-            }
+            zoneAudioSource.Stop();
         }
     }
 
