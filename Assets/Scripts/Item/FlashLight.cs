@@ -1,34 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class FlashLight : MonoBehaviour
+public class FlashLight : NetworkBehaviour
 {
     public Light flashlight;
-   // public float maxTimeLight = 60f;
+    // public float maxTimeLight = 60f;
     public float batteryConsumptionRate = 1f;
 
-    private bool isFlashLightOn = false;
+    public bool isFlashLightOn = false;
     //public float currentBatteryLife;
 
     private bool isUseLight;
 
     private AttributesManager attributesManager;
+
     void Start()
     {
         attributesManager = GetComponentInParent<AttributesManager>();
+
     }
 
     void Update()
     {
-        if (attributesManager.currentPin <= 0)
-        {
-            flashlight.enabled = false;
-        }
+
+
         if (isFlashLightOn)
         {
             UseFlashLight();
         }
+        if (attributesManager.currentPin <= 0)
+        {
+
+            isFlashLightOn = false;
+            flashlight.enabled = false;
+        }
+        else
+        {
+            isFlashLightOn = true;
+            flashlight.enabled = true;
+        }
+
     }
 
     public void UseFlashLight()
@@ -36,24 +51,19 @@ public class FlashLight : MonoBehaviour
         if (attributesManager.currentPin > 0)
         {
             attributesManager.currentPin -= batteryConsumptionRate * Time.deltaTime;
-            if(attributesManager.currentPin <= 0)
+            if (attributesManager.currentPin <= 0)
             {
                 attributesManager.currentPin = 0;
-                flashlight.enabled = false;
-                isFlashLightOn = false;
+
             }
-           // Debug.Log("Pin còn lại: " + attributesManager.currentPin);
+            // Debug.Log("Pin còn lại: " + attributesManager.currentPin);
         }
     }
 
-    public bool IsFlashLightOn()
+    public void IsFlashLightOn()
     {
         isFlashLightOn = true;
-        return isFlashLightOn;
     }
 
-    //public float Battery()
-    //{
-    //    return (currentBatteryLife / maxTimeLight) * 100;
-    //}
+
 }

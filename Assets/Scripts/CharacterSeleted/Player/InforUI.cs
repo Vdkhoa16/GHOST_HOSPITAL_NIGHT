@@ -18,8 +18,8 @@ public class InforUI : MonoBehaviour
     public float maxPin = 60f;
     public GameObject hand;
 
-    public TextMeshProUGUI timerUI;
-    private float timeRemaining = 1800f; 
+    public TextMeshProUGUI timerUI; // Add a UI element to display the timer
+    private float timeRemaining = 1800f; // 30 minutes in seconds
     private bool timerIsRunning = true;
     private FlashLight flashLight;
     void Start()
@@ -49,6 +49,7 @@ public class InforUI : MonoBehaviour
             TextliveUI.text = "Day: " + attributesManager.textlive.ToString();
 
         }
+        // Update the countdown timer
         if (timerIsRunning)
         {
             if (timeRemaining > 0)
@@ -63,32 +64,94 @@ public class InforUI : MonoBehaviour
                 timerIsRunning = false;
             }
         }
-        if (hand.GetComponentInChildren<FlashLight>()) 
+        if (hand.GetComponentInChildren<FlashLight>())
         {
             pinGameObject.SetActive(true);
             float pin;
             pin = (attributesManager.currentPin / attributesManager.maxPin) * 100;
-            Debug.Log(pin);
-            if (pin > 50)
+            //Debug.Log(pin);
+            if (pin >= 75)
             {
-                pinUI[0].SetActive(true);
-                pinUI[1].SetActive(false);
+                for (int i = 0; i < pinUI.Length; i++)
+                {
+                    if (pinUI[i] == pinUI[0])
+                    {
+                        pinUI[i].SetActive(true);
+                    }
+                    else
+                    {
+                        pinUI[i].SetActive(false);
+                    }
+                }
             }
-            if (pin < 50)
+            else if (pin >= 50)
             {
-                pinUI[0].SetActive(false);
-                pinUI[1].SetActive(true);
+                for (int i = 0; i < pinUI.Length; i++)
+                {
+                    if (pinUI[i] == pinUI[1])
+                    {
+                        pinUI[i].SetActive(true);
+                    }
+                    else
+                    {
+                        pinUI[i].SetActive(false);
+                    }
+                }
+            }
+            else if (pin >= 25)
+            {
+                for (int i = 0; i < pinUI.Length; i++)
+                {
+                    if (pinUI[i] == pinUI[2])
+                    {
+                        pinUI[i].SetActive(true);
+                    }
+                    else
+                    {
+                        pinUI[i].SetActive(false);
+                    }
+                }
+            }
+            else if (pin > 0)
+            {
+                for (int i = 0; i < pinUI.Length; i++)
+                {
+                    if (pinUI[i] == pinUI[3])
+                    {
+                        pinUI[i].SetActive(true);
+                    }
+                    else
+                    {
+                        pinUI[i].SetActive(false);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < pinUI.Length; i++)
+                {
+                    if (pinUI[i] == pinUI[4])
+                    {
+                        pinUI[i].SetActive(true);
+                    }
+                    else
+                    {
+                        pinUI[i].SetActive(false);
+                    }
+                }
             }
         }
     }
 
     void DisplayTime(float timeToDisplay)
     {
-        timeToDisplay += 1; 
+        timeToDisplay += 1; // Adding 1 second to show 00:00 instead of -00:01 when time runs out
 
+        // Convert time to minutes and seconds format
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
+        // Update the timer UI text in MM:SS format
         timerUI.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 

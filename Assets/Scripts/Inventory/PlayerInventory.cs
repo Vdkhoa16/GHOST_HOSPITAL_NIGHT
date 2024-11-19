@@ -116,17 +116,13 @@ public class PlayerInventory : NetworkBehaviour
             RemoveItemHandServerRpc();
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            playerAttributes.currentPin = playerAttributes.maxPin;
-        }
     }
 
     public void PickUpButton()
     {
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
-       // Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.green);
+        // Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.green);
 
         if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
         {
@@ -139,7 +135,7 @@ public class PlayerInventory : NetworkBehaviour
                 {
                     // gọi aniamtion
                     playerAnimation.PickUp();
-                   // Debug.Log(networkObject);
+                    // Debug.Log(networkObject);
                     PickItemServerRpc(networkObject);
                     pickUpItem_gameobject.SetActive(false);
                 }
@@ -152,7 +148,7 @@ public class PlayerInventory : NetworkBehaviour
     {
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
-       // Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.red);
+        // Debug.DrawRay(playerCamera.position, ray.direction * pickupRange, Color.red);
 
         if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
         {
@@ -162,7 +158,7 @@ public class PlayerInventory : NetworkBehaviour
                 //Debug.Log("Tìm thấy vật phẩm");
                 crosshairImage.color = Color.red;
                 pickUpItem_gameobject.SetActive(true);
-               
+
                 // outline.UpdateMaterialProperties();
                 outline.OutlineWidth = 10;
             }
@@ -250,10 +246,10 @@ public class PlayerInventory : NetworkBehaviour
             obj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = invObj.item.itemName;
             obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = invObj.amount + "";
             obj.GetComponent<Button>().onClick.AddListener(delegate {
-                    UseItem(invObj.item);
+                UseItem(invObj.item);
                 UseLetter(invObj.item);
             });
-            
+
         }
     }
 
@@ -270,10 +266,10 @@ public class PlayerInventory : NetworkBehaviour
             itemObject.transform.localPosition = prefab.transform.localPosition;
             itemObject.transform.localRotation = prefab.transform.localRotation;
             Debug.Log("Đang sử dụng item: " + itemData.itemName);
-            if(itemData.itemType == ItemType.isFlashLight)
+            if (itemData.itemType == ItemType.isFlashLight)
             {
                 FlashLight flashLight = currentItemInHand.GetComponentInChildren<FlashLight>();
-                flashLight.IsFlashLightOn();
+                flashLight.isFlashLightOn = true;
 
             }
 
@@ -311,6 +307,29 @@ public class PlayerInventory : NetworkBehaviour
 
     void UseItem(Item item)
     {
+        if (item.itemType == ItemType.isBattery)
+        {
+            foreach (InventoryObject invObj in inventoryObjects)
+            {
+                if (invObj.item == item)
+                {
+                    if (invObj.amount > 0)
+                    {
+                        //FlashLight flashLight = currentItemInHand.GetComponentInChildren<FlashLight>();
+                        //flashLight.IsFlashLightOn();
+                        invObj.amount--;
+                        playerAttributes.currentPin = playerAttributes.maxPin;
+                        if (invObj.amount == 0)
+                        {
+                            inventoryObjects.Remove(invObj);
+                        }
+                        UpdateInventoryUI();
+                        return;
+                    }
+                }
+            }
+        }
+
         RemoveItemHandServerRpc();
         foreach (InventoryObject invObj in inventoryObjects)
         {
@@ -341,7 +360,7 @@ public class PlayerInventory : NetworkBehaviour
         {
             if (inventoryObject.item.itemType == ItemType.isKey && inventoryObject.item.keyID == keyID)
             {
-                return true; 
+                return true;
             }
         }
         return false;
@@ -402,8 +421,8 @@ public class PlayerInventory : NetworkBehaviour
             {
                 // Lấy con và phá hủy nó
                 Destroy(playerHandTransform.GetChild(i).gameObject);
-               // playerHandTransform.GetChild(i).gameObject.SetActive(false);
-               
+                // playerHandTransform.GetChild(i).gameObject.SetActive(false);
+
             }
         }
     }
