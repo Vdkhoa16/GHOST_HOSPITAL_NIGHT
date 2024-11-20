@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.SceneManagement;
 
 public class PuzzleController : MonoBehaviour
@@ -27,8 +28,16 @@ public class PuzzleController : MonoBehaviour
         // Check if the object entering the collider is the player (ensure player is tagged as "Player")
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
-            interactionText.gameObject.SetActive(true);  // Show "Press E to solve puzzle"
+            if (other.GetComponent<NetworkObject>().IsOwner)
+            {
+                playerInRange = true;
+                interactionText.gameObject.SetActive(true);  // Show "Press E to solve puzzle"
+            }
+            else
+            {
+                playerInRange = false;
+                interactionText.gameObject.SetActive(false);
+            }
         }
     }
 

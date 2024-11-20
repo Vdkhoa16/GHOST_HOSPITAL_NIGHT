@@ -11,6 +11,9 @@ public class Puzzle : MonoBehaviour
     public Sprite[] sprites;
     public GameObject puzzlePanel;
     private bool checkPoint = false;
+    public GameObject Key;
+    public PuzzleController puzzleController;
+    [SerializeField] private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,7 @@ public class Puzzle : MonoBehaviour
             Shuffle();
         }
         checkPoint= true;
+        Key.SetActive(false);
     }
 
 
@@ -135,7 +139,9 @@ public class Puzzle : MonoBehaviour
     }
     void TriggerCombat()
     {
-        Debug.Log("Combat mode triggered!");
+        puzzleController.ClosePuzzle();
+        Key.SetActive(true);
+        animator.SetBool("IsOpen", true);
 
     }
     Vector2 getValidMove(int x, int y)
