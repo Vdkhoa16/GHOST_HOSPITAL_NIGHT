@@ -14,7 +14,6 @@ public class TextTyper : NetworkBehaviour
     [SerializeField] private AudioSource audioSource; // AudioSource để phát âm thanh
     [SerializeField] private AudioClip typingSound; // Âm thanh khi văn bản xuất hiện
 
-    private bool isTyping = false; // Kiểm tra nếu đang gõ văn bản
     private bool isNearObject = false; // Biến riêng tư để kiểm tra người chơi có ở gần vật thể không
 
 
