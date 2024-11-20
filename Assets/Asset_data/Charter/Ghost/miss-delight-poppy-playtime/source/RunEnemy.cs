@@ -12,7 +12,7 @@ public class RunEnemy : StateMachineBehaviour
     float ChaseRange = 10;
     float JumpRange = 4f;
     //sound
-    private Sound playsound;
+    private Audio_dir playsound;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -21,8 +21,8 @@ public class RunEnemy : StateMachineBehaviour
         TryFindPlayers();
         agent.speed = 5f;
         //sound
-        playsound = animator.GetComponent<Sound>();
-        playsound.Runsound();
+        playsound = animator.GetComponent<Audio_dir>();
+        playsound.Playaudio();
 
     }
     void TryFindPlayers()

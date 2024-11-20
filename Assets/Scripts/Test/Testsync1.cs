@@ -5,6 +5,10 @@ using Unity.Netcode;
 public class Testsync1 : NetworkBehaviour
 {
     public MeshRenderer meshRenderer;
+
+    public BoxCollider boxCollider;
+
+    public GameObject gameObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,8 @@ public class Testsync1 : NetworkBehaviour
         if (other.CompareTag("Player"))
         {
             MeshServerRpc();
+            BoxSeverRpc();
+            GOSeverRpc();
         }
     }
 
@@ -41,5 +47,36 @@ public class Testsync1 : NetworkBehaviour
     public void OnMesh()
     {
         meshRenderer.enabled = true;
+    }
+
+
+
+
+    public void BoxSeverRpc(ServerRpcParams rpcParams = default)
+    {
+        BoxClientRpc();
+    }
+    [ClientRpc]
+    public void BoxClientRpc(ClientRpcParams rpcParams = default)
+    {
+        OnBox();
+    }
+    public void OnBox()
+    {
+        boxCollider.enabled = false;
+    }
+
+    public void GOSeverRpc(ServerRpcParams rpcParams = default)
+    {
+        GOClientRpc();
+    }
+    [ClientRpc]
+    public void GOClientRpc(ClientRpcParams rpcParams = default)
+    {
+        GOBox();
+    }
+    public void GOBox()
+    {
+        gameObject.SetActive(true);
     }
 }

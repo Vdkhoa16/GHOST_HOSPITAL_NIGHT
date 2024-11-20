@@ -10,7 +10,7 @@ public class IdleEnemy : StateMachineBehaviour
 
 
     //sound
-    private Sound playsound;
+    private Audio_dir playsound;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -19,8 +19,8 @@ public class IdleEnemy : StateMachineBehaviour
         TryFindPlayers();
 
         //sound
-        playsound = animator.GetComponent<Sound>();
-        playsound.StopSound();
+        playsound = animator.GetComponent<Audio_dir>();
+        playsound.Stopaudio();
 
     }
 

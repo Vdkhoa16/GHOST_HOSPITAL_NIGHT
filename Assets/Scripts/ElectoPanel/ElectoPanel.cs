@@ -30,7 +30,7 @@ public class ElectoPanel : NetworkBehaviour
         isOn.OnValueChanged += OnElectoStateChanged;
 
         // Ensure the GameObject and sound reflect the initial state
-        // UpdateElectoState(isOn.Value);
+        UpdateElectoState(isOn.Value);
     }
 
     void Update()
@@ -73,18 +73,22 @@ public class ElectoPanel : NetworkBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            //if (other.GetComponent<NetworkObject>().IsOwner)
+            //{
+            //    playerInventory = other.GetComponent<PlayerInventory>();
+            //    pickupButton.SetActive(true);
+            //    isPlayerInRange = true;
+            //}
+            //else
+            //{
+            //    pickupButton.SetActive(false);
+            //}
             if (other.GetComponent<NetworkObject>().IsOwner)
             {
                 playerInventory = other.GetComponent<PlayerInventory>();
-                pickupButton.SetActive(true);
-                isPlayerInRange = true;
             }
-            else
-            {
-                pickupButton.SetActive(false);
-            }
-            //ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
-            //SetPickupButtonVisibilityServerRpc(clientId, true);
+            ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
+            SetPickupButtonVisibilityServerRpc(clientId, true);
 
         }
     }
@@ -93,10 +97,8 @@ public class ElectoPanel : NetworkBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
-            //SetPickupButtonVisibilityServerRpc(clientId, false);
-            pickupButton.SetActive(false);
-            isPlayerInRange = true;
+            ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
+            SetPickupButtonVisibilityServerRpc(clientId, false);
         }
     }
 

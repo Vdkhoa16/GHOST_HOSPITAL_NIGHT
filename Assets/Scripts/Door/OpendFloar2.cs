@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Netcode;
 
-public class OpendFloar2 : MonoBehaviour
+public class OpendFloar2 : NetworkBehaviour
 {
     public GameObject pickupButton;
     private bool isPlayerInRange = false;
-    public GameObject Fence;
+
+    public OnGame GameOn;
+    //public GameObject Fence;
     public ElectoPanel electoPanel;
-    public ParticleSystem fenceEffect;
+    //public ParticleSystem fenceEffect;
     void Start()
     {
         if (pickupButton != null)
@@ -18,35 +21,39 @@ public class OpendFloar2 : MonoBehaviour
             pickupButton.SetActive(false);
         }
     }
-
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
         {
-            if (electoPanel != null && electoPanel.IsOn()) 
+            if (electoPanel != null && electoPanel.IsOn())
             {
                 pickupButton.SetActive(false); // Ẩn nút nhấn
-                TriggerFenceEffect();
-                Fence.SetActive(false); // Tắt Fence
+                // TriggerFenceEffect();
+                // Fence.SetActive(false); // Tắt Fence
+                //if (GameOn != null)
+                //{
+                //    GameOn.OnObject();
+                //}
+               GameOn.OnObject();
             }
             else
             {
                 Debug.Log("Không thể tắt Fence vì ElectoPanel chưa mở!"); // Thông báo lỗi
             }
         }
-        
+
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-           if(other.GetComponent<NetworkObject>().IsOwner)
-           {
+            if (other.GetComponent<NetworkObject>().IsOwner)
+            {
                 pickupButton.SetActive(true);
                 isPlayerInRange = true;
-           }
+            }
             else
             {
                 pickupButton.SetActive(false);
@@ -65,14 +72,13 @@ public class OpendFloar2 : MonoBehaviour
     }
 
 
-    private void TriggerFenceEffect()
-    {
-        if (fenceEffect != null)
-        {
-            fenceEffect.Play(); 
-        }
+    //private void TriggerFenceEffect()
+    //{
+    //    if (fenceEffect != null)
+    //    {
+    //        fenceEffect.Play(); 
+    //    }
 
-    }
-
+    //}
 
 }
