@@ -11,6 +11,7 @@ public class Mo_Ket_Sat : MonoBehaviour
     private void Start()
     {
         key.SetActive(false);
+        safeAnimator.SetBool("isOpen", false);
     }
     public void OpenSafe()
     {

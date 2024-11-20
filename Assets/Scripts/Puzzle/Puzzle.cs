@@ -13,7 +13,6 @@ public class Puzzle : MonoBehaviour
     private bool checkPoint = false;
     public GameObject Key;
     public PuzzleController puzzleController;
-    [SerializeField] private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -141,7 +140,6 @@ public class Puzzle : MonoBehaviour
     {
         puzzleController.ClosePuzzle();
         Key.SetActive(true);
-        animator.SetBool("IsOpen", true);
 
     }
     Vector2 getValidMove(int x, int y)
