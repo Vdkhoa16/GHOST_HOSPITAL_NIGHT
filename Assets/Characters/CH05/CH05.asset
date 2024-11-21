@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   displayName: CH05
-  icon: {fileID: 21300000, guid: 4cce1beb7abf35148a9e457fde5077d7, type: 3}
-  introPrefab: {fileID: 8804029475373558950, guid: c737bc8c72246e94abc0974066a96bcf, type: 3}
-  gameplayPrefab: {fileID: 3713100666584500040, guid: c737bc8c72246e94abc0974066a96bcf, type: 3}
+  icon: {fileID: 21300000, guid: 686dd73d076df214b8d9e7103bc05bff, type: 3}
+  look: 0
+  introPrefab: {fileID: 7607816768097957941, guid: c95dee285cfb64041b6cc3afe3d3dc2e, type: 3}
+  gameplayPrefab: {fileID: 8340738070464716462, guid: c83032264b3cb4d46ac23c888e0df148, type: 3}

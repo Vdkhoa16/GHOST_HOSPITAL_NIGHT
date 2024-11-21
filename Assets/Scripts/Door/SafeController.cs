@@ -135,6 +135,8 @@ public class SafeController : NetworkBehaviour
         letter.SetActive(true);
         isOn = true;
         pickupButton.SetActive(false);
+        Destroy(PassPanel);
+        this.enabled = false;
     }
 
     //public void SoundOpenDoor()

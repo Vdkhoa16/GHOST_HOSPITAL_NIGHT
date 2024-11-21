@@ -24,10 +24,16 @@ public class CharacterSelectDisplay : NetworkBehaviour
 
         foreach (var character in allCharacters)
         {
+        
             var selectButtonInstance = Instantiate(selectButtonPrefab, charactersHolder);
             selectButtonInstance.SetCharacter(this, character);
             characterButtons.Add(selectButtonInstance); // tạo list button để chọn nhân vật
+            if (character.Look)
+            {
+                selectButtonInstance.SetDisabled();
+            }
         }
+        
     }
 
     public void Select(Character character)
