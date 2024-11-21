@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public enum ItemType
@@ -8,7 +9,9 @@ public enum ItemType
     isKey,
     isLetter,
     isFlashLight,
-    isBattery
+    isBattery,
+    isGranada,
+    isIceWall
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Inventory/Item", order = 1)]

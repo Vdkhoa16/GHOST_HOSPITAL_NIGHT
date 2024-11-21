@@ -33,7 +33,10 @@ public class PlayerInventory : NetworkBehaviour
 
     [Header("AttributesManager")]
     private AttributesManager playerAttributes;
-
+    [Header("ItemIceWall")]
+    public Item iceWall;
+    //public GameObject previewPrefab; // Prefab tạm thời
+    public Transform previewObject; // Đối tượng tạm thời
     [System.Serializable]
     public struct ItemData : INetworkSerializable
     {
@@ -116,6 +119,30 @@ public class PlayerInventory : NetworkBehaviour
             RemoveItemHandServerRpc();
         }
 
+        //if (previewObject.childCount > 0)
+        //{
+        //    // Dùng vòng lặp để xóa tất cả các con của playerHandTransform
+        //    for (int i = previewObject.childCount - 1; i >= 0; i--)
+        //    {
+        //        // Lấy con và phá hủy nó
+        //        Destroy(previewObject.GetChild(i).gameObject);
+        //        // playerHandTransform.GetChild(i).gameObject.SetActive(false);
+
+        //    }
+        //}
+        bool check = false;
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            UseItemIceWall(check);
+        }
+        //if (Input.GetKey(KeyCode.Mouse0))
+        //{
+        //    if (currentItemInHand.GetComponentInChildren<Grenade>())
+        //    {
+        //        Grenade grenade = currentItemInHand.GetComponentInChildren<Grenade>();
+        //        PrepareGrenade();
+        //    }
+        //}
     }
 
     public void PickUpButton()
@@ -485,8 +512,107 @@ public class PlayerInventory : NetworkBehaviour
           drop.GetComponent<NetworkObject>().Spawn();
 
       }*/
+    [ServerRpc(RequireOwnership = false)]
+    void UseIceWallServerRpc(ItemData itemData , Vector3 position, Quaternion rotation)
+    {
+        UseIceWallClientRpc(itemData, position, rotation);
+    }
 
 
+    [ClientRpc]
+    void UseIceWallClientRpc(ItemData itemData, Vector3 position, Quaternion rotation)
+    {
+        UseIceWall(itemData,position, rotation);
+    
+    }
+
+
+    void UseIceWall(ItemData itemData, Vector3 position, Quaternion rotation)
+    {
+
+
+        GameObject prefab = Resources.Load<GameObject>(itemData.prefabName);
+        if (prefab != null)
+        {
+
+
+            //Quaternion previewRotation = Quaternion.LookRotation(playerCamera.forward, Vector3.up);
+            //Vector3 previewPosition = previewObject.forward + playerCamera.forward;
+            // playerCamera.transform.SetPositionAndRotation(previewPosition, previewRotation);
+            GameObject itemObject = Instantiate(prefab, position, rotation);
+
+            // Kiểm tra nếu prefab có NetworkObject
+            //NetworkObject networkObject = itemObject.GetComponent<NetworkObject>();
+            //if (networkObject != null)
+            //{
+            //    // Spawn object trên server
+            //    networkObject.Spawn();
+
+            //}
+            //else
+            //{
+            //    Debug.LogError("Prefab không có NetworkObject, không thể spawn.");
+            //}
+
+        }
+        else
+        {
+            Debug.LogError("Không thể load prefab từ Resources: " + itemData.prefabName);
+        }
+    }
+
+
+    public void UseItemIceWall(bool check)
+    {
+        if (currentItemInHand.GetComponentInChildren<Grenade>())
+        {
+            Grenade grenade = currentItemInHand.GetComponentInChildren<Grenade>();
+            ItemData itemData = new ItemData(iceWall);
+            UseIceWallServerRpc(itemData,previewObject.position,previewObject.rotation);
+            check = true;
+            if (check)
+            {
+
+                foreach (InventoryObject invObj in inventoryObjects)
+                {
+                    Item item = invObj.item;
+                    if (item.itemType == ItemType.isGranada)
+                    {
+                        if (invObj.amount > 0)
+                        {
+                            invObj.amount--;
+                            if (invObj.amount == 0)
+                            {
+                                inventoryObjects.Remove(invObj);
+                                RemoveItemHandServerRpc();
+                            }
+                            UpdateInventoryUI();
+                            return;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    //public void PrepareGrenade()
+    //{
+
+    //    if (previewObject == null)
+    //    {
+    //        // Tạo đối tượng tạm thời
+    //        //previewObject = Instantiate(previewPrefab); // Đảm bảo sử dụng Transform
+    //    }
+
+    //    // Xoay và di chuyển theo camera
+    //    Quaternion previewRotation = Quaternion.LookRotation(playerCamera.forward, Vector3.up);
+    //    Vector3 previewPosition = playerCamera.position + playerCamera.forward * 5f;
+
+    //    previewObject.transform.SetPositionAndRotation(previewPosition, previewRotation);
+
+
+    //}
     [System.Serializable]
     public class InventoryObject
     {
