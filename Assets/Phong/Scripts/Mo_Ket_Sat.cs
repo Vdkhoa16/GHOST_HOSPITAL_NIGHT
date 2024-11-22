@@ -25,7 +25,7 @@ public class Mo_Ket_Sat : MonoBehaviour
             isOpen = true; // Đánh dấu két sắt là đã mở
             safeAnimator.SetBool("isOpen", true); // Kích hoạt trạng thái Open_Door
            // key.SetActive(true);
-            boxItem.enabled = true;\
+            boxItem.enabled = true;
             
         }
     }
