@@ -54,7 +54,7 @@ public class PuzzleController : MonoBehaviour
     void Update()
     {
         // If the player is in range and presses "E", change scene
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && Input.GetKeyDown(KeyCode.F))
         {
             Cameramain.SetActive(false);
             PuzzleCamera.SetActive(true);

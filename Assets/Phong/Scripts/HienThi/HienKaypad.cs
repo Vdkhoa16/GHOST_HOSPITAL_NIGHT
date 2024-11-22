@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI; // Nhập không gian tên UnityEngine.UI để sử dụng các thành phần UI như Button
 
@@ -47,8 +48,16 @@ public class HienKaypad : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isNearObject = true;
-            showPressEUI(true);
+            if (other.GetComponent<NetworkObject>().IsOwner)
+            {
+                isNearObject = true;
+                showPressEUI(true);
+            }
+            else
+            {
+                isNearObject = false;
+                showPressEUI(false);
+            }
         }
     }
 
