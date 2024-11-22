@@ -12,7 +12,7 @@ public class Tager_Door : NetworkBehaviour
     private Animator animator;
     private NetworkVariable<bool> isOpen = new NetworkVariable<bool>(true); // trạng thái của cửa
     private bool isPlayerInRange = false; // vùng hiển thị button
-    [SerializeField] private AudioSource SoundOpen, SoundClose;
+    [SerializeField] GameObject SoundOpen, SoundClose;
 
     public bool requiresKey = false; // Cửa có yêu cầu chìa khóa không
     public int keyID; // ID của chìa khóa cần để mở cửa
@@ -43,7 +43,7 @@ public class Tager_Door : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
         {
-            
+
 
             if (requiresKey)
             {
@@ -114,7 +114,6 @@ public class Tager_Door : NetworkBehaviour
             animator.SetBool("closeD", true);
             OnCloseDAnimationEnd();
             animator.SetBool("OpenD", false);
-            /*            Debug.Log("Closing door");*/
             // Cập nhật NavMeshObstacle khi cửa đóng
             if (navMeshObstacle != null)
             {
@@ -126,7 +125,6 @@ public class Tager_Door : NetworkBehaviour
             // Nếu cửa đang đóng, mở cửa
             animator.SetBool("OpenD", true);
             animator.SetBool("closeD", false);
-            /*            Debug.Log("Opening door");*/
             if (navMeshObstacle != null)
             {
                 navMeshObstacle.carving = false; // Cho phép AI đi qua
@@ -145,15 +143,26 @@ public class Tager_Door : NetworkBehaviour
         isOpen.Value = !isOpen.Value;
         Debug.Log("Toggled Door. New state: " + isOpen.Value);  // In ra trạng thái mới để kiểm tra
     }
+    //Sound
+    public void SoundOpenDoorOn()
+    {
+        SoundOpen.SetActive(true);
+        SoundClose.SetActive(false);
+    }
+    public void SoundOpenDoorOff()
+    {
+        SoundOpen.SetActive(false);
+    }
+    public void SoundCloseDoorOn()
+    {
+        SoundClose.SetActive(true);
+        SoundOpen.SetActive(false);
+    }
+    public void SoundCloseDoorOff()
+    {
+        SoundClose.SetActive(false);
+    }
 
-    public void SoundOpenDoor()
-    {
-        SoundOpen.Play();
-    }
-    public void SoundCloseDoor()
-    {
-        SoundClose.Play();
-    }
 
     [ServerRpc(RequireOwnership = false)]
     private void SetPickupButtonVisibilityServerRpc(ulong clientId, bool visible, ServerRpcParams rpcParams = default)

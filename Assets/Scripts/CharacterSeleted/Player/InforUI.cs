@@ -66,6 +66,7 @@ public class InforUI : MonoBehaviour
         }
         if (hand.GetComponentInChildren<FlashLight>())
         {
+            
             pinGameObject.SetActive(true);
             float pin;
             pin = (attributesManager.currentPin / attributesManager.maxPin) * 100;

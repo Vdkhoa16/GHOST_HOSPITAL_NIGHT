@@ -15,5 +15,6 @@ MonoBehaviour:
   id: 3
   displayName: CH03
   icon: {fileID: 21300000, guid: f7385ccffd98d54418fcf8dde6262ea0, type: 3}
+  look: 0
   introPrefab: {fileID: 3586392216173026287, guid: f10283248de42f243a693e93dac697fb, type: 3}
-  gameplayPrefab: {fileID: 9134103847676100736, guid: c0a1ee8f45ec3be449a78fc4c64410c5, type: 3}
+  gameplayPrefab: {fileID: -8530103686588269343, guid: 5a307d6863a7dad46b02f67851a6ba0f, type: 3}

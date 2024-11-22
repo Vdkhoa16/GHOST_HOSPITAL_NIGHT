@@ -7181,7 +7181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingBar: {fileID: 700712241}
   load: {fileID: 700712239}
-  sceneName: Game
+  sceneName: GamePlay
 --- !u!114 &2074794679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11360,6 +11360,7 @@ MonoBehaviour:
   keyID: 0
   notificationText: {fileID: 0}
   playerInventory: {fileID: 0}
+  navMeshObstacle: {fileID: 0}
 --- !u!65 &2193489957144957515
 BoxCollider:
   m_ObjectHideFlags: 0
