@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class Mo_Ket_Sat : MonoBehaviour
@@ -8,10 +9,14 @@ public class Mo_Ket_Sat : MonoBehaviour
 
     private bool isOpen = false; // Biến để theo dõi trạng thái mở của két sắt
     [SerializeField] private GameObject key;
+    private BoxCollider boxItem;
     private void Start()
     {
-        key.SetActive(false);
+        //key.SetActive(false);
+        boxItem = key.GetComponent<BoxCollider>();
         safeAnimator.SetBool("isOpen", false);
+        boxItem.enabled = false;
+        
     }
     public void OpenSafe()
     {
@@ -19,7 +24,9 @@ public class Mo_Ket_Sat : MonoBehaviour
         {
             isOpen = true; // Đánh dấu két sắt là đã mở
             safeAnimator.SetBool("isOpen", true); // Kích hoạt trạng thái Open_Door
-            key.SetActive(true);
+           // key.SetActive(true);
+            boxItem.enabled = true;\
+            
         }
     }
 }
