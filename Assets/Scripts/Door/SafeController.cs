@@ -19,6 +19,7 @@ public class SafeController : NetworkBehaviour
     [SerializeField] private GameObject PassPanel;
 
     [SerializeField] private GameObject letter;
+    private BoxCollider boxItem;
     private bool isOn = false;
     void Start()
     {
@@ -29,7 +30,8 @@ public class SafeController : NetworkBehaviour
             pickupButton.SetActive(false);
         }
         isOpen.OnValueChanged += OnDoorStateChanged;
-        letter.SetActive(false);
+        boxItem = letter.GetComponent<BoxCollider>();
+        boxItem.enabled = false;
     }
 
     void Update()
@@ -132,7 +134,7 @@ public class SafeController : NetworkBehaviour
     public void ToggleDoorServerRpc(ServerRpcParams rpcParams = default)
     {
         isOpen.Value = !isOpen.Value;
-        letter.SetActive(true);
+        boxItem.enabled = true;
         isOn = true;
         pickupButton.SetActive(false);
         Destroy(PassPanel);
