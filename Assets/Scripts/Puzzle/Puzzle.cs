@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Unity.Netcode;
+
 
 public class Puzzle : MonoBehaviour
 {
@@ -11,18 +13,21 @@ public class Puzzle : MonoBehaviour
     public Sprite[] sprites;
     public GameObject puzzlePanel;
     private bool checkPoint = false;
-    public GameObject Key;
+    [SerializeField] private GameObject key;
+    private BoxCollider boxItem;
     public PuzzleController puzzleController;
     // Start is called before the first frame update
     void Start()
     {
+        boxItem = key.GetComponent<BoxCollider>();
         Init();
         for (int i = 0; i < 10; i++)
         {
             Shuffle();
         }
         checkPoint= true;
-        Key.SetActive(false);
+        boxItem.enabled = false;
+
     }
 
 
@@ -139,7 +144,7 @@ public class Puzzle : MonoBehaviour
     void TriggerCombat()
     {
         puzzleController.ClosePuzzle();
-        Key.SetActive(true);
+        boxItem.enabled = true;
 
     }
     Vector2 getValidMove(int x, int y)
