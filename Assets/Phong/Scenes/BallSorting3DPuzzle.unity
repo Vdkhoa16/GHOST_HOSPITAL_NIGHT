@@ -1115,7 +1115,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Ho\xE0n Th\xE0nh!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4b68f10abaa903041be11b0cb2c30135, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d9452a0eece467b459a402ea606fa7d2, type: 2}
   m_sharedMaterial: {fileID: 758359726750372798, guid: 4b68f10abaa903041be11b0cb2c30135, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1179,7 +1179,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &826018083
@@ -1496,8 +1496,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Nh\u1EA5n \"E\" \u0111\u1EC3 tho\xE1t tr\xF2 ch\u01A1i"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4b68f10abaa903041be11b0cb2c30135, type: 2}
-  m_sharedMaterial: {fileID: 758359726750372798, guid: 4b68f10abaa903041be11b0cb2c30135, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d9452a0eece467b459a402ea606fa7d2, type: 2}
+  m_sharedMaterial: {fileID: 758359726750372798, guid: d9452a0eece467b459a402ea606fa7d2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2519,7 +2519,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399915253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 286f83bca6b20d3449f3f011a75f38ef, type: 3}
+  m_Script: {fileID: 11500000, guid: efbba80ebc8978f4a94a46bd64eaf565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tube_balls_holder: {fileID: 50894728}
@@ -2818,7 +2818,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1532648543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 286f83bca6b20d3449f3f011a75f38ef, type: 3}
+  m_Script: {fileID: 11500000, guid: efbba80ebc8978f4a94a46bd64eaf565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tube_balls_holder: {fileID: 885337497}
@@ -3407,7 +3407,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1881608985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7ebd26d502f7b47bd1a2a9e01ae8fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 03ce04515eca3b74886c78fcd3cf0f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isSelected: 0
@@ -3706,7 +3706,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2008530203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 286f83bca6b20d3449f3f011a75f38ef, type: 3}
+  m_Script: {fileID: 11500000, guid: efbba80ebc8978f4a94a46bd64eaf565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tube_balls_holder: {fileID: 1323983480}
@@ -3936,7 +3936,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2044843410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 286f83bca6b20d3449f3f011a75f38ef, type: 3}
+  m_Script: {fileID: 11500000, guid: efbba80ebc8978f4a94a46bd64eaf565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tube_balls_holder: {fileID: 1258571746}

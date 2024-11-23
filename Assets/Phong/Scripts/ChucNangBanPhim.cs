@@ -21,6 +21,8 @@ public class ChucNangBanPhimhim1 : MonoBehaviour
             Ans.text = "Chính xác!";
             Door.SetBool("isOpen", true);
             Invoke("CloseButtonAfterDelay", 2f); // Gọi hàm CloseButtonAfterDelay sau 2 giây
+            // Xóa script HienKaypad
+            Destroy(hienKaypad);
         }
         else
         {
