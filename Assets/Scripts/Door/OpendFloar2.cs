@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
-using Unity.Netcode;
 
 public class OpendFloar2 : NetworkBehaviour
 {

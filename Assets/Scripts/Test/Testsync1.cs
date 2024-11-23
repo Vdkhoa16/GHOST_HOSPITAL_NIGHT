@@ -8,7 +8,7 @@ public class Testsync1 : NetworkBehaviour
 
     public BoxCollider boxCollider;
 
-    public GameObject gameObject;
+   // public GameObject gameObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,10 +73,10 @@ public class Testsync1 : NetworkBehaviour
     [ClientRpc]
     public void GOClientRpc(ClientRpcParams rpcParams = default)
     {
-        GOBox();
+      //  GOBox();
     }
-    public void GOBox()
-    {
-        gameObject.SetActive(true);
-    }
+    //public void GOBox()
+    //{
+    //    gameObject.SetActive(true);
+    //}
 }

@@ -48,6 +48,6 @@ public class NumberBox : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0) && swapFunc != null)
             swapFunc(x, y);
-        Debug.Log("Chạm");
+        //Debug.Log("Chạm");
     }
 }

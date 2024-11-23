@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public class OnGame : NetworkBehaviour
 {
-    public GameObject gameObject;
+    public GameObject fences;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +28,7 @@ public class OnGame : NetworkBehaviour
     }
     public void GOBox()
     {
-        gameObject.SetActive(false);
+        fences.SetActive(false);
     }
 
     public void OnObject()
