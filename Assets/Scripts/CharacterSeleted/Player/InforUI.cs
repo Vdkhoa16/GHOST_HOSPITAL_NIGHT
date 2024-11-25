@@ -5,6 +5,8 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+
 
 public class InforUI : MonoBehaviour
 {
@@ -18,10 +20,22 @@ public class InforUI : MonoBehaviour
     public float maxPin = 60f;
     public GameObject hand;
 
-    public TextMeshProUGUI timerUI; // Add a UI element to display the timer
-    private float timeRemaining = 1800f; // 30 minutes in seconds
+    public TextMeshProUGUI timerUI;
+    private float timeRemaining = 60f;
     private bool timerIsRunning = true;
     private FlashLight flashLight;
+
+    //kiểm tra cửa
+    private Door_main doorMain;
+    //chuyển sceen
+    public string loadsceen = "StartGame";
+    //img win lose + text
+    public GameObject endTimerImage;
+    public TextMeshProUGUI endTimerText;
+    //ấm thanh đếm ngược
+    public AudioSource Audiotime;
+    private bool isAudioPlayed = false;
+    private bool isAudioLooping = false;
     void Start()
     {
         attributesManager = GetComponentInParent<AttributesManager>();
@@ -37,6 +51,8 @@ public class InforUI : MonoBehaviour
             // Ẩn UI nếu không phải là player cục bộ
             this.gameObject.SetActive(false);
         }
+        endTimerImage.SetActive(false);
+        endTimerText.gameObject.SetActive(false);
     }
 
     void Update()
@@ -56,104 +72,162 @@ public class InforUI : MonoBehaviour
             {
                 timeRemaining -= Time.deltaTime;
                 DisplayTime(timeRemaining);
+                // Kiểm tra thời gian còn lại và phát âm thanh lặp
+                if (timeRemaining <= 10 )
+                {
+                    if (!isAudioPlayed)
+                    {
+                        Audiotime.Play(); // Phát âm thanh lần đầu
+                        isAudioPlayed = true; // Đặt cờ đã phát âm thanh
+                    }
+                    if (!isAudioLooping)
+                    {
+                        isAudioLooping = true; // Đặt cờ lặp âm thanh
+                        StartCoroutine(PlayAudioLoop()); // Bắt đầu lặp
+                    }
+                }
             }
             else
             {
-                Debug.Log("end");
                 timeRemaining = 0;
                 timerIsRunning = false;
+
+                //dừng âm thanh
+                StopCoroutine(PlayAudioLoop());
+                Audiotime.Stop();
+                isAudioLooping = false;
+
+                //kiểm tra cửa đã được mở hay chưa
+                if (doorMain != null && doorMain.IsDoorOpen())
+                {
+                    WinGame();
+                }
+                else
+                {
+                    EndGame();
+                }
             }
+            if (hand.GetComponentInChildren<FlashLight>())
+            {
+
+                pinGameObject.SetActive(true);
+                float pin;
+                pin = (attributesManager.currentPin / attributesManager.maxPin) * 100;
+                //Debug.Log(pin);
+                if (pin >= 75)
+                {
+                    for (int i = 0; i < pinUI.Length; i++)
+                    {
+                        if (pinUI[i] == pinUI[0])
+                        {
+                            pinUI[i].SetActive(true);
+                        }
+                        else
+                        {
+                            pinUI[i].SetActive(false);
+                        }
+                    }
+                }
+                else if (pin >= 50)
+                {
+                    for (int i = 0; i < pinUI.Length; i++)
+                    {
+                        if (pinUI[i] == pinUI[1])
+                        {
+                            pinUI[i].SetActive(true);
+                        }
+                        else
+                        {
+                            pinUI[i].SetActive(false);
+                        }
+                    }
+                }
+                else if (pin >= 25)
+                {
+                    for (int i = 0; i < pinUI.Length; i++)
+                    {
+                        if (pinUI[i] == pinUI[2])
+                        {
+                            pinUI[i].SetActive(true);
+                        }
+                        else
+                        {
+                            pinUI[i].SetActive(false);
+                        }
+                    }
+                }
+                else if (pin > 0)
+                {
+                    for (int i = 0; i < pinUI.Length; i++)
+                    {
+                        if (pinUI[i] == pinUI[3])
+                        {
+                            pinUI[i].SetActive(true);
+                        }
+                        else
+                        {
+                            pinUI[i].SetActive(false);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < pinUI.Length; i++)
+                    {
+                        if (pinUI[i] == pinUI[4])
+                        {
+                            pinUI[i].SetActive(true);
+                        }
+                        else
+                        {
+                            pinUI[i].SetActive(false);
+                        }
+                    }
+                }
+            }
+
         }
-        if (hand.GetComponentInChildren<FlashLight>())
+
+        void DisplayTime(float timeToDisplay)
         {
-            
-            pinGameObject.SetActive(true);
-            float pin;
-            pin = (attributesManager.currentPin / attributesManager.maxPin) * 100;
-            //Debug.Log(pin);
-            if (pin >= 75)
-            {
-                for (int i = 0; i < pinUI.Length; i++)
-                {
-                    if (pinUI[i] == pinUI[0])
-                    {
-                        pinUI[i].SetActive(true);
-                    }
-                    else
-                    {
-                        pinUI[i].SetActive(false);
-                    }
-                }
-            }
-            else if (pin >= 50)
-            {
-                for (int i = 0; i < pinUI.Length; i++)
-                {
-                    if (pinUI[i] == pinUI[1])
-                    {
-                        pinUI[i].SetActive(true);
-                    }
-                    else
-                    {
-                        pinUI[i].SetActive(false);
-                    }
-                }
-            }
-            else if (pin >= 25)
-            {
-                for (int i = 0; i < pinUI.Length; i++)
-                {
-                    if (pinUI[i] == pinUI[2])
-                    {
-                        pinUI[i].SetActive(true);
-                    }
-                    else
-                    {
-                        pinUI[i].SetActive(false);
-                    }
-                }
-            }
-            else if (pin > 0)
-            {
-                for (int i = 0; i < pinUI.Length; i++)
-                {
-                    if (pinUI[i] == pinUI[3])
-                    {
-                        pinUI[i].SetActive(true);
-                    }
-                    else
-                    {
-                        pinUI[i].SetActive(false);
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < pinUI.Length; i++)
-                {
-                    if (pinUI[i] == pinUI[4])
-                    {
-                        pinUI[i].SetActive(true);
-                    }
-                    else
-                    {
-                        pinUI[i].SetActive(false);
-                    }
-                }
-            }
+            timeToDisplay += 1; // Adding 1 second to show 00:00 instead of -00:01 when time runs out
+
+            // Convert time to minutes and seconds format
+            float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+            float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+            // Update the timer UI text in MM:SS format
+            timerUI.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+
+    }
+    private void EndGame()
+    {
+        endTimerImage.SetActive(true);
+        endTimerText.gameObject.SetActive(true);
+        endTimerText.text = "Thời gian của bạn đã hết!";
+        StartCoroutine(TransitionSceneAfterDelay(3f));
+    }
+    private void WinGame()
+    {
+        endTimerImage.SetActive(true);
+        endTimerText.gameObject.SetActive(true);
+        endTimerText.text = "Bạn đã thoát được nhưng \n Mọi thứ vẫn chưa kết thúc....";
+        StartCoroutine(TransitionSceneAfterDelay(3f));
+    }
+    private IEnumerator TransitionSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        //SceneManager.LoadScene(loadsceen);
+        Debug.Log("đã chuyển sceen");
+    }
+
+    private IEnumerator PlayAudioLoop()
+    {
+        while (isAudioLooping)
+        {
+            Audiotime.Play();
+            yield return new WaitForSeconds(1f);
         }
     }
-
-    void DisplayTime(float timeToDisplay)
-    {
-        timeToDisplay += 1; // Adding 1 second to show 00:00 instead of -00:01 when time runs out
-
-        // Convert time to minutes and seconds format
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-
-        // Update the timer UI text in MM:SS format
-        timerUI.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-
 }

@@ -136,8 +136,14 @@ public class ElectoPanel : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ToggleElectoServerRpc(ServerRpcParams rpcParams = default)
     {
-        isOn.Value = !isOn.Value;
-        //Debug.Log("Toggled Electo. New state: " + (isOn.Value ? "Mở" : "Chưa mở")); // Debug the new state
+        if (!isOn.Value) // Chỉ cho phép bật nếu trạng thái hiện tại là "tắt"
+        {
+            isOn.Value = true;
+        }
+        //if (isOn.Value)
+        //{
+        //    ShowNotification("Máy kích điện đã được bật, không thể tắt!");
+        //}
     }
 
     [ServerRpc(RequireOwnership = false)]

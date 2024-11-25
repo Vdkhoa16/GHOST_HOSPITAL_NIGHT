@@ -22,6 +22,7 @@ public class InteractableObject : MonoBehaviour
                 // Mở khóa và hiển thị con trỏ chuột
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                showPressEUI(false);
             }
             else
             {
@@ -31,6 +32,7 @@ public class InteractableObject : MonoBehaviour
                 // Khóa và ẩn con trỏ chuột lại
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                showPressEUI(true);
             }
         }
     }
