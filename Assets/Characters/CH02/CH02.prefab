@@ -2182,9 +2182,9 @@ MonoBehaviour:
   respawnX: 5
   respawnY: 5
   respawnZ: 5
-  imageOnLiveDecrease: {fileID: 0}
-  imageOnAttack: {fileID: 0}
-  Textlive: {fileID: 0}
+  imageOnLiveDecrease: {fileID: 4239444841289941689}
+  imageOnAttack: {fileID: 5413182744870853506}
+  Textlive: {fileID: 3969257291167043528}
   maxPin: 60
   currentPin: 0
 --- !u!114 &1012318522404056611
@@ -3277,6 +3277,21 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+--- !u!1 &3969257291167043528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 485090085626874625, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+  m_PrefabInstance: {fileID: 3580010569580577993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4239444841289941689 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 827334370800797296, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+  m_PrefabInstance: {fileID: 3580010569580577993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5413182744870853506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8841056053559009099, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+  m_PrefabInstance: {fileID: 3580010569580577993}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8495997697958487033 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4920490736616777520, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}

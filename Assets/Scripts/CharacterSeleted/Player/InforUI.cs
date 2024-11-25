@@ -21,14 +21,14 @@ public class InforUI : MonoBehaviour
     public GameObject hand;
 
     public TextMeshProUGUI timerUI;
-    private float timeRemaining = 60f;
+    [SerializeField] private float timeRemaining = 60f;
     private bool timerIsRunning = true;
     private FlashLight flashLight;
 
     //kiểm tra cửa
     private Door_main doorMain;
     //chuyển sceen
-    public string loadsceen = "StartGame";
+    [SerializeField] private string loadsceen = "GameBox";
     //img win lose + text
     public GameObject endTimerImage;
     public TextMeshProUGUI endTimerText;
@@ -65,7 +65,15 @@ public class InforUI : MonoBehaviour
             TextliveUI.text = "Day: " + attributesManager.textlive.ToString();
 
         }
-        // Update the countdown timer
+        //// Kiểm tra cửa và thực hiện ưingame
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    if (doorMain != null && doorMain.IsDoorOpen())
+        //    {
+        //        WinGame(); // win
+        //    }
+        //}
+        // Update timer
         if (timerIsRunning)
         {
             if (timeRemaining > 0)
@@ -201,14 +209,21 @@ public class InforUI : MonoBehaviour
         }
 
     }
-    private void EndGame()
+    public void EndGame()
     {
         endTimerImage.SetActive(true);
         endTimerText.gameObject.SetActive(true);
         endTimerText.text = "Thời gian của bạn đã hết!";
         StartCoroutine(TransitionSceneAfterDelay(3f));
     }
-    private void WinGame()
+    public void DedGame()
+    {
+        endTimerImage.SetActive(true);
+        endTimerText.gameObject.SetActive(true);
+        endTimerText.text = "bạn đac chết";
+        StartCoroutine(TransitionSceneAfterDelay(3f));
+    }
+    public void WinGame()
     {
         endTimerImage.SetActive(true);
         endTimerText.gameObject.SetActive(true);
@@ -218,8 +233,7 @@ public class InforUI : MonoBehaviour
     private IEnumerator TransitionSceneAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        //SceneManager.LoadScene(loadsceen);
-        Debug.Log("đã chuyển sceen");
+        SceneManager.LoadScene(loadsceen);
     }
 
     private IEnumerator PlayAudioLoop()

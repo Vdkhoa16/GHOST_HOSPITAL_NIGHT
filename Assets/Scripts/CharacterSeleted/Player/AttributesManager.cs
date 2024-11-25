@@ -78,7 +78,7 @@ public class AttributesManager : NetworkBehaviour
             }
             else
             {
-                Debug.Log("end");
+                FindObjectOfType<InforUI>()?.DedGame();
             }
         }
         else
@@ -134,4 +134,9 @@ public class AttributesManager : NetworkBehaviour
         }
         vThirdPersonController.UpdateSpeed(walk_Speed, running_Speed, sprint_Speed);
     }
+    //private IEnumerator TransitionSceneAfterDelay(float delay)
+    //{
+    //    yield return new WaitForSeconds(delay);
+    //    FindObjectOfType<InforUI>()?.EndGame();
+    //}
 }

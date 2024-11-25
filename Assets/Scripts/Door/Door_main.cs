@@ -44,15 +44,11 @@ public class Door_main : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
         {
-
-
             if (requiresKey)
             {
-                // Check if the player has the correct key
                 if (playerInventory != null && playerInventory.HasKey(keyID))
                 {
                     ToggleDoorServerRpc();
-
                     //remove
                     requiresKey = false;
                 }
@@ -65,6 +61,11 @@ public class Door_main : NetworkBehaviour
             {
                 ToggleDoorServerRpc();
             }
+            //// Kiểm tra cửa đã mở chưa để kích hoạt chiến thắng
+            //if (IsDoorOpen())
+            //{
+            //    FindObjectOfType<InforUI>()?.WinGame();
+            //}
         }
 
     }
@@ -130,6 +131,8 @@ public class Door_main : NetworkBehaviour
             {
                 navMeshObstacle.carving = false; // Cho phép AI đi qua
             }
+            StartCoroutine(TransitionSceneAfterDelay(3f));
+            
         }
     }
 
@@ -189,5 +192,9 @@ public class Door_main : NetworkBehaviour
         pickupButton.SetActive(visible);
         isPlayerInRange = visible;
     }
-
+    private IEnumerator TransitionSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        FindObjectOfType<InforUI>()?.WinGame();
+    }
 }

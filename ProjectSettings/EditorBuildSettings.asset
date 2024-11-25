@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Phong/Scenes/BallSorting3DPuzzle.unity
     guid: 2f86915540bd7dc4ba60227517f0fb8c
+  - enabled: 1
+    path: Assets/Scenes/Khoa/Gamebox.unity
+    guid: f599a45ac02c5ad4a9b4adbf7a99c61a
   m_configObjects: {}
