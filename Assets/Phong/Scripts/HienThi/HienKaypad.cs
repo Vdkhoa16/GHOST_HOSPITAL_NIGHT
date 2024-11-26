@@ -2,9 +2,6 @@
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI; // Nhập không gian tên UnityEngine.UI để sử dụng các thành phần UI như Button
-
-
-
 public class HienKaypad : NetworkBehaviour
 {
     [SerializeField] private GameObject canvas; // Canvas chứa đoạn văn bản

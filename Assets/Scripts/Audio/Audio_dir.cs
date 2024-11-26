@@ -6,7 +6,7 @@ using UnityEngine;
 public class Audio_dir : MonoBehaviour
 {
     [SerializeField] private AudioSource zoneAudioSource; // Âm thanh phát trong vùng
-
+    private bool checkAudio;
     private void Start()
     {
         if (zoneAudioSource != null)
@@ -23,44 +23,54 @@ public class Audio_dir : MonoBehaviour
             if (other.GetComponent<NetworkObject>().IsOwner)
             {
                 zoneAudioSource.Play();
+                checkAudio = true;
             }
             else
             {
                 zoneAudioSource.Stop();
+                checkAudio=false;
             }
         }
     }
 
     public void Playaudio()
     {
-         void OnTriggerEnter(Collider other)
-        {
+        // void OnTriggerEnter(Collider other)
+        //{
 
-            if (other.CompareTag("Player"))
-            {
-                if (other.GetComponent<NetworkObject>().IsOwner)
-                {
-                    zoneAudioSource.Play();
-                }
-                else
-                {
-                    zoneAudioSource.Stop();
-                }
-            }
+        //    if (other.CompareTag("Player"))
+        //    {
+        //        if (other.GetComponent<NetworkObject>().IsOwner)
+        //        {
+        //            zoneAudioSource.Play();
+        //        }
+        //        else
+        //        {
+        //            zoneAudioSource.Stop();
+        //        }
+        //    }
+        //}
+        // zoneAudioSource.Play();
+        if (checkAudio)
+        {
+            zoneAudioSource.Play();
         }
-       // zoneAudioSource.Play();
     }
     public void Stopaudio()
     {
-        void OnTriggerExit(Collider other)
-        {
+        //void OnTriggerExit(Collider other)
+        //{
 
-            if (other.CompareTag("Player"))
-            {
-                zoneAudioSource.Stop();
-            }
+        //    if (other.CompareTag("Player"))
+        //    {
+        //        zoneAudioSource.Stop();
+        //    }
+        //}
+        // zoneAudioSource.Stop();
+        if (!checkAudio)
+        {
+            zoneAudioSource.Stop();
         }
-       // zoneAudioSource.Stop();
     }
 
 
@@ -71,6 +81,7 @@ public class Audio_dir : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             zoneAudioSource.Stop();
+            checkAudio = false;
         }
     }
 

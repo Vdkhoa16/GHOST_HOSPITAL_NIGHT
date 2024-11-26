@@ -1998,7 +1998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2278771469
+  GlobalObjectIdHash: 80769177
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2185,7 +2185,7 @@ MonoBehaviour:
   imageOnLiveDecrease: {fileID: 4239444841289941689}
   imageOnAttack: {fileID: 5413182744870853506}
   Textlive: {fileID: 3969257291167043528}
-  maxPin: 60
+  maxPin: 180
   currentPin: 0
 --- !u!114 &1012318522404056611
 MonoBehaviour:

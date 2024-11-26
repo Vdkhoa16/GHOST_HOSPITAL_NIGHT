@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Unity.Netcode;
+using UnityEngine;
 
 public class ShowPromptOnTrigger : MonoBehaviour
 {
@@ -14,7 +16,15 @@ public class ShowPromptOnTrigger : MonoBehaviour
         // Kiểm tra nếu người chơi vào vùng Trigger
         if (other.CompareTag("Player"))
         {
-            pressFText.SetActive(true); // Hiển thị thông báo
+            //pressFText.SetActive(true); // Hiển thị thông báo
+            if (other.GetComponent<NetworkObject>().IsOwner)
+            {
+                pressFText.SetActive(true);
+            }
+            else
+            {
+                pressFText.SetActive(false);
+            }
         }
     }
 
@@ -23,7 +33,8 @@ public class ShowPromptOnTrigger : MonoBehaviour
         // Kiểm tra nếu người chơi rời khỏi vùng Trigger
         if (other.CompareTag("Player"))
         {
-            pressFText.SetActive(false); // Ẩn thông báo
+            pressFText.SetActive(false);
         }
     }
+
 }

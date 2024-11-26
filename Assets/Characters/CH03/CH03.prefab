@@ -1156,7 +1156,7 @@ MonoBehaviour:
   imageOnLiveDecrease: {fileID: 1239125239746193731}
   imageOnAttack: {fileID: 6987533072035278968}
   Textlive: {fileID: 2085847439593301042}
-  maxPin: 60
+  maxPin: 180
   currentPin: 0
 --- !u!114 &5344453612830263992
 MonoBehaviour:

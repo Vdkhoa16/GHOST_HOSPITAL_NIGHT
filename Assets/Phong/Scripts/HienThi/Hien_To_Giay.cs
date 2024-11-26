@@ -1,8 +1,10 @@
 ﻿using UnityEngine; 
 using TMPro; 
 using UnityEngine.UI;
+using Unity.Netcode;
+using System.Collections.Generic;
 
-public class Hien_To_Giay : MonoBehaviour
+public class Hien_To_Giay : NetworkBehaviour
 {
     [SerializeField] private GameObject canvas; // Canvas chứa đoạn văn bản
     public GameObject pressEUI;
@@ -46,8 +48,19 @@ public class Hien_To_Giay : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isNearObject = true;
-            showPressEUI(true);
+            //if (other.GetComponent<NetworkObject>().IsOwner)
+            //{
+            //    isNearObject = true;
+            //    showPressEUI(true);
+            //}
+            //else
+            //{
+            //    isNearObject = false;
+            //    showPressEUI(false);
+            //}
+
+            ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
+            SetPickupButtonVisibilityServerRpc(clientId, true);
         }
     }
 
@@ -55,13 +68,38 @@ public class Hien_To_Giay : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isNearObject = false;
-            showPressEUI(false);
+            //    isNearObject = false;
+            //    showPressEUI(false);
+            //}
+            ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
+            SetPickupButtonVisibilityServerRpc(clientId, false);
         }
     }
 
-    void showPressEUI(bool show)
+    //void showPressEUI(bool show)
+    //{
+    //    pressEUI.SetActive(show);
+    //}
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetPickupButtonVisibilityServerRpc(ulong clientId, bool visible, ServerRpcParams rpcParams = default)
     {
-        pressEUI.SetActive(show);
+        SetPickupButtonVisibilityClientRpc(visible, new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams
+            {
+                TargetClientIds = new List<ulong> { clientId }
+            }
+        });
+    }
+
+
+    [ClientRpc]
+    private void SetPickupButtonVisibilityClientRpc(bool visible, ClientRpcParams rpcParams = default)
+    {
+
+        pressEUI.SetActive(visible);
+        isNearObject = visible;
     }
 }

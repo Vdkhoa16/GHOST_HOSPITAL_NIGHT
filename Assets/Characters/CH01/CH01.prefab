@@ -2720,7 +2720,7 @@ MonoBehaviour:
   imageOnLiveDecrease: {fileID: 8066938384733901408}
   imageOnAttack: {fileID: 2177895186053008219}
   Textlive: {fileID: 7076192260488961809}
-  maxPin: 60
+  maxPin: 240
   currentPin: 0
 --- !u!1 &8018049275055675853
 GameObject:
@@ -3187,7 +3187,7 @@ PrefabInstance:
       objectReference: {fileID: 2278402889384526786}
     - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: timeRemaining
-      value: 300
+      value: 6000
       objectReference: {fileID: 0}
     - target: {fileID: 2529479795894021762, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: m_fontAsset

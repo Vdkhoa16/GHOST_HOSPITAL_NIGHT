@@ -134,9 +134,26 @@ public class SafeController : NetworkBehaviour
     public void ToggleDoorServerRpc(ServerRpcParams rpcParams = default)
     {
         isOpen.Value = !isOpen.Value;
-        boxItem.enabled = true;
+        
         isOn = true;
         pickupButton.SetActive(false);
+        OpendSafeServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void OpendSafeServerRpc()
+    {
+        OpendSafeClientRpc();
+    }
+    [ClientRpc]
+    public void OpendSafeClientRpc()
+    {
+        OpendSafe();
+    }
+
+    public void OpendSafe()
+    {
+        boxItem.enabled = true;
         Destroy(PassPanel);
         this.enabled = false;
     }

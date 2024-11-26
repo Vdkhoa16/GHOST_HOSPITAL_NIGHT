@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 
 public class SoundOnProximity : MonoBehaviour
 {
@@ -18,7 +19,11 @@ public class SoundOnProximity : MonoBehaviour
         if (other.CompareTag("Player") && audioSource != null && !audioSource.isPlaying)
         {
             // Phát âm thanh khi người chơi vào vùng gần
-            audioSource.Play();
+
+            if (other.GetComponent<NetworkObject>().IsOwner)
+            {
+                audioSource.Play();
+            }
         }
     }
 

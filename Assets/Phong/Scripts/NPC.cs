@@ -17,7 +17,7 @@ public class TextTyper : NetworkBehaviour
     private bool isNearObject = false; // Biến riêng tư để kiểm tra người chơi có ở gần vật thể không
 
 
-    public NetworkObject networkObject;
+   // public NetworkObject networkObject;
     void Start()
     {
         closeButton.onClick.AddListener(HideText);
@@ -28,11 +28,11 @@ public class TextTyper : NetworkBehaviour
         if (isNearObject && Input.GetKeyDown(KeyCode.E))
         {
             //ShowText(); // Hiển thị văn bản khi nhấn E
-            if (networkObject != null)
-            {
-                ShowText();
-            }
-
+            //if (networkObject != null)
+            //{
+          
+            //}
+            ShowText();
         }
 
     }
@@ -60,19 +60,6 @@ public class TextTyper : NetworkBehaviour
     {
         if (other.CompareTag("Player")) // Kiểm tra nếu đối tượng va chạm có tag "VaCham"
         {
-            networkObject = other.GetComponent<NetworkObject>();
-
-            //if (other.GetComponent<NetworkObject>().IsOwner)
-            //{
-            //    isNearObject = true; // Đánh dấu người chơi ở gần vật thể
-            //    showPressEUI(true);  // Hiển thị chữ "E"
-            //    
-            //}
-            //else
-            //{
-            //    isNearObject = false; // Đánh dấu người chơi không còn ở gần vật thể
-            //    showPressEUI(false);
-            //}
 
             ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
             SetPickupButtonVisibilityServerRpc(clientId, true);
@@ -81,21 +68,16 @@ public class TextTyper : NetworkBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        //if (other.CompareTag("Player")) // Kiểm tra nếu đối tượng rời khỏi vùng va chạm
-        //{
-        //    isNearObject = false; // Đánh dấu người chơi không còn ở gần vật thể
-        //    showPressEUI(false);  // Ẩn chữ "E"
-
-        //}
+        if (other.CompareTag("Player")) // Kiểm tra nếu đối tượng rời khỏi vùng va chạm
+        {
+                                        //    isNearObject = false; // Đánh dấu người chơi không còn ở gần vật thể
+                                        //    showPressEUI(false);  // Ẩn chữ "E"
         ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
         SetPickupButtonVisibilityServerRpc(clientId, false);
+    }
 
     }
 
-    void showPressEUI(bool show) // Hàm để hiển thị/ẩn chữ "E"
-    {
-        pressEUI.SetActive(show); // Chuyển đổi trạng thái hiển thị của pressEUI
-    }
 
     [ServerRpc(RequireOwnership = false)]
     private void SetPickupButtonVisibilityServerRpc(ulong clientId, bool visible, ServerRpcParams rpcParams = default)
