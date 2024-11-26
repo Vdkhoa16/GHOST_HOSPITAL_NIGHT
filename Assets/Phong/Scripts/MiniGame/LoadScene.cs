@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class InteractableObject : MonoBehaviour
@@ -46,9 +47,18 @@ public class InteractableObject : MonoBehaviour
     {
         if (other.CompareTag("Player")) // Đảm bảo player có tag "Player"
         {
-            isPlayerNearby = true;        
-            showPressEUI(true);  // Hiển thị chữ "E"
+            if (other.GetComponent<NetworkObject>().IsOwner)
+            {
+                isPlayerNearby = true;
+                showPressEUI(true);  // Hiển thị chữ "E"
+            }
+            else
+            {
+                isPlayerNearby = false;
+                showPressEUI(false);  // Ẩn chữ "E"
+            }
         }
+
     }
 
     // Khi player rời khỏi vùng kích hoạt
@@ -56,8 +66,9 @@ public class InteractableObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerNearby = false;          
+            isPlayerNearby = false;
             showPressEUI(false);  // Ẩn chữ "E"
+
         }
     }
     void showPressEUI(bool show) // Hàm để hiển thị/ẩn chữ "E"
