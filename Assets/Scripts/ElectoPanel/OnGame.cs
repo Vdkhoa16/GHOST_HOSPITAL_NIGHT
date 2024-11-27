@@ -37,19 +37,4 @@ public class OnGame : NetworkBehaviour
     }
 
 
-    //public void BoxSeverRpc(ServerRpcParams rpcParams = default)
-    //{
-    //    BoxClientRpc();
-    //}
-    //[ClientRpc]
-    //public void BoxClientRpc(ClientRpcParams rpcParams = default)
-    //{
-    //    OnBox();
-    //}
-    //public void OnBox()
-    //{
-    //    boxCollider.enabled = false;
-    //}
-
-
 }

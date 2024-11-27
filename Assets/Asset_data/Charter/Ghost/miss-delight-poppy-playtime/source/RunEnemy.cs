@@ -12,7 +12,7 @@ public class RunEnemy : StateMachineBehaviour
     float ChaseRange = 10;
     float JumpRange = 4f;
     //sound
-    private Audio_dir playsound;
+    private EnemyAttacking playsound;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -21,8 +21,8 @@ public class RunEnemy : StateMachineBehaviour
         TryFindPlayers();
         agent.speed = 5f;
         //sound
-        playsound = animator.GetComponent<Audio_dir>();
-        playsound.Playaudio();
+        playsound = animator.GetComponent<EnemyAttacking>();
+        playsound.OnObject();
 
     }
     void TryFindPlayers()
@@ -88,23 +88,7 @@ public class RunEnemy : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(animator.transform.position);
-        // Stop sound and reset sound state
-        //if (isSoundPlaying && playsound != null)
-        //{
-        //    playsound.StopSound();
-        //    isSoundPlaying = false;
-        //}
+
     }
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

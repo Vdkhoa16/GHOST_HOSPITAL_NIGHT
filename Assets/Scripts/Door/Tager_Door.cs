@@ -125,6 +125,7 @@ public class Tager_Door : NetworkBehaviour
             // Nếu cửa đang đóng, mở cửa
             animator.SetBool("OpenD", true);
             animator.SetBool("closeD", false);
+
             if (navMeshObstacle != null)
             {
                 navMeshObstacle.carving = false; // Cho phép AI đi qua
