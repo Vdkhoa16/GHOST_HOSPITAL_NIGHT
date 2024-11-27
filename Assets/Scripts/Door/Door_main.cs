@@ -21,8 +21,6 @@ public class Door_main : NetworkBehaviour
     public TextMeshProUGUI notificationText;
 
     public PlayerInventory playerInventory;
-
-    public NavMeshObstacle navMeshObstacle;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -116,21 +114,13 @@ public class Door_main : NetworkBehaviour
             animator.SetBool("closeD", true);
             OnCloseDAnimationEnd();
             animator.SetBool("OpenD", false);
-            // Cập nhật NavMeshObstacle khi cửa đóng
-            if (navMeshObstacle != null)
-            {
-                navMeshObstacle.carving = true; // Tạo chướng ngại vật cho AI
-            }
+
         }
         else
         {
             // Nếu cửa đang đóng, mở cửa
             animator.SetBool("OpenD", true);
             animator.SetBool("closeD", false);
-            if (navMeshObstacle != null)
-            {
-                navMeshObstacle.carving = false; // Cho phép AI đi qua
-            }
             StartCoroutine(TransitionSceneAfterDelay(3f));
             
         }

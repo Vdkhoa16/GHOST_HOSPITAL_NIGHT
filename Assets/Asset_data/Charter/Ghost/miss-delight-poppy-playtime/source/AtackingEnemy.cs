@@ -5,30 +5,9 @@ using UnityEngine;
 public class AtackingEnemy : StateMachineBehaviour
 {
     List<Transform> players = new List<Transform>();
-    //private AttributesManager playerAttributes;
-
-    //sound
-    //private Sound playsound;
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         TryFindPlayers();
-        //if (playerAttributes == null)
-        //{
-        //    GameObject player = GameObject.FindGameObjectWithTag("Player");
-        //    playerAttributes = player.GetComponent<AttributesManager>();
-        //}
-
-        //if (playerAttributes != null)
-        //{
-        //    Debug.Log("atackig");
-        //    // playerAttributes.Atacking();
-        //}
-
-        //sound
-        //playsound = animator.GetComponent<Sound>();
-        //    playsound.StopSound();
-
     }
     void TryFindPlayers()
     {

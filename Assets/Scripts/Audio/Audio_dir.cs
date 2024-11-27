@@ -15,6 +15,8 @@ public class Audio_dir : MonoBehaviour
         }
     }
 
+    //== kiểm tra chgo cửa 
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -33,6 +35,18 @@ public class Audio_dir : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            zoneAudioSource.Stop();
+            checkAudio = false;
+        }
+    }
+
+
+    //kiểm tra cho enemy
     public void Playaudio()
     {
         // void OnTriggerEnter(Collider other)
@@ -75,15 +89,7 @@ public class Audio_dir : MonoBehaviour
 
 
 
-    private void OnTriggerExit(Collider other)
-    {
 
-        if (other.CompareTag("Player"))
-        {
-            zoneAudioSource.Stop();
-            checkAudio = false;
-        }
-    }
 
     [ServerRpc(RequireOwnership = false)]
     private void UpdateSoundStateServerRpc(ulong clientId, bool playSound)
