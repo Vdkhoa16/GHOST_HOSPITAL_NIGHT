@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 339871965
+  GlobalObjectIdHash: 2051078430
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -755,6 +755,28 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 2878a8b06e4cbe44e9b6d1524d646c27, type: 2}
     amount: 99
   - item: {fileID: 11400000, guid: 15336ccfc689cfc47ba78c7f3d1d9e1e, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 707aaf2faee681340a0706f075130cdc, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: fc08ce6f77fb91c45b8cb9fd71e4a5d0, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: c4e302ab93fe4434fadaa6c58b01b637, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 88cc7905b05332b429abdf7d01b4b4c2, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 6291ce3ef50c2f8479a4269d5ff7ea77, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 89422293b63b0a74bb72844e1e2faaeb, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 32326d100503e754bbd992f2d3ba0650, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 607c85a84068d6849962e5025632a8ce, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: f763a4100b371704db2f13bca7f7c1c1, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9846099e95ed2154d83327d40cba121c, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: f16e1489e0f746b428d435e1914cbd2f, type: 2}
     amount: 1
   invCanvasObject: {fileID: 1985974861613601577, guid: 3ac2722e2b95fd548b2de503f4d24de7, type: 3}
   inventoryButtom: 9

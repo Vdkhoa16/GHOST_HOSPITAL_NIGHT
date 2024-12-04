@@ -15,23 +15,10 @@ public class ChucNangBanPhimhim1 : NetworkBehaviour
 
      void Start()
     {
-        if (key == null)
-        {
-            Debug.LogError("Key chưa được gắn trong Inspector! Vui lòng kiểm tra.");
-            return; // Dừng thực hiện tiếp trong hàm Start để tránh lỗi.
-        }
 
         boxItem = key.GetComponent<BoxCollider>();
-        if (boxItem == null)
-        {
-            Debug.LogError("BoxCollider không được tìm thấy trên Key object!");
-        }
-        else
-        {
-            boxItem.enabled = false;
-            Debug.Log("da tat box");
-        }
 
+            boxItem.enabled = false;
           
     }
     public void Number(int number)
@@ -47,7 +34,7 @@ public class ChucNangBanPhimhim1 : NetworkBehaviour
             Invoke("CloseButtonAfterDelay", 2f); // Gọi hàm CloseButtonAfterDelay sau 2 giây
             // Xóa script HienKaypad
             Destroy(hienKaypad);
-            OnObject();
+            GOServerRpc();
         }
         else
         {
