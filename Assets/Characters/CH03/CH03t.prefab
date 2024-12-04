@@ -3274,6 +3274,10 @@ PrefabInstance:
       propertyPath: hand
       value: 
       objectReference: {fileID: 5927705106284154983}
+    - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+      propertyPath: timeRemaining
+      value: 6000
+      objectReference: {fileID: 0}
     - target: {fileID: 2862278598011898733, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: m_Layer
       value: 3

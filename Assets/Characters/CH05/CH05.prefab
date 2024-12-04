@@ -3109,6 +3109,10 @@ PrefabInstance:
       propertyPath: hand
       value: 
       objectReference: {fileID: 3394118807452981420}
+    - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+      propertyPath: timeRemaining
+      value: 1e+10
+      objectReference: {fileID: 0}
     - target: {fileID: 4920490736616777520, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 960

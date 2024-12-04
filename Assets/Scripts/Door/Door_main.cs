@@ -13,7 +13,7 @@ public class Door_main : NetworkBehaviour
     private NetworkVariable<bool> isOpen = new NetworkVariable<bool>(true); // trạng thái của cửa
     private bool isPlayerInRange = false; // vùng hiển thị button
     [SerializeField] GameObject SoundOpen, SoundClose;
-
+    public GameObject oKhoa;
 
     public bool requiresKey = false; // Cửa có yêu cầu chìa khóa không
     public int keyID; // ID của chìa khóa cần để mở cửa
@@ -49,6 +49,7 @@ public class Door_main : NetworkBehaviour
                     ToggleDoorServerRpc();
                     //remove
                     requiresKey = false;
+                    Destroy(oKhoa);
                 }
                 else
                 {

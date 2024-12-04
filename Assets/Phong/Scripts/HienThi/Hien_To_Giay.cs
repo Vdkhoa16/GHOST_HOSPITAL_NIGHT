@@ -48,17 +48,6 @@ public class Hien_To_Giay : NetworkBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //if (other.GetComponent<NetworkObject>().IsOwner)
-            //{
-            //    isNearObject = true;
-            //    showPressEUI(true);
-            //}
-            //else
-            //{
-            //    isNearObject = false;
-            //    showPressEUI(false);
-            //}
-
             ulong clientId = other.GetComponent<NetworkObject>().OwnerClientId;
             SetPickupButtonVisibilityServerRpc(clientId, true);
         }
@@ -98,7 +87,7 @@ public class Hien_To_Giay : NetworkBehaviour
     [ClientRpc]
     private void SetPickupButtonVisibilityClientRpc(bool visible, ClientRpcParams rpcParams = default)
     {
-
+        Debug.Log("Player");
         pressEUI.SetActive(visible);
         isNearObject = visible;
     }

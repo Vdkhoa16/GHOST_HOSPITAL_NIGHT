@@ -969,7 +969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1297764568
+  GlobalObjectIdHash: 794979872
   InScenePlacedSourceGlobalObjectIdHash: 777236365
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -3243,6 +3243,10 @@ PrefabInstance:
       propertyPath: hand
       value: 
       objectReference: {fileID: 4057613306707428853}
+    - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+      propertyPath: timeRemaining
+      value: 6000
+      objectReference: {fileID: 0}
     - target: {fileID: 2862278598011898733, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: m_Layer
       value: 3

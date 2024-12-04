@@ -2,14 +2,38 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-public class ChucNangBanPhimhim1 : MonoBehaviour
+using Unity.Netcode;
+public class ChucNangBanPhimhim1 : NetworkBehaviour
 {
     [SerializeField] private TMP_Text Ans;
     [SerializeField] private Animator Door;
     [SerializeField] private HienKaypad hienKaypad; // Tham chiếu tới script HienBanPhimNhapMK
     [SerializeField] private string Answer = "666333";
 
+    [SerializeField] private GameObject key;
+    private BoxCollider boxItem;
+
+     void Start()
+    {
+        if (key == null)
+        {
+            Debug.LogError("Key chưa được gắn trong Inspector! Vui lòng kiểm tra.");
+            return; // Dừng thực hiện tiếp trong hàm Start để tránh lỗi.
+        }
+
+        boxItem = key.GetComponent<BoxCollider>();
+        if (boxItem == null)
+        {
+            Debug.LogError("BoxCollider không được tìm thấy trên Key object!");
+        }
+        else
+        {
+            boxItem.enabled = false;
+            Debug.Log("da tat box");
+        }
+
+          
+    }
     public void Number(int number)
     {
         Ans.text += number.ToString();
@@ -23,6 +47,7 @@ public class ChucNangBanPhimhim1 : MonoBehaviour
             Invoke("CloseButtonAfterDelay", 2f); // Gọi hàm CloseButtonAfterDelay sau 2 giây
             // Xóa script HienKaypad
             Destroy(hienKaypad);
+            OnObject();
         }
         else
         {
@@ -38,4 +63,26 @@ public class ChucNangBanPhimhim1 : MonoBehaviour
     {
         hienKaypad.HidePaper(); // Gọi hàm HidePaper từ HienBanPhimNhapMK
     }
+    //Open
+    [ServerRpc(RequireOwnership = false)]
+    public void GOServerRpc(ServerRpcParams rpcParams = default)
+    {
+        GOClientRpc();
+    }
+    [ClientRpc]
+    public void GOClientRpc(ClientRpcParams rpcParams = default)
+    {
+        GOBox();
+    }
+    public void GOBox()
+    {
+        boxItem.enabled = true;
+        Debug.Log("box da duoc bat");
+    }
+    public void OnObject()
+    {
+        GOServerRpc();
+    }
+
+
 }

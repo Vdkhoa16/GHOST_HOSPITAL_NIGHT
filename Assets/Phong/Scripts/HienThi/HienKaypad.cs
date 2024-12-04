@@ -15,7 +15,7 @@ public class HienKaypad : NetworkBehaviour
     {
         closeButton.onClick.AddListener(HidePaper);
     }
-
+   
     void Update()
     {
         if (isNearObject && Input.GetKeyDown(KeyCode.E))
@@ -23,7 +23,6 @@ public class HienKaypad : NetworkBehaviour
             ActivateInputFields();
         }
     }
-
     public void ActivateInputFields()
     {
         canvas.SetActive(true); // Hiện canvas        
@@ -32,6 +31,7 @@ public class HienKaypad : NetworkBehaviour
         // Mở khóa và hiển thị con trỏ chuột
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
     }
 
     public void HidePaper()
@@ -41,6 +41,7 @@ public class HienKaypad : NetworkBehaviour
         // Khóa và ẩn con trỏ chuột lại
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
     }
 
     void OnTriggerEnter(Collider other)
