@@ -8,6 +8,7 @@ public class OpendFloar2 : NetworkBehaviour
 {
     public GameObject pickupButton;
     private bool isPlayerInRange = false;
+    public AudioSource sourceclick;
 
     public OnGame GameOn;
     //public GameObject Fence;
@@ -35,6 +36,7 @@ public class OpendFloar2 : NetworkBehaviour
                 //    GameOn.OnObject();
                 //}
                GameOn.OnObject();
+                sourceclick.Play();
             }
             else
             {

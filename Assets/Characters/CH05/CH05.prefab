@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2051078430
+  GlobalObjectIdHash: 339871965
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -867,11 +867,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTesting: 0
-  health: 5
+  health: 1000
   live: 0
-  walk_Speed: 2
-  running_Speed: 4
-  sprint_Speed: 6
+  walk_Speed: 3
+  running_Speed: 5
+  sprint_Speed: 7
   textlive: 0
   respawnX: 5
   respawnY: 5
@@ -879,7 +879,7 @@ MonoBehaviour:
   imageOnLiveDecrease: {fileID: 24782939077854225}
   imageOnAttack: {fileID: 8183883205137915178}
   Textlive: {fileID: 979569294774815072}
-  maxPin: 60
+  maxPin: 1000
   currentPin: 0
 --- !u!1 &2048112007118457646
 GameObject:
@@ -3131,6 +3131,10 @@ PrefabInstance:
       propertyPath: hand
       value: 
       objectReference: {fileID: 3394118807452981420}
+    - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+      propertyPath: loadsceen
+      value: GameBox
+      objectReference: {fileID: 0}
     - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: timeRemaining
       value: 1e+10

@@ -2487,7 +2487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2967662480
+  GlobalObjectIdHash: 1221147356
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2705,9 +2705,9 @@ MonoBehaviour:
   isTesting: 0
   health: 5
   live: 0
-  walk_Speed: 2
-  running_Speed: 4
-  sprint_Speed: 6
+  walk_Speed: 3
+  running_Speed: 6
+  sprint_Speed: 7
   textlive: 0
   respawnX: 5
   respawnY: 5
@@ -2715,7 +2715,7 @@ MonoBehaviour:
   imageOnLiveDecrease: {fileID: 8066938384733901408}
   imageOnAttack: {fileID: 2177895186053008219}
   Textlive: {fileID: 7076192260488961809}
-  maxPin: 60
+  maxPin: 120
   currentPin: 0
 --- !u!1 &8114289201951520316
 GameObject:
@@ -3274,6 +3274,10 @@ PrefabInstance:
       propertyPath: hand
       value: 
       objectReference: {fileID: 5927705106284154983}
+    - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+      propertyPath: maxPin
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: timeRemaining
       value: 6000

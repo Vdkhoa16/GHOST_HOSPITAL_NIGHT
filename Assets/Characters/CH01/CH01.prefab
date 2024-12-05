@@ -2369,9 +2369,9 @@ GameObject:
   - component: {fileID: 7204105683431487651}
   - component: {fileID: 5733534813668511549}
   - component: {fileID: 2862758606287892732}
+  - component: {fileID: 1444225471739100424}
   - component: {fileID: 3383877916545016845}
   - component: {fileID: 2973330491463765264}
-  - component: {fileID: 1444225471739100424}
   - component: {fileID: 2190394646512276382}
   - component: {fileID: 7026602022886096769}
   - component: {fileID: 8375835457688401762}
@@ -2480,6 +2480,27 @@ MonoBehaviour:
   running_Speed: 4
   sprint_Speed: 6
   rotationSpeed: 10
+--- !u!114 &1444225471739100424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017319169791800093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2295215226
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &3383877916545016845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2531,27 +2552,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &1444225471739100424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8017319169791800093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3666871806
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!136 &2190394646512276382
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3169,6 +3169,10 @@ PrefabInstance:
       propertyPath: hand
       value: 
       objectReference: {fileID: 6957845885201567542}
+    - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+      propertyPath: maxPin
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: Audiotime
       value: 

@@ -31,13 +31,7 @@ public class TextEdit : MonoBehaviour
             "PROJECT GHOST HOSPITAL", "Trưởng nhóm: Nguyễn quốc kiệt", "Thành viên phối hợp thực hiện", "Võ Đăng Khoa", "Đặng Vũ Phong",
             "Huỳnh Bảo Long ", "Tuấn Bình", "Kịch bản: ", "Nguyễn Quốc Kiệt - Võ Đăng Khoa", "Thiết kế map: Võ Đăng Khoa",
             "Mini game: Tất cả các thành viên", "Nhiệm vụ và chức năng đã làm", "Nguyễn Quốc Kiệt: ", "Netcode: Xây dựng hệ thống đồng bộ ", "Item: xây dựng hệ hống Item",
-            "Võ Đăng Khoa: ", "hệ thống cửa ", "AI ENEMY: quái vật và AI Navmesh", "Âm thanh: vùng âm thanh", "Dòng chữ 20",
-            "Dòng chữ 21", "Dòng chữ 22", "Dòng chữ 23", "Dòng chữ 24", "Dòng chữ 25",
-            "Dòng chữ 26", "Dòng chữ 27", "Dòng chữ 28", "Dòng chữ 29", "Dòng chữ 30",
-            "Dòng chữ 31", "Dòng chữ 32", "Dòng chữ 33", "Dòng chữ 34", "Dòng chữ 35",
-            "Dòng chữ 36", "Dòng chữ 37", "Dòng chữ 38", "Dòng chữ 39", "Dòng chữ 40",
-            "Dòng chữ 41", "Dòng chữ 42", "Dòng chữ 43", "Dòng chữ 44", "Dòng chữ 45",
-            "Dòng chữ 46", "Dòng chữ 47", "Dòng chữ 48", "Dòng chữ 49", "Dòng chữ 50"
+            "Võ Đăng Khoa: ", "hệ thống cửa ", "AI ENEMY: quái vật và AI Navmesh", "Âm thanh: vùng âm thanh", "Dòng chữ 20"
         };
 
         // Lấy TextMeshProUGUI và RectTransform

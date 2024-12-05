@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Unity.Netcode;
-public class ChucNangBanPhimhim1 : NetworkBehaviour
+public class ChucNangBanPhimhim1 : MonoBehaviour
 {
     [SerializeField] private TMP_Text Ans;
     [SerializeField] private Animator Door;
@@ -15,11 +15,8 @@ public class ChucNangBanPhimhim1 : NetworkBehaviour
 
      void Start()
     {
-
         boxItem = key.GetComponent<BoxCollider>();
-
-            boxItem.enabled = false;
-          
+        boxItem.enabled = false;
     }
     public void Number(int number)
     {
@@ -34,7 +31,7 @@ public class ChucNangBanPhimhim1 : NetworkBehaviour
             Invoke("CloseButtonAfterDelay", 2f); // Gọi hàm CloseButtonAfterDelay sau 2 giây
             // Xóa script HienKaypad
             Destroy(hienKaypad);
-            GOServerRpc();
+            GOBox(true);
         }
         else
         {
@@ -51,25 +48,21 @@ public class ChucNangBanPhimhim1 : NetworkBehaviour
         hienKaypad.HidePaper(); // Gọi hàm HidePaper từ HienBanPhimNhapMK
     }
     //Open
-    [ServerRpc(RequireOwnership = false)]
-    public void GOServerRpc(ServerRpcParams rpcParams = default)
+    //[ServerRpc(RequireOwnership = false)]
+    //public void GOServerRpc(bool visible)
+    //{
+    //    GOClientRpc(visible);
+    //}
+    //[ClientRpc]
+    //public void GOClientRpc(bool visible)
+    //{
+    //    GOBox(visible);
+    //}
+    public void GOBox(bool visible)
     {
-        GOClientRpc();
-    }
-    [ClientRpc]
-    public void GOClientRpc(ClientRpcParams rpcParams = default)
-    {
-        GOBox();
-    }
-    public void GOBox()
-    {
-        boxItem.enabled = true;
+        boxItem.enabled = visible;
         Debug.Log("box da duoc bat");
-    }
-    public void OnObject()
-    {
-        GOServerRpc();
-    }
 
+    }
 
 }

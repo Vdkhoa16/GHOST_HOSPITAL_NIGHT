@@ -1144,11 +1144,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTesting: 0
-  health: 10
+  health: 5
   live: 0
-  walk_Speed: 2
-  running_Speed: 4
-  sprint_Speed: 6
+  walk_Speed: 3
+  running_Speed: 6
+  sprint_Speed: 7
   textlive: 0
   respawnX: 0
   respawnY: 0
@@ -1156,7 +1156,7 @@ MonoBehaviour:
   imageOnLiveDecrease: {fileID: 1239125239746193731}
   imageOnAttack: {fileID: 6987533072035278968}
   Textlive: {fileID: 2085847439593301042}
-  maxPin: 180
+  maxPin: 120
   currentPin: 0
 --- !u!114 &5344453612830263992
 MonoBehaviour:
@@ -3243,6 +3243,14 @@ PrefabInstance:
       propertyPath: hand
       value: 
       objectReference: {fileID: 4057613306707428853}
+    - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+      propertyPath: maxPin
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
+      propertyPath: loadsceen
+      value: GameBox
+      objectReference: {fileID: 0}
     - target: {fileID: 2345502366366359929, guid: 9e59ce76096eb28499e7c36c265caeb7, type: 3}
       propertyPath: timeRemaining
       value: 6000
